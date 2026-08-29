@@ -93,7 +93,9 @@ Make program that auto-starts on boot-up
 @reboot python /home/duckie/blink16-always.py &
 <Ctrl-S> <Ctrl-X>
 
-Install Git-Hub on Pi, clone files from repository.  Open shell, type:
+Install Git-Hub on Pi, clone files from repository.  
+Video Source:  https://www.youtube.com/watch?v=9CULlsc5BBU
+Instructions:  Open shell, type:
     sudo apt update
     sudo apt install git -y
     git clone https://github.com/t-minshall/duck-coop-controller
