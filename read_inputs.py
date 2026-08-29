@@ -13,7 +13,7 @@ def Flash_LED_open_cmd():
         led.on()
         time.sleep(0.2)
         led.off()
-        sleep(0.2)
+        time.sleep(0.2)
     
 def Flash_LED_close_cmd():
     print("Button detected: close-command")
@@ -21,7 +21,7 @@ def Flash_LED_close_cmd():
         led.on()
         time.sleep(0.2)
         led.off()
-        sleep(0.2)
+        time.sleep(0.2)
     
 def Flash_LED_stop_cmd():
     print("Button detected: stop-command")
@@ -29,7 +29,7 @@ def Flash_LED_stop_cmd():
         led.on()
         time.sleep(0.2)
         led.off()
-        sleep(0.2)
+        time.sleep(0.2)
     
 def Flash_LED_open_sw():
     print("Button detected: open limit-switch")
@@ -37,7 +37,7 @@ def Flash_LED_open_sw():
         led.on()
         time.sleep(0.2)
         led.off()
-        sleep(0.2)
+        time.sleep(0.2)
     
 def Flash_LED_closed_sw():
     print("Button detected: closed limit-switch")
@@ -45,7 +45,7 @@ def Flash_LED_closed_sw():
         led.on()
         time.sleep(0.2)
         led.off()
-        sleep(0.2)
+        time.sleep(0.2)
     
 def Flash_LED_torque_sw():
     print("Button detected: over-torque limit-switch")
@@ -53,7 +53,7 @@ def Flash_LED_torque_sw():
         led.on()
         time.sleep(0.2)
         led.off()
-        sleep(0.2)
+        time.sleep(0.2)
     
 def Flash_LED_latch_sw():
     print("Button detected: latch overide switch")
@@ -61,7 +61,7 @@ def Flash_LED_latch_sw():
         led.on()
         time.sleep(0.2)
         led.off()
-        sleep(0.2)
+        time.sleep(0.2)
     
 #Define all IO ports
 led=LED(18)
