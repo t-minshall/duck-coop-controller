@@ -86,13 +86,13 @@ print("Closed u-switch      GPIO-26    Header-37      5 flashes    ")
 print("Torque u-switch      GPIO-20    Header-38      6 flashes    ")
 print("Latch disable sw     GPIO-21    Header-40      7 flashes    ")
 while True:
-    btn_open.when_pressed = Flash_LED("Open Command")
-    btn_close.when_pressed = Flash_LED
-    btn_stop.when_pressed = Flash_LED
-    sw_open.when_pressed = Flash_LED
-    sw_close.when_pressed = Flash_LED
-    sw_torque.when_pressed = Flash_LED
-    sw_latch.when_pressed = Flash_LED
+    btn_open.when_pressed = Flash_LED_open_cmd
+    btn_close.when_pressed = Flash_LED_close_cmd
+    btn_stop.when_pressed = Flash_LED_stop_cmd
+    sw_open.when_pressed = Flash_LED_open_sw
+    sw_close.when_pressed = Flash_LED_closed_sw
+    sw_torque.when_pressed = Flash_LED_torque_sw
+    sw_latch.when_pressed = Flash_LED_latch_sw
 
 #hang program, let "when_pressed" interrupts execute
 #not sure how to debounce
