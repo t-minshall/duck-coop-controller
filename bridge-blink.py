@@ -31,4 +31,4 @@ for _ in range(5):
     time.sleep(1.0)
     T3.off()
     T4.off()
-  time.sleep(0.1)
+    time.sleep(0.1)
