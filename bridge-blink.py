@@ -10,11 +10,11 @@ T4=LED(27)    #    Right armature   Positive side    X3-4       K3        T4    
 T5=LED(23)    #    Right armature   Negative side    X3-5       K4        T5          23      16
 led=LED(18)   #    LED-10, driven by GPIO-18
 led.off()
-for _ in range(20):
-  led.on()
-  time.sleep(0.1)
-  led.off()
-  time.sleep(0.2)
+#for _ in range(20):
+#  led.on()
+#  time.sleep(0.1)
+#  led.off()
+#  time.sleep(0.2)
 T2.off()
 T3.off()
 T4.off()
@@ -33,11 +33,11 @@ for _ in range(5):
     T3.on()
     T4.on()
     led.off()
-    for x in range(5):    # 5 cycles at 400ms per cycle = 2 seconds of LED flashing
-      time.sleep(0.3)
-      led.on()
-      time.sleep(0.1)
-      led.off()
+ #   for x in range(5):    # 5 cycles at 400ms per cycle = 2 seconds of LED flashing
+ #     time.sleep(0.3)
+ #     led.on()
+ #     time.sleep(0.1)
+ #     led.off()
     T3.off()
     T4.off()
     time.sleep(0.1)
