@@ -34,9 +34,9 @@ for _ in range(5):
     T4.on()
     led.off()
     for x in range(5):    # 5 cycles at 400ms per cycle = 2 seconds of LED flashing
-      sleep(0.3)
+      time.sleep(0.3)
       led.on()
-      sleep(0.1)
+      time.sleep(0.1)
       led.off()
     T3.off()
     T4.off()
