@@ -24,6 +24,14 @@ H_NL=LED(22)
 H_NR=LED(23)
 
 #main program
+print("Waiting for input to be grounded:")
+print("Open Button          GPIO-5     Header-29  ")
+print("Close Button         GPIO-6     Header-31  ")
+print("Stop Button          GPIO-13    Header-33  ")
+print("Open u-switch        GPIO-19    Header-35  ")
+print("Closed u-switch      GPIO-26    Header-37  ")
+print("Torque u-switch      GPIO-20    Header-38  ")
+print("Latch disable sw     GPIO-21    Header-40  ")
 while True:
     btn_open.when_pressed = Flash_LED
     btn_close.when_pressed = Flash_LED
