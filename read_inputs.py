@@ -24,16 +24,16 @@ H_NL=LED(22)
 H_NR=LED(23)
 
 #main program
-btn_open.when_pressed = Flash_LED
-btn_close.when_pressed = Flash_LED
-btn_stop.when_pressed = Flash_LED
-sw_open.when_pressed = Flash_LED
-sw_close.when_pressed = Flash_LED
-sw_torque.when_pressed = Flash_LED
-sw_latch.when_pressed = Flash_LED
+while True:
+    btn_open.when_pressed = Flash_LED
+    btn_close.when_pressed = Flash_LED
+    btn_stop.when_pressed = Flash_LED
+    sw_open.when_pressed = Flash_LED
+    sw_close.when_pressed = Flash_LED
+    sw_torque.when_pressed = Flash_LED
+    sw_latch.when_pressed = Flash_LED
 
 #hang program, let "when_pressed" interrupts execute
 #not sure how to debounce
 #not sure how to prevent alternate inputs from interfering
 #not sure how to pass an argument to "Flash_LED" so it can be more uniquely responsive
-pause()
