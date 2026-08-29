@@ -93,20 +93,8 @@ Make program that auto-starts on boot-up
 @reboot python /home/duckie/blink16-always.py &
 <Ctrl-S> <Ctrl-X>
 
-Install & Use Git-Hub on Pi
-1) Install Git:  open shell, type:
+Install Git-Hub on Pi, clone files from repository.  Open shell, type:
     sudo apt update
     sudo apt install git -y
-2) Link to my Git Repo ?????????????????????, type:
-    git config --global user.name "t-minshall"
-    git config --global user.email "ted.minshall@frontier.com"
-3) Create local-dir, make a dummy file, and link to GIT
-    mkdir duck-coop-git
-    cd duck-coop-git
-    git init
-    echo "print('hello')" > hello.py
-    git add .
-    git commit -m "initial commit of dummy file"
-    git remote add origin https://github.com/t-minshall/duck-coop-controller.git
-    git branch -M main
-    git push -u origin main
+    git clone https://github.com/t-minshall/duck-coop-controller
+
