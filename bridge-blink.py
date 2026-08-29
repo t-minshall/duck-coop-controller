@@ -35,6 +35,7 @@ for _ in range(5):
     time.sleep(0.25)
     led.on()
     time.sleep(0.25)
+    led.off()
     T3.off()
     T4.off()
     time.sleep(0.1)
