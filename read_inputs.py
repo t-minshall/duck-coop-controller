@@ -7,7 +7,7 @@ import time
 #Define sub-routines
 def Flash_LED_open_cmd():
     print("Button detected: open-command")
-    for _ in range(1)
+    for _ in range(1):
         led.on()
         time.sleep(0.2)
         led.off()
@@ -15,7 +15,7 @@ def Flash_LED_open_cmd():
     
 def Flash_LED_close_cmd():
     print("Button detected: close-command")
-    for _ in range(2)
+    for _ in range(2):
         led.on()
         time.sleep(0.2)
         led.off()
@@ -23,7 +23,7 @@ def Flash_LED_close_cmd():
     
 def Flash_LED_stop_cmd():
     print("Button detected: stop-command")
-    for _ in range(3)
+    for _ in range(3):
         led.on()
         time.sleep(0.2)
         led.off()
@@ -31,7 +31,7 @@ def Flash_LED_stop_cmd():
     
 def Flash_LED_open_sw():
     print("Button detected: open limit-switch")
-    for _ in range(4)
+    for _ in range(4):
         led.on()
         time.sleep(0.2)
         led.off()
@@ -39,7 +39,7 @@ def Flash_LED_open_sw():
     
 def Flash_LED_closed_sw():
     print("Button detected: closed limit-switch")
-    for _ in range(5)
+    for _ in range(5):
         led.on()
         time.sleep(0.2)
         led.off()
@@ -47,7 +47,7 @@ def Flash_LED_closed_sw():
     
 def Flash_LED_torque_sw():
     print("Button detected: over-torque limit-switch")
-    for _ in range(6)
+    for _ in range(6):
         led.on()
         time.sleep(0.2)
         led.off()
@@ -55,7 +55,7 @@ def Flash_LED_torque_sw():
     
 def Flash_LED_latch_sw():
     print("Button detected: latch overide switch")
-    for _ in range(7)
+    for _ in range(7):
         led.on()
         time.sleep(0.2)
         led.off()
