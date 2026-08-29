@@ -5,8 +5,8 @@ from gpiozero import LED, Button
 import time
 
 #Define sub-routines
-def Flash_LED():
-    print("Button detected")
+def Flash_LED(button_name):
+    print("Button detected:" + button_name)
     
 #Define all IO ports
 led=LED(18)
@@ -33,7 +33,7 @@ print("Closed u-switch      GPIO-26    Header-37  ")
 print("Torque u-switch      GPIO-20    Header-38  ")
 print("Latch disable sw     GPIO-21    Header-40  ")
 while True:
-    btn_open.when_pressed = Flash_LED
+    btn_open.when_pressed = Flash_LED("Open Command")
     btn_close.when_pressed = Flash_LED
     btn_stop.when_pressed = Flash_LED
     sw_open.when_pressed = Flash_LED
