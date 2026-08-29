@@ -98,19 +98,18 @@ print("Latch disable sw     GPIO-21    Header-40      7 flashes    ")
 while True:
     while btn_open.is_pressed:
         announce_input(1,"Open Command")
+    while btn_close.is_pressed:
+        announce_input(2,"Close Command")
+    while btn_stop.is_pressed:
+        announce_input(3,"Stop Command")
+    while sw_open.is_pressed:
+        announce_input(4, "Open micro-switch")
+    while sw_closed.is_pressed:
+        announce_input(5, "Closed micro-switch")
     while sw_torque.is_pressed:
         announce_input(6, "Over-torque switch")
     while sw_latch.is_pressed:
         announce_input(7, "Latch overide switch")
-                           
-        
-#    btn_open.when_pressed = Flash_LED_open_cmd
-#    btn_close.when_pressed = Flash_LED_close_cmd
-#    btn_stop.when_pressed = Flash_LED_stop_cmd
-#    sw_open.when_pressed = Flash_LED_open_sw
-#    sw_close.when_pressed = Flash_LED_closed_sw
-#    sw_torque.when_pressed = Flash_LED_torque_sw
-#    sw_latch.when_pressed = Flash_LED_latch_sw
 
 #hang program, let "when_pressed" interrupts execute
 #not sure how to debounce
