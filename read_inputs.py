@@ -63,8 +63,8 @@ def Flash_LED_latch_sw():
         led.off()
         time.sleep(0.2)
 
-def announce_input(code,button_name);
-    printf("Button "+code+"pressed: "+button_name
+def announce_input(code,button_name):
+    print(f"Button {code} pressed: {button_name}")
     for _ in range(code):
         led.on()
         time.sleep(0.2)
