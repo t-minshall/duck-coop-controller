@@ -97,4 +97,6 @@ Install Git-Hub on Pi, clone files from repository.  Open shell, type:
     sudo apt update
     sudo apt install git -y
     git clone https://github.com/t-minshall/duck-coop-controller
+To update Pi-local files, from the clone-directory, type
+    git pull
 
