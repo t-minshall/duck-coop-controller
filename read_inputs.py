@@ -5,8 +5,61 @@ from gpiozero import LED, Button
 import time
 
 #Define sub-routines
-def Flash_LED(button_name):
-    print("Button detected:" + button_name)
+def Flash_LED_open_cmd():
+    print("Button detected: open-command")
+    for _ in range(1)
+        led.on()
+        time.sleep(0.2)
+        led.off()
+        sleep(0.2)
+    
+def Flash_LED_close_cmd():
+    print("Button detected: close-command")
+    for _ in range(2)
+        led.on()
+        time.sleep(0.2)
+        led.off()
+        sleep(0.2)
+    
+def Flash_LED_stop_cmd():
+    print("Button detected: stop-command")
+    for _ in range(3)
+        led.on()
+        time.sleep(0.2)
+        led.off()
+        sleep(0.2)
+    
+def Flash_LED_open_sw():
+    print("Button detected: open limit-switch")
+    for _ in range(4)
+        led.on()
+        time.sleep(0.2)
+        led.off()
+        sleep(0.2)
+    
+def Flash_LED_closed_sw():
+    print("Button detected: closed limit-switch")
+    for _ in range(5)
+        led.on()
+        time.sleep(0.2)
+        led.off()
+        sleep(0.2)
+    
+def Flash_LED_torque_sw():
+    print("Button detected: over-torque limit-switch")
+    for _ in range(6)
+        led.on()
+        time.sleep(0.2)
+        led.off()
+        sleep(0.2)
+    
+def Flash_LED_latch_sw():
+    print("Button detected: latch overide switch")
+    for _ in range(7)
+        led.on()
+        time.sleep(0.2)
+        led.off()
+        sleep(0.2)
     
 #Define all IO ports
 led=LED(18)
@@ -25,9 +78,9 @@ H_NR=LED(23)
 
 #main program
 print("Waiting for input to be grounded:")
-print("Open Button          GPIO-5     Header-29  ")
-print("Close Button         GPIO-6     Header-31  ")
-print("Stop Button          GPIO-13    Header-33  ")
+print("Open Button          GPIO-5     Header-29      1 flash      ")
+print("Close Button         GPIO-6     Header-31      2 flashes    ")
+print("Stop Button          GPIO-13    Header-33      3 flashes    ")
 print("Open u-switch        GPIO-19    Header-35  ")
 print("Closed u-switch      GPIO-26    Header-37  ")
 print("Torque u-switch      GPIO-20    Header-38  ")
