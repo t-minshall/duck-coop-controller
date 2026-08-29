@@ -1,8 +1,10 @@
+
 #Write program to read inputs & flash LED appropriately based on which input is detected
 #Tutorial source:  gpiozero docs page (https://gpiozero.readthedocs.io/en/stable/recipes.html)
 #Read input, flash light
-from gpiozero import LED, Button
 import time
+from gpiozero import LED
+from gpiozero import Button
 
 #Define sub-routines
 def Flash_LED_open_cmd():
