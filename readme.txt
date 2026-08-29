@@ -23,7 +23,7 @@ Steps:
 14) Write PY to control latch based on 3-button input (up=hard-latch, down=soft-latch).
 15) Write PY to control winch & latch, test, implement
 
-
+---------------------------------------------------------------------------------------------------------
 Creating the R-Pi Disk // Creating an Image of the OS on an SD card:
 1) open Raspberry Pi Imager
 2) put SD card into computer slot (dismiss any Dropbox prompts, note drive letter)
@@ -40,13 +40,14 @@ Creating the R-Pi Disk // Creating an Image of the OS on an SD card:
 12) change window back to Imager, verify a code exists in the authentication token box, then hit "Next"
 13) Select "Write" to write a blank OS image to the SD card
 
-
+---------------------------------------------------------------------------------------------------------
 Interacting with the R-pi once an image is created: getting a shell to open
 1) remove SD card from computer (assuming it was just written per the section above)
 2) insert SD card into R-pi, then power the PI.  Wait ~5 minutes until system fully booted.
 3) open router home-page, look at connected devices, keep refreshing until "duckie" appears. Note: it may be necessary to refresh the R-pi connect chrome page ... not sure.
 4) Go back to "connect" window in Chrome (https://connect.raspberrypi.com/devices), select the "connect" button for the R-pi
 
+---------------------------------------------------------------------------------------------------------
 Create simple program to blink a LED on GPIO-18
 1) with the R-pi connected per above, in the shell-screen, type the following
     sudo nano blink18.py (this opens the nano text editor, editing the Python file blink18.py)
@@ -63,6 +64,7 @@ Create simple program to blink a LED on GPIO-18
 2) put LED/resistor between pins 9 & 12 (Gnd & GPIO-18)
 3) type "python blink18.py", observed LED blinks 15 times
     
+---------------------------------------------------------------------------------------------------------
 Make program that runs forever
 1) type "sudo nano blink16-always.py"
     {enter password if req'd: quack}
@@ -86,6 +88,7 @@ Make program that runs forever
 3) type "python blink16-always.py", observed LED blinks and never stops.
 4) press <Ctrl-C> to exit
 
+---------------------------------------------------------------------------------------------------------
 Make program that auto-starts on boot-up
 1) get a program working. In this case, use blink16-always.py, from above
 2) type "sudo crontab -e", then enter the line below ... (select option-1 to use nano, if needed)
@@ -93,6 +96,7 @@ Make program that auto-starts on boot-up
 @reboot python /home/duckie/blink16-always.py &
 <Ctrl-S> <Ctrl-X>
 
+---------------------------------------------------------------------------------------------------------
 Install Git-Hub on Pi, clone files from repository.  
 Video Source:  https://www.youtube.com/watch?v=9CULlsc5BBU
 Instructions:  Open shell, type:
@@ -102,3 +106,44 @@ Instructions:  Open shell, type:
 To update Pi-local files, from the clone-directory, type
     git pull
 
+
+---------------------------------------------------------------------------------------------------------
+#Write program to read inputs & flash LED appropriately based on which input is detected
+#Tutorial source:  gpiozero docs page (https://gpiozero.readthedocs.io/en/stable/recipes.html)
+#Read input, flash light
+from gpiozero import LED, Button
+import time
+
+#Define sub-routines
+def Flash_LED():
+    print("Button detected")
+    
+#Define all IO ports
+led=LED(18)
+buzzer=LED(25)
+btn_open=Button(5)
+btn_close=Button(6)
+btn_stop=Button(13)
+sw_open=Button(19)
+sw_close=Button(26)
+sw_torque=Button(20)
+sw_latch=Button(21)
+H_PL=LED(17)
+H_PR=LED(27)
+H_NL=LED(22)
+H_NR=LED(23)
+
+#main program
+btn_open.when_pressed = Flash_LED
+btn_close.when_pressed = Flash_LED
+btn_stop.when_pressed = Flash_LED
+sw_open.when_pressed = Flash_LED
+sw_close.when_pressed = Flash_LED
+sw_torque.when_pressed = Flash_LED
+sw_latch.when_pressed = Flash_LED
+
+#hang program, let "when_pressed" interrupts execute
+#not sure how to debounce
+#not sure how to prevent alternate inputs from interfering
+#not sure how to pass an argument to "Flash_LED" so it can be more uniquely responsive
+pause()
