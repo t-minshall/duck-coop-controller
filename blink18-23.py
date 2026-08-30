@@ -1,8 +1,14 @@
 from gpiozero import LED
 import time
-led=LED(18)
+T5=LED(23)
+LED10=LED(18)
+
 for _ in range(15):
-    led.on()
-    time.sleep(0.5)
-    led.off()
-    time.sleep(0.5)
+    LED10.on()
+    T5.off()
+    print("light on,  transistor off")
+    time.sleep(0.4)
+    LED10.off()
+    T5.on()
+    print("light off, transistor on")
+    time.sleep(0.4)
