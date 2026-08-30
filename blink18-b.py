@@ -5,5 +5,5 @@ led10 = LED(18)
 #while True:
 #  led10.blink(on_time=0.05, off_time=0.95)
 
-led10.blink(on_time=0.05, off_time=0.95)
+led10.blink(on_time=0.03, off_time=0.97)
 pause()
