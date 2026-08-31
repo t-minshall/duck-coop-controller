@@ -3,7 +3,7 @@ import time
 T5=LED(23)
 LED10=LED(18)
 
-for _ in range(5):
+for _ in range(5999):
     LED10.on()
     T5.off()
     print("light on,  transistor off")
