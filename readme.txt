@@ -1,3 +1,11 @@
+Starting a Do-Over
+1) open Pi Imager, make new SD card per sectionn below (Creating the R-Pi Disk)
+2) insert SD card, power pi, be patient ... takes 5 min or longer for initial boot-up.
+3) open Pi-Connect, connect to a new shell (DOS window)
+4) Update & Install Git per section below (Install Git-Hub on Pi)
+5) Get background blinker (GPIO-16) running per section below (Make program that auto-starts on boot up)
+
+---------------------------------------------------
 To get Python running on laptop, open a DOS-window in this directory, then type 
     'PY DOOR_LIFT.PY'      (or whatever other program you wish to run. DOS is NOT case sensitive, so upper-case was done just for emphasis.)
     
@@ -100,7 +108,12 @@ Make program that auto-starts on boot-up
 Install Git-Hub on Pi, clone files from repository.  
 Video Source:  https://www.youtube.com/watch?v=9CULlsc5BBU
 Instructions:  Open shell, type:
-    sudo apt update
+    sudo apt update (enter password "quack" if needed)
+    {sudo apt upgrade} (
+                        this wasn't in initial source-instructions, but probably best if done ... 
+                        Update fetches list of sw packages
+                        Upgrade actually installs them    
+                        )
     sudo apt install git -y
     git clone https://github.com/t-minshall/duck-coop-controller
 To update Pi-local files, from the clone-directory, type
@@ -147,3 +160,17 @@ sw_latch.when_pressed = Flash_LED
 #not sure how to prevent alternate inputs from interfering
 #not sure how to pass an argument to "Flash_LED" so it can be more uniquely responsive
 pause()
+
+
+
+----------------------------------------------------------------
+Create a batch-type script
+from shell window, create text-file (with .sh extension) ... eg
+    sudo nano dc.sh
+    enter appropriate command-line commands ... eg
+        cd duck-coop-controller
+        ls
+    make it executable ... type
+        chmod +x dc.sh
+    run the script/batch-file, preceeding the file-name with "./"
+        ./dc.sh
