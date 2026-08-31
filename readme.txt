@@ -99,9 +99,9 @@ Make program that runs forever
 ---------------------------------------------------------------------------------------------------------
 Make program that auto-starts on boot-up
 1) get a program working. In this case, use blink16-always.py, from above
-2) type "sudo crontab -e", then enter the line below ... (select option-1 to use nano, if needed)
+2) type "sudo crontab -e", then enter the line below ... (enter password "quack" if needed) (select option-1 to use nano, if needed)
 3) down-arrow to the bottom of the page, add the line
-@reboot python /home/duckie/blink16-always.py &
+@reboot python /home/duckie/duck-coop-controller/blink16-always.py &
 <Ctrl-S> <Ctrl-X>
 
 ---------------------------------------------------------------------------------------------------------
