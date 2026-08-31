@@ -168,10 +168,10 @@ Create a batch-type script
 from shell window, create text-file (with .sh extension) ... eg
     sudo nano dc.sh
     enter appropriate command-line commands ... eg
-        cd duck-coop-controller
+        cd ./duck-coop-controller
         pwd
         ls
     make it executable ... type
         chmod +x dc.sh
-    run the script/batch-file, preceeding the file-name with "./"
-        ./dc.sh
+    run the script/batch-file, preceeding the file-name with ". " (to "source" the script)
+        . dc.sh (or type "source dc.sh")
