@@ -3,9 +3,9 @@
 --------------------------------------------------------------------------------------------------------------------------
 1) open Pi Imager, make new SD card per section-3 below (Creating the R-Pi Disk)
 2) insert SD card, power pi, be patient ... takes 5 min or longer for initial boot-up.
-3) open Pi-Connect, connect to a new shell (DOS window)
-4) Update & Install Git per section below (Install Git-Hub on Pi)
-5) Get background blinker (GPIO-16) running per section below (Make program that auto-starts on boot up)
+3) open Pi-Connect, connect to a new shell (DOS window) per section-4
+4) Update & Install Git per section-8 below (Install Git-Hub on Pi)
+5) Get background blinker (GPIO-16) running per section-7 below (Make program that auto-starts on boot up)
 
 --------------------------------------------------------------------------------------------------------------------------
 --------------- Sec 1:  Get Python running on laptop, run emulation program  ---------------------------------------------
