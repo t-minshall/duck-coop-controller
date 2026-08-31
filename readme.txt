@@ -6,6 +6,11 @@
 3) open Pi-Connect, connect to a new shell (DOS window) per section-4
 4) Update & Install Git per section-8 below (Install Git-Hub on Pi)
 5) Get background blinker (GPIO-16) running per section-7 below (Make program that auto-starts on boot up)
+6) Get batch-file/script running per section-10
+7) future:  Update files per section-11
+8) future:  doctor remote-connect so it doesn't crash so often (linger)
+9) future: learn how to kill a crontab process
+10) get T5 working correctly & soldered in
 
 --------------------------------------------------------------------------------------------------------------------------
 --------------- Sec 1:  Get Python running on laptop, run emulation program  ---------------------------------------------
@@ -181,14 +186,12 @@ sw_latch.when_pressed = Flash_LED
 #not sure how to pass an argument to "Flash_LED" so it can be more uniquely responsive
 pause()
 
-
-
 --------------------------------------------------------------------------------------------------------------------------
 --------------- Sec 10:  Write a batch-type script  ----------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------
 Create a batch-type script
 from shell window, create text-file (with .sh extension) ... eg
-    sudo nano dc.sh
+    sudo nano dc.sh (or copy from repository into root)
     enter appropriate command-line commands ... eg
         cd ./duck-coop-controller
         pwd
@@ -197,3 +200,10 @@ from shell window, create text-file (with .sh extension) ... eg
         chmod +x dc.sh
     run the script/batch-file, preceeding the file-name with ". " (to "source" the script)
         . dc.sh (or type "source dc.sh")
+
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 11:  Write a batch-type script  ----------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+From root-shell type:
+    sudo apt update
+    sudo apt upgrade
