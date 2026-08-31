@@ -1,2 +1,3 @@
-cd duck-coop-controller
+cd ./duck-coop-controller
+pwd
 ls
