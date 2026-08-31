@@ -1,18 +1,24 @@
-Starting a Do-Over
-1) open Pi Imager, make new SD card per sectionn below (Creating the R-Pi Disk)
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 0:  Starting a Do-over  ------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+1) open Pi Imager, make new SD card per section-3 below (Creating the R-Pi Disk)
 2) insert SD card, power pi, be patient ... takes 5 min or longer for initial boot-up.
 3) open Pi-Connect, connect to a new shell (DOS window)
 4) Update & Install Git per section below (Install Git-Hub on Pi)
 5) Get background blinker (GPIO-16) running per section below (Make program that auto-starts on boot up)
 
----------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 1:  Get Python running on laptop, run emulation program  ---------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
 To get Python running on laptop, open a DOS-window in this directory, then type 
     'PY DOOR_LIFT.PY'      (or whatever other program you wish to run. DOS is NOT case sensitive, so upper-case was done just for emphasis.)
     
 To get Python running on a Raspberry ...
 IDK
 
-
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 2:  Board Build / Debug Plan  ------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
 Steps:
 1) Build program to blink a LED on GPIO-18 [blink18.py or blink16-always.py using spare]
 2) Test program on breadboard.
@@ -31,7 +37,9 @@ Steps:
 14) Write PY to control latch based on 3-button input (up=hard-latch, down=soft-latch).
 15) Write PY to control winch & latch, test, implement
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 3:  Create the R-Pi Disk  ----------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
 Creating the R-Pi Disk // Creating an Image of the OS on an SD card:
 1) open Raspberry Pi Imager
 2) put SD card into computer slot (dismiss any Dropbox prompts, note drive letter)
@@ -48,14 +56,18 @@ Creating the R-Pi Disk // Creating an Image of the OS on an SD card:
 12) change window back to Imager, verify a code exists in the authentication token box, then hit "Next"
 13) Select "Write" to write a blank OS image to the SD card
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 4:  Opening a Shell, interacting w/ the R-Pi  --------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
 Interacting with the R-pi once an image is created: getting a shell to open
 1) remove SD card from computer (assuming it was just written per the section above)
 2) insert SD card into R-pi, then power the PI.  Wait ~5 minutes until system fully booted.
 3) open router home-page, look at connected devices, keep refreshing until "duckie" appears. Note: it may be necessary to refresh the R-pi connect chrome page ... not sure.
 4) Go back to "connect" window in Chrome (https://connect.raspberrypi.com/devices), select the "connect" button for the R-pi
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 5:  Build/Run a simple program  ----------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
 Create simple program to blink a LED on GPIO-18
 1) with the R-pi connected per above, in the shell-screen, type the following
     sudo nano blink18.py (this opens the nano text editor, editing the Python file blink18.py)
@@ -72,7 +84,9 @@ Create simple program to blink a LED on GPIO-18
 2) put LED/resistor between pins 9 & 12 (Gnd & GPIO-18)
 3) type "python blink18.py", observed LED blinks 15 times
     
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 6:  Make a program that runs forever  ----------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
 Make program that runs forever
 1) type "sudo nano blink16-always.py"
     {enter password if req'd: quack}
@@ -96,7 +110,9 @@ Make program that runs forever
 3) type "python blink16-always.py", observed LED blinks and never stops.
 4) press <Ctrl-C> to exit
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 7:  Make a program that starts on boot-up  -----------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
 Make program that auto-starts on boot-up
 1) get a program working. In this case, use blink16-always.py, from above
 2) type "sudo crontab -e", then enter the line below ... (enter password "quack" if needed) (select option-1 to use nano, if needed)
@@ -104,7 +120,9 @@ Make program that auto-starts on boot-up
 @reboot python /home/duckie/duck-coop-controller/blink16-always.py &
 <Ctrl-S> <Ctrl-X>
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 8:  Instal Git-Hub on Pi, Clone a Repository  --------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
 Install Git-Hub on Pi, clone files from repository.  
 Video Source:  https://www.youtube.com/watch?v=9CULlsc5BBU
 Instructions:  Open shell, type:
@@ -120,7 +138,9 @@ To update Pi-local files, from the clone-directory, type
     git pull
 
 
----------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 9:  Flash LED's based on GPIO inputs  ---------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
 #Write program to read inputs & flash LED appropriately based on which input is detected
 #Tutorial source:  gpiozero docs page (https://gpiozero.readthedocs.io/en/stable/recipes.html)
 #Read input, flash light
@@ -163,7 +183,9 @@ pause()
 
 
 
-----------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 10:  Write a batch-type script  ----------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
 Create a batch-type script
 from shell window, create text-file (with .sh extension) ... eg
     sudo nano dc.sh
