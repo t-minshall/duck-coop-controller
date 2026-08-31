@@ -169,6 +169,7 @@ from shell window, create text-file (with .sh extension) ... eg
     sudo nano dc.sh
     enter appropriate command-line commands ... eg
         cd duck-coop-controller
+        pwd
         ls
     make it executable ... type
         chmod +x dc.sh
