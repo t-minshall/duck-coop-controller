@@ -4,7 +4,7 @@
 1) open Pi Imager, make new SD card per section-3 below (Creating the R-Pi Disk)
 2) insert SD card, power pi, be patient ... takes 5 min or longer for initial boot-up.
 3) open Pi-Connect, connect to a new shell (DOS window) per section-4
-4) Update & Install Git per section-8 below (Install Git-Hub on Pi)
+4) Update & Install Git per section-8 below (Install Git-Hub on Pi). Be sure to do the "upgrade" part too, which will take 30-60 min.
 5) Get background blinker (GPIO-16) running per section-7 below (Make program that auto-starts on boot up)
 6) Get batch-file/script running per section-10
 7) future:  Update files per section-11
