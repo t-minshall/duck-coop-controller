@@ -207,3 +207,41 @@ from shell window, create text-file (with .sh extension) ... eg
 From root-shell type:
     sudo apt update
     sudo apt upgrade
+
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 12:  Make the R-Pi work/talk with the PC over USB (for when headless fails)  -------------------------
+--------------------------------------------------------------------------------------------------------------------------
+************ did not work for me ... crap!
+Source video:  https://www.youtube.com/watch?v=xj3MPmJhAPU
+Install Notepad-plus-plus from https://notepad-plus-plus.org/
+Install PuTTY from https://putty.org/index.html
+Launch Notepad++
+    on the SD-card, edit file "config.txt", and add the following line to the very end/bottom (also add a <CR>)
+        <CR> (carriage return, not these specific characters)
+        dtoverlay=dwc2
+    edit file "cmdline.txt", insert the following right after "rootwait"
+        modules-load=dwc2,g_ether (no extra CR's, just 1 long line, with space on either side of inserted code)
+    create null-file "ssh" (no extension, no contents)
+Remove SD card, insert into R-pi.  Power R-pi through the power-connector, give it ~5 min to fully boot for 1st time.
+Test that SSH works correctly via wi-fi (using connect.raspberrypi.com)
+remove power, connect R-pi with data-cable to data-port (make sure power-port was unplugged)
+
+data-port with correct USB-cable.
+
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 13:  Creating a stable OS  ---------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+1) Create a new SD card
+2) launch a shell
+3) type sudo apt update
+4) type sudo crontab -e
+5) scroll all the way down, add the line
+    @reboot sudo apt update && sudo apt upgrade -y
+6) reboot the Pi and go away for 1 hr
+
+----------------------------------------
+connecting w/o R-Pi-connect
+open a dos powershell window (search for "powershell")
+enter "ssh duckie@duckie-01"
+accept unknown fingerprint by entering "yes"
+enter password "quack"
