@@ -25,22 +25,22 @@ IDK
 --------------- Sec 2:  Board Build / Debug Plan  ------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------
 Steps:
-1) Build program to blink a LED on GPIO-18 [blink18.py or blink16-always.py using spare]
-2) Test program on breadboard.
-3) Build PCB to include power-supply (7805 & Caps), LED-10 & interconnect-header.  Verify 5/12 volts exist where expected
-4) Connect Pi, verify Python can blink LED.
-5) Add X1 connector, jump pins 3-4, verify 12V exists where expected (V-ctrl). Add LED-8 & verify it runs when X1-3 & 4 are jumpered.
-6) Up. Test both 18/23 on breadboard. see program blink-18-23.py
-6) Add T5 & components to drive 1 leg of H-bridge (board only, no relay). Test to ensure PY can control T5's LED.
-7) Add relay, verify PCB/PY can blink one relay correctly.
-8) Build PY program to "blink" the full H-bridge and LED-10 together (about 2 seconds in one direction, then 2 seconds in reverse).
-9) Add balance of H-bridge relays, find a dummy 12V-dc motor, and verify system can spin motor forwards/backwards.
-10) Test H-bridge blinker on real hoist (set door mid-travel first). Make sure there's a way to easily cut power.
-11) write PY program to read various inputs & display status on LED-10 (OK to require recompile for each input). Ensure we can read 3-button controller, limit/torque switches ... 6 inputs in total. Extra credit if PY can read input, then blink "X" number of times, depending on which input it was.
-12) write PY program to read 3-button controller & blink LED-10 at 3 different speeds, depending on which button is pressed (off if none).
-13 Complete board build
-14) Write PY to control latch based on 3-button input (up=hard-latch, down=soft-latch).
-15) Write PY to control winch & latch, test, implement
+x  1) Build program to blink a LED on GPIO-18 [blink18.py or blink16-always.py using spare]
+x  2) Test program on breadboard.
+x  3) Build PCB to include power-supply (7805 & Caps), LED-10 & interconnect-header.  Verify 5/12 volts exist where expected
+x  4) Connect Pi, verify Python can blink LED.
+   5) Add X1 & X-pwr connectors, jump pins 3-4, verify 12V exists where expected (V-ctrl). Add LED-8 & verify it runs when X1-3 & 4 are jumpered.
+x  6a) Test both 18/23 on breadboard. see program blink-18-23.py
+   6b) Add T5 & components to drive 1 leg of H-bridge (board only, no relay). Test to ensure PY can control T5's LED.
+   7) Add relay, verify PCB/PY can blink one relay correctly.
+   8) Build PY program to "blink" the full H-bridge and LED-10 together (about 2 seconds in one direction, then 2 seconds in reverse).
+   9) Add balance of H-bridge relays, find a dummy 12V-dc motor, and verify system can spin motor forwards/backwards.
+  10) Test H-bridge blinker on real hoist (set door mid-travel first). Make sure there's a way to easily cut power.
+  11) write PY program to read various inputs & display status on LED-10 (OK to require recompile for each input).                                                           Ensure we can read 3-button controller, limit/torque switches ... 6 inputs in total.                                                                                   Extra credit if PY can read input, then blink "X" number of times, depending on which input it was.
+  12) write PY program to read 3-button controller & blink LED-10 at 3 different speeds, depending on which button is pressed (off if none).
+  13 Complete board build
+  14) Write PY to control latch based on 3-button input (up=hard-latch, down=soft-latch).
+  15) Write PY to control winch & latch, test, implement
 
 --------------------------------------------------------------------------------------------------------------------------
 --------------- Sec 3:  Create the R-Pi Disk  ----------------------------------------------------------------------------
@@ -132,11 +132,18 @@ Install Git-Hub on Pi, clone files from repository.
 Video Source:  https://www.youtube.com/watch?v=9CULlsc5BBU
 Instructions:  Open shell, type:
     sudo apt update (enter password "quack" if needed)
-    {sudo apt upgrade} (
+    sudo apt upgrade (
                         this wasn't in initial source-instructions, but probably best if done ... 
                         Update fetches list of sw packages
                         Upgrade actually installs them    
-                        )
+                        Note: this will crash the shell and mess up future upgrades, fixed in following steps
+                    )
+Assuming the shell crashed and messed up the apt-install process ...
+    type "sudo crontab -e" (open the crontab list, so we can fix the apt-installer during bootup ... not within a shell that will crash and kill the update)
+    at the bottom of the file, add the line "@reboot sudo dpkg --configure -a"
+    reboot the R-pi (power cycle, or type "sudo reboot")
+    remove the line in crontab recently added (or comment with a "#" prefix)
+Continue w/ Git installation
     sudo apt install git -y
     git clone https://github.com/t-minshall/duck-coop-controller
 To update Pi-local files, from the clone-directory, type
