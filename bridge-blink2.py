@@ -15,4 +15,4 @@ while True:
   init_controller.motor_fwd()
   time.sleep(1)
   init_controller.motor_bkwd()
-  time.sleeep(1)
+  time.sleep(1)
