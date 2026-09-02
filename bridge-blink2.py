@@ -16,3 +16,4 @@ while True:
   time.sleep(1)
   init_controller.motor_bkwd()
   time.sleep(1)
+  LED10.toggle()
