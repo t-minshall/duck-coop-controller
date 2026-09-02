@@ -51,4 +51,12 @@ def motor_kill():
     T5.on()
     return
 
+def motor_loop():
+    while True: 
+        motor_fwd()
+        time.sleep(1)
+        motor_bkwd()
+        time.sleep(1)
+    return
+
 
