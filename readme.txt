@@ -257,9 +257,19 @@ data-port with correct USB-cable.
     8.3) edit crontab to comment out the dpkg line and un-comment the python line (this one I keeep for now)
 9) open shell, install GIT per section-8, starting with the install git step
 
-----------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 14:  Connecting to R-pi via Power-Shell (not Rasberry Connect)  --------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
 connecting w/o R-Pi-connect
-open a dos powershell window (search for "powershell")
-enter "ssh duckie@duckie-01"
-accept unknown fingerprint by entering "yes"
-enter password "quack"
+1) open a dos powershell window (search for "powershell")
+2) enter "ssh duckie@duckie-01"
+3) accept unknown fingerprint by entering "yes"
+4) enter password "quack"
+
+if that fails, may need to avoid figerprint checking
+1) from power-shell, enter "notepad $HOME\.ssh\config (note slash-direction, allow system to create file if needed)
+2) Enter the following lines (including indentation)
+Host duckie-*
+	StrictHostKeyChecking no
+	UserKnownHostsFile NUL
+(these lines will prevent fingerprint-checking on all hosts named duckie-*)
