@@ -8,6 +8,13 @@ T2=LED(17)
 T1=LED(25)
 T6=LED(7)
 T7=LED(8)
+CMD_latch=button(21)
+CMD_open=button(5)
+CMD_close=button(6)
+CMD_stop=button(13)
+SW_open=button(19)
+SW_closed=button(26)
+SW_torque=button(20)
 
 def motor_stop():
   T2.off()
@@ -42,4 +49,4 @@ def motor_kill():
     T3.on()
     T5.on()
     return()
-  
+
