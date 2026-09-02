@@ -9,7 +9,7 @@ import init_controller
 #    time.sleep(1)
 #  return
 
-init_controller.motor_off()
+init_controller.motor_stop()
 while True:
   init_controller.motor_fwd()
   time.sleep(1)
