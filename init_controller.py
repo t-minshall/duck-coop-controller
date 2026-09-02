@@ -22,7 +22,7 @@ def motor_stop():
   T3.off()
   T4.off()
   T5.off()
-  return()
+  return
   
 def motor_fwd():
   T2.off()
@@ -32,7 +32,7 @@ def motor_fwd():
   time.sleep(0.05)
   T2.on()
   T4.on()
-  return()
+  return
   
 def motor_bkwd():
   T2.off()
@@ -42,12 +42,12 @@ def motor_bkwd():
   time.sleep(0.05)
   T3.on()
   T5.on()
-  return()
+  return
   
 def motor_kill():
+    T2.on()
     T3.on()
+    T4.on()
     T5.on()
-    T3.on()
-    T5.on()
-    return()
+    return
 
