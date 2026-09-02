@@ -3,7 +3,7 @@ import time
 LED10=LED(18)
 T5=LED(23)
 T4=LED(27)
-T3-LED(22)
+T3=LED(22)
 T2=LED(17)
 T1=LED(25)
 T6=LED(7)
