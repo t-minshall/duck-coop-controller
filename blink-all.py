@@ -1,6 +1,6 @@
 import init_controller
 import time
-del=0.2
+del = 0.2
 
 init_controller.T1.off()
 init_controller.T2.off()
