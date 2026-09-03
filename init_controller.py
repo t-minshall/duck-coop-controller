@@ -7,7 +7,8 @@ T4=LED(27)   # Motor x y (red)
 T3=LED(22)   # Motor x y (red)
 T2=LED(17)   # Motor x y (red)
 T1=LED(25)   # Buzzer (greeen)
-T6=LED(7)    # Hard Latch (green
+#T6=LED(7)    # Hard Latch (green)  ******* GPIO-7 seems broken on my Pi ... re-routing to GPIO-12
+T6=LED(12)    # Hard Latch (green)
 T7=LED(8)    # Soft Latch (green)
 CMD_latch=Button(21, bounce_time=0.05)
 CMD_open=Button(5, bounce_time=0.05)
