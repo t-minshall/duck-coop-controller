@@ -9,7 +9,7 @@ init_controller.T5.off()
 init_controller.T6.off()
 init_controller.T7.off()
 init_controller.LED10.on()
-time.sleeep(0.1)
+time.sleep(0.1)
 while True:
   init_controller.LED10.toggle()
   init_controller.T2.toggle()
