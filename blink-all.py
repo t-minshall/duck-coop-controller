@@ -39,7 +39,7 @@ while True:
   init_controller.T1.toggle()
   init_controller.LED10.toggle()
   time.sleep(del_time)
-  del_time=del_time-del_increment
+  del_time=del_time - del_time_increment
   if del_time<del_time_min:
       del_time=del_time_init
 
