@@ -246,6 +246,7 @@ data-port with correct USB-cable.
     @reboot echo "cd duck-coop-controller" > /home/duckie/dc.sh && echo "ls" >> /home/duckie/dc.sh && chmod +x /home/duckie/dc.sh &
     @reboot sudo apt update > /home/duckie/update.txt && sudo apt upgrade -y > /home/duckie/upgrade.txt &
     #@reboot sudo dpkg --configure -a > /home/duckie/dpkg.txt &
+	#rpi-connect restart
     #@reboot python /home/duckie/duck-coop-contrpller/blink16-always.py &
     ctrl-s & ctrl-x to save/exit
 6) reboot the Pi (type "sudo reboot", password "quack") and go away for 1 hr (while upgrade happens)
@@ -254,7 +255,7 @@ data-port with correct USB-cable.
     note: if step-9 fails, execute steps 8.1 - 8.3, then re-try step 9. 
     8.1) edit crontab to comment out the first 2 added lines (create dc.sh, perform update/upgrade) & uncomment #3 (dpkg)
     8.2) reboot again, but only wait 5 minutes
-    8.3) edit crontab to comment out the dpkg line and un-comment the python line (this one I keeep for now)
+    8.3) edit crontab to comment out the dpkg line and un-comment the rpi-connect & python lines (this one I keep for now)
 9-experimental ...
 	9.1) sudo apt install rpi-connect-lite
 	9.2) rpi-connect on
