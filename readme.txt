@@ -243,7 +243,7 @@ data-port with correct USB-cable.
 3) type sudo apt update
 4) type sudo crontab -e
 5) scroll all the way down, add the lines:
-    @reboot echo "cd duck-coop-controller" > dc.sh && echo "ls" >> dc.sh && chmod +x dc.sh &
+    @reboot echo "cd duck-coop-controller" > /home/duckie/dc.sh && echo "ls" >> /home/duckie/dc.sh && chmod +x /home/duckie/dc.sh &
     @reboot sudo apt update > /home/duckie/update.txt && sudo apt upgrade -y > /home/duckie/upgrade.txt &
     #@reboot sudo dpkg --configure -a > /home/duckie/dpkg.txt &
     #@reboot python /home/duckie/duck-coop-contrpller/blink16-always.py &
