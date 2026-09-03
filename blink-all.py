@@ -1,5 +1,6 @@
 import init_controller
 import time
+del=0.2
 
 init_controller.T1.off()
 init_controller.T2.off()
@@ -9,7 +10,7 @@ init_controller.T5.off()
 init_controller.T6.off()
 init_controller.T7.off()
 init_controller.LED10.on()
-time.sleep(0.1)
+time.sleep(del)
 while True:
   init_controller.LED10.toggle()
   init_controller.T2.toggle()
