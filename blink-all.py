@@ -1,6 +1,9 @@
 import init_controller
 import time
-del_time = 0.2
+del_time_init = 0.2
+del_time_min=0.025
+del_time_increment=0.025
+del_time=del_time_init
 
 init_controller.T1.off()
 init_controller.T2.off()
@@ -36,4 +39,7 @@ while True:
   init_controller.T1.toggle()
   init_controller.LED10.toggle()
   time.sleep(del_time)
+  del_time=del_time-del_increment
+  if del_time<del_time_min:
+      del_time=del_time_init
 
