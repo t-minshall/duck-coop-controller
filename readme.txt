@@ -255,7 +255,12 @@ data-port with correct USB-cable.
     8.1) edit crontab to comment out the first 2 added lines (create dc.sh, perform update/upgrade) & uncomment #3 (dpkg)
     8.2) reboot again, but only wait 5 minutes
     8.3) edit crontab to comment out the dpkg line and un-comment the python line (this one I keeep for now)
-9) open shell, install GIT per section-8, starting with the install git step
+9-experimental ...
+	9.1) sudo apt install rpi-connect-lite
+	9.2) rpi-connect on
+	9.3) rpi-connect signin
+	9.4) loginctl enable-linger
+10) open shell, install GIT per section-8, starting with the install git step
 
 --------------------------------------------------------------------------------------------------------------------------
 --------------- Sec 14:  Connecting to R-pi via Power-Shell (not Rasberry Connect)  --------------------------------------
