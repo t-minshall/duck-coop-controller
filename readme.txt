@@ -249,7 +249,7 @@ data-port with correct USB-cable.
     #@reboot python /home/duckie/duck-coop-contrpller/blink16-always.py &
     ctrl-s & ctrl-x to save/exit
 6) reboot the Pi (type "sudo reboot", password "quack") and go away for 1 hr (while upgrade happens)
-7) open shell, verify dc.sh file exists
+7) open shell, verify dc.sh file exists. Re-run "sudo apt update" again, verify it shows only 1-4 files.  If it still shows dozens, reboot again.
 8) edit crontab to comment out the first 2 added lines (create dc.sh, perform iupdate/upgrade) & uncomment #4 (python)
     note: if step-9 fails, execute steps 8.1 - 8.3, then re-try step 9. 
     8.1) edit crontab to comment out the first 2 added lines (create dc.sh, perform update/upgrade) & uncomment #3 (dpkg)
