@@ -5,7 +5,7 @@
 2) insert SD card, power pi, be patient ... takes 5 min or longer for initial boot-up.
 3) open Pi-Connect, connect to a new shell (DOS window) per section-4
 4) Update & Install Git per section-8 below (Install Git-Hub on Pi). Be sure to do the "upgrade" part too, which will take 30-60 min.
-5) Get background blinker (GPIO-16) running per section-7 below (Make program that auto-starts on boot up)
+5) Get background blinker (GPIO-12) running per section-7 below (Make program that auto-starts on boot up)
 6) Get batch-file/script running per section-10
 7) future:  Update files per section-11
 8) future:  doctor remote-connect so it doesn't crash so often (linger)
@@ -25,7 +25,7 @@ IDK
 --------------- Sec 2:  Board Build / Debug Plan  ------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------
 Steps:
-x  1) Build program to blink a LED on GPIO-18 [blink18.py or blink16-always.py using spare]
+x  1) Build program to blink a LED on GPIO-18 [blink18.py or blink-always.py using spare]
 x  2) Test program on breadboard.
 x  3) Build PCB to include power-supply (7805 & Caps), LED-10 & interconnect-header.  Verify 5/12 volts exist where expected
 x  4) Connect Pi, verify Python can blink LED.
@@ -247,7 +247,7 @@ data-port with correct USB-cable.
     @reboot sudo apt update > /home/duckie/update.txt && sudo apt upgrade -y > /home/duckie/upgrade.txt &
     #@reboot sudo dpkg --configure -a > /home/duckie/dpkg.txt &
 	#rpi-connect restart
-    #@reboot python /home/duckie/duck-coop-contrpller/blink16-always.py &
+    #@reboot python /home/duckie/duck-coop-contrpller/blink-always.py &
     ctrl-s & ctrl-x to save/exit
 6) reboot the Pi (type "sudo reboot", password "quack") and go away for 1 hr (while upgrade happens)
 7) open shell, verify dc.sh file exists. Re-run "sudo apt update" again, verify it shows only 1-4 files.  If it still shows dozens, reboot again.
