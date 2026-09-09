@@ -9,7 +9,7 @@
 # ***********  Initialization  ******************************
 import init_controller
 import time
-section=3
+section=4
 
 init_controller.T1.off()
 init_controller.T2.off()
@@ -68,20 +68,20 @@ if section==4:
     del_time=1.5
     switch_time=0.2
     while True:
-        #init_controller.Ty.off()
-        #init_controller.Tz.off()
+        init_controller.T2.off()
+        init_controller.T3.off()
         time.sleep(switch_time)
         init_controller.LED10.on()
-        #init_controller.Tw.on()
-        #init_controller.Tx.on()
+        init_controller.T4.on()
+        init_controller.T5.on()
         print("Motor FWD", end="")
         time.sleep(del_time)
-        #init_controller.LED10.off
-        #init_controller.Tw.off()
-        #init_controller.Tx.off()
+        init_controller.LED10.off
+        init_controller.T4.off()
+        init_controller.T5.off()
         time.sleep(switch_time)
-        #init_controller.Ty.on()
-        #init_controller.Tz.on()
+        init_controller.T2.on()
+        init_controller.T2.on()
         print("Motor REV", end="")
         time.sleep(del_time)
 
@@ -97,20 +97,20 @@ if section==5:
         #wait for OPEN input
         while init_controller.CMD_open.is_pressed:
             if direction!="FWD":
-                #init_controller.Ty.off()
-                #init_controller.Tz.off()
+                init_controller.T2.off()
+                init_controller.T3.off()
                 time.sleep(switch_time)
-                #init_controller.Tw.on()
-                #init_controller.Tx.on()
+                init_controller.T4.on()
+                init_controller.T5.on()
             direction="FWD"
             print("Button OPEN is pressed, Motor turning FWD")
         #wait for CLOSE input
         while init_controller.CMD_close.is_pressed:
             if direction!="REV":
-                #init_controller.Tw.off()
-                #init_controller.Tx.off()
+                init_controller.T4.off()
+                init_controller.T5.off()
                 time.sleep(switch_time)
-                #init_controller.Ty.on()
-                #init_controller.Tz.on()
+                init_controller.T2.on()
+                init_controller.T3.on()
             direction="REV"
             print("Button CLOSE is pressed, Motor turning REV")
