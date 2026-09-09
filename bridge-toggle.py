@@ -19,10 +19,12 @@ init_controller.T5.off()
 init_controller.T6.off()
 init_controller.T7.off()
 init_controller.LED10.off()
+print("Section-1 (Initialization) complete")
 
 # ***********  Section 2 ************************************
 # ***********  Identify Transistors, Relays, Armatures  *****
 if section==2:
+    print("Starting Section-2 (identify TRA's)")
     del_time=1.5
     init_controller.T2.toggle()
     init_controller.LED10.toggle()
@@ -48,16 +50,21 @@ if section==2:
 # ***********  Section 3 ************************************
 # ***********  Make Motor Turn  *****************************
 if section==3:
+    print("Starting Section-3 (make motor turn")
     del_time=1.5
+    toggle_count=0
     while True:
+        print("Motor-toggle", toggle_count, end="")
         init_controller.LED10.toggle()
         #init_controller.Tw.toggle()
         #init_controller.Tx.toggle()
         time.sleep(del_time)
+        toggle_count += 1
 
 # ***********  Section 4 ************************************
 # ***********  Make Motor Toggle  ***************************
 if section==4:
+    print("Starting Section-4 (make motor toggle")
     del_time=1.5
     switch_time=0.2
     while True:
@@ -67,6 +74,7 @@ if section==4:
         init_controller.LED10.on()
         #init_controller.Tw.on()
         #init_controller.Tx.on()
+        print("Motor FWD", end="")
         time.sleep(del_time)
         #init_controller.LED10.off
         #init_controller.Tw.off()
@@ -74,11 +82,13 @@ if section==4:
         time.sleep(switch_time)
         #init_controller.Ty.on()
         #init_controller.Tz.on()
+        print("Motor REV", end="")
         time.sleep(del_time)
 
 # ***********  Section 5 ************************************
 # ***********  Control Motor with Inputs  *******************
 if section==5:
+    print("Starting Section-5 (make motor respond to inputs")
     switch_time=0.2
     #Starting condition (from Sec-1), all transistors OFF
     while True:
