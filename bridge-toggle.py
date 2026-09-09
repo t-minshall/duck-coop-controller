@@ -50,7 +50,7 @@ if section==2:
 # ***********  Section 3 ************************************
 # ***********  Make Motor Turn  *****************************
 if section==3:
-    print("Starting Section-3 (make motor turn")
+    print("Starting Section-3 (make motor turn)")
     del_time=1.5
     toggle_count=0
     while True:
@@ -64,7 +64,7 @@ if section==3:
 # ***********  Section 4 ************************************
 # ***********  Make Motor Toggle  ***************************
 if section==4:
-    print("Starting Section-4 (make motor toggle")
+    print("Starting Section-4 (make motor toggle)")
     del_time=1.5
     switch_time=0.2
     while True:
