@@ -9,7 +9,7 @@
 # ***********  Initialization  ******************************
 import init_controller
 import time
-section=2
+section=3
 
 init_controller.T1.off()
 init_controller.T2.off()
@@ -56,8 +56,8 @@ if section==3:
     while True:
         print("Motor-toggle", toggle_count, end="")
         init_controller.LED10.toggle()
-        #init_controller.Tw.toggle()
-        #init_controller.Tx.toggle()
+        init_controller.T2.toggle()
+        init_controller.T3.toggle()
         time.sleep(del_time)
         toggle_count += 1
 
