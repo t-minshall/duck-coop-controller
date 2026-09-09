@@ -86,7 +86,7 @@ if section==5:
         print("NO buttons pressed, stopping motor", end="")
         #wait for OPEN input
         while init_controller.CMD_open.is_pressed:
-            if direction!=="FWD":
+            if direction!="FWD":
                 #init_controller.Ty.off()
                 #init_controller.Tz.off()
                 time.sleep(switch_time)
@@ -96,7 +96,7 @@ if section==5:
             print("Button OPEN is pressed, Motor turning FWD")
         #wait for CLOSE input
         while init_controller.CMD_close.is_pressed:
-            if direction!=="REV":
+            if direction!="REV":
                 #init_controller.Tw.off()
                 #init_controller.Tx.off()
                 time.sleep(switch_time)
