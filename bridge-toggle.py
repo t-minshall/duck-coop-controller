@@ -18,26 +18,31 @@ init_controller.T4.off()
 init_controller.T5.off()
 init_controller.T6.off()
 init_controller.T7.off()
-init_controller.LED10.on()
+init_controller.LED10.off()
 
 # ***********  Section 2 ************************************
 # ***********  Identify Transistors, Relays, Armatures  *****
 if section=2:
     del_time=1.5
     init_controller.T2.toggle()
+    init_controller.LED10.toggle()
     time.sleep(del_time)
     while True:
         init_controller.T2.toggle()
         init_controller.T3.toggle()
+        init_controller.LED10.toggle()
         time.sleep(del_time)
         init_controller.T3.toggle()
         init_controller.T4.toggle()
+        init_controller.LED10.toggle()
         time.sleep(del_time)
         init_controller.T4.toggle()
         init_controller.T5.toggle()
+        init_controller.LED10.toggle()
         time.sleep(del_time)
         init_controller.T5.toggle()
         init_controller.T2.toggle()
+        init_controller.LED10.toggle()
         time.sleep(del_time)
   
 # ***********  Section 3 ************************************
@@ -46,7 +51,7 @@ if section=3:
     del_time=1.5
     while True:
         init_controller.LED10.toggle()
-        #init_controller.Tx.toggle()
+        #init_controller.Tw.toggle()
         #init_controller.Tx.toggle()
         time.sleep(del_time)
 
@@ -56,10 +61,26 @@ if section=4:
     del_time=1.5
     switch_time=0.2
     while True:
-        init_controller.LED10.toggle()
-        #init_controller.Tx.toggle()
-        #init_controller.Tx.toggle()
+        #init_controller.Ty.off()
+        #init_controller.Tz.off()
+        time.sleep(switch_time)
+        init_controller.LED10.on()
+        #init_controller.Tw.on()
+        #init_controller.Tx.on()
+        time.sleep(del_time)
+        #init_controller.LED10.off
+        #init_controller.Tw.off()
+        #init_controller.Tx.off()
+        time.sleep(switch_time)
+        #init_controller.Ty.on()
+        #init_controller.Tz.on()
         time.sleep(del_time)
 
 # ***********  Section 5 ************************************
 # ***********  Control Motor with Inputs  *******************
+if section=5:
+    switch_time=0.2
+    #Starting condition (from Sec-1), all transistors OFF
+    while True:
+        #wait for input
+        #make sure 2-inputs doesn't crash
