@@ -82,5 +82,25 @@ if section=5:
     switch_time=0.2
     #Starting condition (from Sec-1), all transistors OFF
     while True:
-        #wait for input
-        #make sure 2-inputs doesn't crash
+        direction="NONE"
+        print("NO buttons pressed, stopping motor", end="")
+        #wait for OPEN input
+        while init_controller.CMD_open.is_pressed:
+            if direction!="FWD":
+                #init_controller.Ty.off()
+                #init_controller.Tz.off()
+                time.sleep(switch_time)
+                #init_controller.Tw.on()
+                #init_controller.Tx.on()
+            direction="FWD"
+            print("Button OPEN is pressed, Motor turning FWD")
+        #wait for CLOSE input
+        while init_controller.CMD_close.is_pressed:
+            if direction!="REV":
+                #init_controller.Tw.off()
+                #init_controller.Tx.off()
+                time.sleep(switch_time)
+                #init_controller.Ty.on()
+                #init_controller.Tz.on()
+            direction="REV"
+            print("Button CLOSE is pressed, Motor turning REV")
