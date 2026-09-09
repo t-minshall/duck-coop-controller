@@ -22,7 +22,7 @@ init_controller.LED10.off()
 
 # ***********  Section 2 ************************************
 # ***********  Identify Transistors, Relays, Armatures  *****
-if section=2:
+if section==2:
     del_time=1.5
     init_controller.T2.toggle()
     init_controller.LED10.toggle()
@@ -47,7 +47,7 @@ if section=2:
   
 # ***********  Section 3 ************************************
 # ***********  Make Motor Turn  *****************************
-if section=3:
+if section==3:
     del_time=1.5
     while True:
         init_controller.LED10.toggle()
@@ -57,7 +57,7 @@ if section=3:
 
 # ***********  Section 4 ************************************
 # ***********  Make Motor Toggle  ***************************
-if section=4:
+if section==4:
     del_time=1.5
     switch_time=0.2
     while True:
@@ -78,7 +78,7 @@ if section=4:
 
 # ***********  Section 5 ************************************
 # ***********  Control Motor with Inputs  *******************
-if section=5:
+if section==5:
     switch_time=0.2
     #Starting condition (from Sec-1), all transistors OFF
     while True:
@@ -86,7 +86,7 @@ if section=5:
         print("NO buttons pressed, stopping motor", end="")
         #wait for OPEN input
         while init_controller.CMD_open.is_pressed:
-            if direction!="FWD":
+            if direction!=="FWD":
                 #init_controller.Ty.off()
                 #init_controller.Tz.off()
                 time.sleep(switch_time)
@@ -96,7 +96,7 @@ if section=5:
             print("Button OPEN is pressed, Motor turning FWD")
         #wait for CLOSE input
         while init_controller.CMD_close.is_pressed:
-            if direction!="REV":
+            if direction!=="REV":
                 #init_controller.Tw.off()
                 #init_controller.Tx.off()
                 time.sleep(switch_time)
