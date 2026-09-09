@@ -81,7 +81,7 @@ if section==4:
         init_controller.T5.off()
         time.sleep(switch_time)
         init_controller.T2.on()
-        init_controller.T2.on()
+        init_controller.T3.on()
         print("Motor REV", end="")
         time.sleep(del_time)
 
