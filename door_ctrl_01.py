@@ -67,7 +67,7 @@ while True:
         Motion_type="AUTO"
         winch_in()
 
-    if switch_timer>time.time() and Motion_type="AUTO":    #    door failed to clear the open/closed sensors quickly enough
+    if switch_timer>time.time() and Motion_type=="AUTO":    #    door failed to clear the open/closed sensors quickly enough
         stop_all()
         Motion_type="ERROR"
         Buzzer.on()
