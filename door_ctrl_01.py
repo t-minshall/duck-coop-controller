@@ -24,7 +24,7 @@ def initialize():
     close_sns_time=1                              #    Time it should take to toggle the open-sensor from a normal-closed state
     close_time=10                                 #    Time it should take to fully close the door
     open_sns_time=1                               #    Time it should take to toggle the open-sensor from a normal-open state
-    armature-debounce=0.2                        #    Time delay before energizing motor armature relays (prevent shorting)
+    armature_debounce=0.2                        #    Time delay before energizing motor armature relays (prevent shorting)
     
 def stop_all():
     T2.off()
