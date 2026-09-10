@@ -93,6 +93,10 @@ if section==5:
     #Starting condition (from Sec-1), all transistors OFF
     while True:
         direction="NONE"
+        init_controller.T2.off()
+        init_controller.T3.off()
+        init_controller.T4.off()
+        init_controller.T5.off()
         print("NO buttons pressed, stopping motor", end="\r")
         #wait for OPEN input
         while init_controller.CMD_open.is_pressed:
