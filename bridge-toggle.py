@@ -9,7 +9,7 @@
 # ***********  Initialization  ******************************
 import init_controller
 import time
-section=4
+section=5
 
 init_controller.T1.off()
 init_controller.T2.off()
