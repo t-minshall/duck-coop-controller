@@ -2,7 +2,7 @@ initialize()
 var_a = 1
 print("running -001")
 
-def initialize:
+def initialize():
     from gpiozero import LED
     from gpiozero import Button
     import time
