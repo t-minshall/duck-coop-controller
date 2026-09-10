@@ -61,7 +61,7 @@ while True:
     else:
         Buzzer.off()
 
-    if CMD_open.is_pressed and <SW_closed.is_pressed:    # this is a normal open-op
+    if CMD_open.is_pressed and SW_closed.is_pressed:    # this is a normal open-op
         open_timer=time.time()+open_time
         switch_timer=time.time()+close_sns_time
         Motion_type="AUTO"
