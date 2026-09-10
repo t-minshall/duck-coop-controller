@@ -72,7 +72,7 @@ while True:
         Motion_type="ERROR"
         Buzzer.on()
     
-    if (open_timer>time.time() or close_timer>time.time()) and Motion_type="AUTO":    #    door failed to complete open- or close-motion before time-out
+    if (open_timer>time.time() or close_timer>time.time()) and Motion_type=="AUTO":    #    door failed to complete open- or close-motion before time-out
         stop_all()
         Motion_type="ERROR"
         Buzzer.on()
