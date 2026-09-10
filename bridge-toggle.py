@@ -88,7 +88,7 @@ if section==4:
 # ***********  Section 5 ************************************
 # ***********  Control Motor with Inputs  *******************
 if section==5:
-    print("Starting Section-5 (make motor respond to inputs")
+    print("Starting Section-5 (make motor respond to inputs)")
     switch_time=0.2
     #Starting condition (from Sec-1), all transistors OFF
     while True:
