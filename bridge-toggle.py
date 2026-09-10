@@ -93,7 +93,7 @@ if section==5:
     #Starting condition (from Sec-1), all transistors OFF
     while True:
         direction="NONE"
-        print("NO buttons pressed, stopping motor", end="")
+        print("NO buttons pressed, stopping motor", end="\r")
         #wait for OPEN input
         while init_controller.CMD_open.is_pressed:
             if direction!="FWD":
