@@ -27,7 +27,7 @@ def initialize():
     armature_debounce=0.2                        #    Time delay before energizing motor armature relays (prevent shorting)
     
 def stop_all():
-    T2.off()
+    #T2.off()
     T3.off()
     T4.off()
     T5.off()
