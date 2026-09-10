@@ -1,7 +1,3 @@
-initialize()
-var_a = 1
-print("running -001")
-
 def initialize():
     from gpiozero import LED
     from gpiozero import Button
@@ -22,3 +18,7 @@ def initialize():
     SW_open=Button(19, bounce_time=0.05)
     SW_closed=Button(26, bounce_time=0.05)
     SW_torque=Button(20, bounce_time=0.05)
+
+initialize()
+var_a = 1
+print("running -001")
