@@ -150,7 +150,7 @@ if section==6:
             if direction!="REV":
                 init_controller.T4.off()
                 init_controller.T5.off()
-                init_controller.LED10.on()
+                init_controller.LED10.off()
                 time.sleep(switch_time)
                 init_controller.T2.on()
                 init_controller.T3.on()
