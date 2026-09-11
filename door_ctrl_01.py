@@ -19,12 +19,13 @@ CMD_stop=Button(13, bounce_time=0.05)
 SW_open=Button(19, bounce_time=0.05)
 SW_closed=Button(26, bounce_time=0.05)
 SW_torque=Button(20, bounce_time=0.05)
-jog_delay=0.25                                #    Time when motor can be force-driven under over-torque condition
+jog_on_delay=0.5                              #    Time when motor can be force-driven under over-torque condition
+jog_off_delay=0.5                             #    Time when servos are OFF during forced-jog motion
 open_time=10                                  #    Time it should take to fully open the door
 close_sns_time=1                              #    Time it should take to toggle the open-sensor from a normal-closed state
 close_time=10                                 #    Time it should take to fully close the door
 open_sns_time=1                               #    Time it should take to toggle the open-sensor from a normal-open state
-armature_debounce=0.2                        #    Time delay before energizing motor armature relays (prevent shorting)
+armature_debounce=0.2                         #    Time delay before energizing motor armature relays (prevent shorting)
 
 
 def stop_all():
@@ -47,9 +48,22 @@ def winch_out():
     T4.on()
     T5.on()
 
+#    Motion Scenarios:
+#    1) Overtorque:  need way to jog out of error-state
+#    2) Normal Open command - from a fully closed-door state
+#    3) Open commanded, but fail to clear "close" sensor quickly enough
+#    4) Open commanded, but fail to meet "open" sensor quickly enough
+#    5) Abnormal Open command - from a mid-position location
+#    2b) Normal Close command - from a fully open-door state
+#    3b) Close commmanded, fail to clear "open" sensor in time
+#    4b) Close commmanded, fail to reach "close" in time
+#    5b) Abnormal Close
+#    6) Stop button
+#
+#
 initialize()
 stop_all()
-jog_timer=time.time()+jog_delay
+jog_timer=time.time()+jog_on_delay
 Motion_type="NULL"
 while True:
     if SW_torque.is_pressed:
@@ -58,21 +72,39 @@ while True:
             jog_timer=time.time()+(2*jog_delay)
             stop_all()
             Motion_type="ERROR"
-            time.sleep(jog_delay)
+            time.sleep(jog_off_delay)
     else:
         Buzzer.off()
 
-    if CMD_open.is_pressed and SW_closed.is_pressed:    # this is a normal open-op
+    if CMD_open.is_pressed and SW_closed.is_pressed:    # this is a normal open-op - start
         open_timer=time.time()+open_time
         switch_timer=time.time()+close_sns_time
-        Motion_type="AUTO"
+        Motion_type="AUTO-Open"
+        open_sensor="not-seen"
         winch_in()
 
-    if switch_timer>time.time() and Motion_type=="AUTO":    #    door failed to clear the open/closed sensors quickly enough
+    if Motion_type=="AUTO-Open" and SW_open.is_pressed    # this is the normal open-op - ending
+        if open_sensor=="not-seen"
+            open_overtravel_timer= time.time()+open_overtravel
+            open_sensor="seen"
+        if time.time()>open_overtravel_timer
+            stop_all()
+
+    if Motion_type=="AUTO-Open" and time.time()>switch_timer and SW_closed.is_pressed        # door has failed to clear the closed-sensor during open quickly enough
         stop_all()
-        Motion_type="ERROR"
         Buzzer.on()
+        time.sleep(3)
+        Buzzer.off()
+        Motion_type="ERROR"
+
+    if Motion_type=="AUTO-Open" and time.time()>open_timer and not SW_open.is_pressed            # door failed to open fully during open-cycle quickly enough
+        stop_all()
+        Buzzer.on()
+        time.sleep(3)
+        Buzzer.off()
+        Motion_type="ERROR"
     
+    --------------------------------  
     if (open_timer>time.time() or close_timer>time.time()) and Motion_type=="AUTO":    #    door failed to complete open- or close-motion before time-out
         stop_all()
         Motion_type="ERROR"
