@@ -118,3 +118,42 @@ if section==5:
                 init_controller.T3.on()
             direction="REV"
             print("Button CLOSE is pressed, Motor turning REV")
+
+
+# ***********  Section 6 ************************************
+# ***********  Control Motor with More Inputs  **************
+if section==5:
+    print("Starting Section-6 (motor responds to inputs, and more)")
+    switch_time=0.2
+    #Starting condition (from Sec-1), all transistors OFF
+    while True:
+        direction="NONE"
+        init_controller.T2.off()
+        init_controller.T3.off()
+        init_controller.T4.off()
+        init_controller.T5.off()
+        print("NO buttons pressed, stopping motor", end="\r")
+        #wait for OPEN input
+        while init_controller.CMD_open.is_pressed:
+            if direction!="FWD":
+                init_controller.T2.off()
+                init_controller.T3.off()
+                init_controller.T1.off()
+                time.sleep(switch_time)
+                init_controller.T4.on()
+                init_controller.T5.on()
+                init_controller.LED10.on()
+            direction="FWD"
+            print("Button OPEN is pressed, Motor turning FWD", end="\r")
+        #wait for CLOSE input
+        while init_controller.CMD_close.is_pressed:
+            if direction!="REV":
+                init_controller.T4.off()
+                init_controller.T5.off()
+                init_controller.LED10.on()
+                time.sleep(switch_time)
+                init_controller.T2.on()
+                init_controller.T3.on()
+                init_controller.T1.on()
+            direction="REV"
+            print("Button CLOSE is pressed, Motor turning REV", end="\r")
