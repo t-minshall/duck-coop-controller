@@ -9,7 +9,7 @@
 # ***********  Initialization  ******************************
 import init_controller
 import time
-section=5
+section=6
 
 init_controller.T1.off()
 init_controller.T2.off()
@@ -122,8 +122,8 @@ if section==5:
 
 # ***********  Section 6 ************************************
 # ***********  Control Motor with More Inputs  **************
-if section==5:
-    print("Starting Section-6 (motor responds to inputs, and more)")
+if section==6:
+    print("Starting Section-6 (motor responds to inputs, and buzzer/LED)")
     switch_time=0.2
     #Starting condition (from Sec-1), all transistors OFF
     while True:
@@ -133,7 +133,7 @@ if section==5:
         init_controller.T4.off()
         init_controller.T5.off()
         print("NO buttons pressed, stopping motor", end="\r")
-        #wait for OPEN input
+
         while init_controller.CMD_open.is_pressed:
             if direction!="FWD":
                 init_controller.T2.off()
@@ -145,7 +145,7 @@ if section==5:
                 init_controller.LED10.on()
             direction="FWD"
             print("Button OPEN is pressed, Motor turning FWD", end="\r")
-        #wait for CLOSE input
+
         while init_controller.CMD_close.is_pressed:
             if direction!="REV":
                 init_controller.T4.off()
@@ -157,3 +157,13 @@ if section==5:
                 init_controller.T1.on()
             direction="REV"
             print("Button CLOSE is pressed, Motor turning REV", end="\r")
+
+        while init_controller.CMD_stop.is_pressed:
+            init_controller.T1.off()
+            init_controller.T2.off()
+            init_controller.T3.off()
+            init_controller.T4.off()
+            init_controller.T5.off()
+            init_controller.LED10.off()
+            print("Button STOP is pressed, Motor halted", end="\r")
+            
