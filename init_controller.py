@@ -118,5 +118,5 @@ def system_state(T1,T2,T3,T4,T5,T6,T7):
     else:
         sys_state=sys_state+"-"
 
-return(sys_state)
+    return(sys_state)
 
