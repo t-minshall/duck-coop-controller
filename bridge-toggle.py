@@ -347,7 +347,7 @@ if section==9:
             init_controller.T4.off()
             init_controller.T5.off()
             init_controller.T6.off()
-            init_controller.T7.off()
+            init_controller.T7.off() && print("T7 off")
             init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
             print("Button STOP is pressed, Motor halted", end="                                    \r")
