@@ -278,6 +278,7 @@ if section==9:
     print("Starting Section-9 (all IO working together)")
     switch_time=0.2
     print_end="                                    \r"
+    print_end="\r"
     #print_end="\r\n"
     #Starting condition (from Sec-1), all transistors OFF
     direction="NONE"
@@ -289,9 +290,9 @@ if section==9:
     init_controller.T7.off()
     init_controller.LED10.blink(0.2, 1.8)
     sys_state_local=init_controller.system_state(init_controller.T1.is_lit, init_controller.T2.is_lit, init_controller.T3.is_lit, init_controller.T4.is_lit, init_controller.T5.is_lit, init_controller.T6.is_lit, init_controller.T7.is_lit)
-    print("NO buttons pressed, stopping motor", sys_state_local, end=print_end)
+    #print("NO buttons pressed, stopping motor", sys_state_local, end=print_end)
     message="NO buttons pressed, stopping motor"
-    print(f"{message:<30} {sys_state_local}")
+    print(f"{message:<50} {sys_state_local}", end=print_end)
     while True:
         while init_controller.CMD_open.is_pressed:
             if direction!="OPEN":
@@ -305,8 +306,10 @@ if section==9:
                 init_controller.T1.blink(0.5, 0.5)
                 init_controller.LED10.blink(0.5, 0.5)
             direction="OPEN"
-            print("Button OPEN is pressed, Motor turning FWD/OPEN", end=print_end)
-
+            sys_state_local=init_controller.system_state(init_controller.T1.is_lit, init_controller.T2.is_lit, init_controller.T3.is_lit, init_controller.T4.is_lit, init_controller.T5.is_lit, init_controller.T6.is_lit, init_controller.T7.is_lit)
+            message="Button OPEN is pressed, Motor turning FWD/OPEN"
+            print(f"{message:<50} {sys_state_local}", end=print_end)
+            
         if direction=="OPEN" and init_controller.SW_open.is_pressed:
             # motor has moved all the way to the open position-sensor
             # stop motor, reset buzzer and LED-flasher
