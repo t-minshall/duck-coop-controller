@@ -90,21 +90,21 @@ def system_state(T1,T2,T3,T4,T5,T6,T7):
     else:
         sys_state=sys_state+"-"
   
-    sys_state=sys_state+" : "
+    sys_state=sys_state+" | "
     if CMD_open.is_pressed:
         sys_state=sys_state+"O"
     else:
-        sys_statre=sys_state+"."
+        sys_state=sys_state+"."
     if CMD_close.is_pressed:
         sys_state=sys_state+"C"
     else:
-        sys_statre=sys_state+"."
+        sys_state=sys_state+"."
     if CMD_stop.is_pressed:
         sys_state=sys_state+"S"
     else:
         sys_state=sys_state+"."
 
-    sys_state=sys_state+" : "
+    sys_state=sys_state+" | "
     if SW_open.is_pressed:
         sys_state=sys_state+"o"
     else:
