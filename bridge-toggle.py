@@ -352,7 +352,7 @@ if section==9:
             direction="NONE"
             print("Button STOP is pressed, Motor halted", end="                                    \r")
 
-        while init_controller.SNS_torque.is_pressed:
+        while init_controller.SW_torque.is_pressed:
             # Note: system will get hung-up here ... no way to jog-out while over-torque is sensed
             init_controller.T1.blink(0.5, 0.5)
             init_controller.T2.off()
