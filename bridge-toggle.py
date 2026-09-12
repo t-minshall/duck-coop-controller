@@ -366,7 +366,7 @@ if section==9:
             init_controller.LED10.blink(0.2, 0.2)
             direction="NONE"
             print("Over-Torque detected, Stop motors, sound alarm", end=print_end)
-        sys_state_local=init_controller.system_state(init_controller.T1.is_on, init_controller.T2.is_on, init_controller.T3.is_on, init_controller.T4.is_on)
+        sys_state_local=init_controller.system_state(init_controller.T1.is_lit, init_controller.T2.is_lit, init_controller.T3.is_lit, init_controller.T4.is_lit)
         print(sys_state_local, end="\r")
 
 # ***********  Section 10 ************************************
