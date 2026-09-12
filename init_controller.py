@@ -83,7 +83,7 @@ def system_state(T1,T2,T3,T4,T5,T6,T7):
         sys_state=sys_state+"-"
     if T6==True:
         sys_state=sys_state+"L"
-    else
+    else:
         sys_state=sys_state+"-"
     if T7==True:
         sys_state=sys_state+"l"
