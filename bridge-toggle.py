@@ -302,7 +302,7 @@ if section==9:
             direction="OPEN"
             print("Button OPEN is pressed, Motor turning FWD/OPEN", end="                                    \r")
 
-        if direction=="OPEN" and SNS_open.is_pressed:
+        if direction=="OPEN" and SW_open.is_pressed:
             # motor has moved all the way to the open position-sensor
             # stop motor, reset buzzer and LED-flasher
             init_controller.T4.off()
@@ -324,7 +324,7 @@ if section==9:
             direction="CLOSE"
             print("Button CLOSE is pressed, Motor turning REV/CLOSE", end="                                    \r")
 
-        if direction=="CLOSE" and SNS_close.is_pressed:
+        if direction=="CLOSE" and SW_close.is_pressed:
             # motor has moved all the way to the closed position-sensor
             # stop motor, reset buzzer and LED-flasher
             #throw Latch
