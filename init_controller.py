@@ -60,7 +60,7 @@ def motor_loop():
         time.sleep(1)
     return
 
-def system_state(T1,T2,T3,T4,T5,T6,T7):
+def system_state(T11,T2,T3,T4,T5,T6,T7):
     if T1.is_lit:
         sys_state="B"
     else:
