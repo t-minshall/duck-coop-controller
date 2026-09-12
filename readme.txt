@@ -251,18 +251,23 @@ data-port with correct USB-cable.
     #@reboot python /home/duckie/duck-coop-controller/blink-all.py &
 	ctrl-s & ctrl-x to save/exit
 6) reboot the Pi (type "sudo reboot", password "quack") and go away for 1 hr (while upgrade happens)
+	6.1) watch the upgrade.txt file, make sure it stops appending for a bit before rebooting (man upgrade.txt)
 7) open shell, verify dc.sh file exists. Re-run "sudo apt update" again, verify it shows only 1-4 files.  If it still shows dozens, reboot again.
 8) edit crontab to comment out the first 2 added lines (create dc.sh, perform iupdate/upgrade) & uncomment #4 (python)
     note: if step-9 fails, execute steps 8.1 - 8.3, then re-try step 9. 
     8.1) edit crontab to comment out the first 2 added lines (create dc.sh, perform update/upgrade) & uncomment #3 (dpkg)
     8.2) reboot again, but only wait 5 minutes
     8.3) edit crontab to comment out the dpkg line and un-comment the rpi-connect & python lines (this one I keep for now)
-9-experimental ...
-	9.1) sudo apt install rpi-connect-lite
-	9.2) rpi-connect on
-	9.3) rpi-connect signin
-	9.4) loginctl enable-linger
+9-experimental ... setup the PI with a static IP address
+	9.1) type sudo nmtui
+	9.2) move selection-line with arrows, select with CR.  Select Edit a Connection.
+	9.3) Select the appropriate line under WiFi
+	9.4) down-arrow to IPv4 configuration, change from Auto to Manual.
+	9.5) Right arrow to "show".  Add address as 192.168.1.205, set gateway as 192.168.1.1 and DNS as 192.168.1.1
+	9.6) arrow-down to select OK
 10) open shell, install GIT per section-8, starting with the install git step
+	10.1) sudo apt install git -y
+	10.2) git clone https://github.com/t-minshall/duck-coop-controller
 
 --------------------------------------------------------------------------------------------------------------------------
 --------------- Sec 14:  Connecting to R-pi via Power-Shell (not Rasberry Connect)  --------------------------------------
