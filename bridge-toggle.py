@@ -367,7 +367,7 @@ if section==9:
             direction="NONE"
             print("Over-Torque detected, Stop motors, sound alarm", end=print_end)
 
-        #print(sys_state(True, False, True, False)
+        print(sys_state(True, False, True, False))
 
 # ***********  Section 10 ************************************
 # ***********  ???????????????????????? *****************
