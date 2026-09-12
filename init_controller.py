@@ -61,31 +61,31 @@ def motor_loop():
     return
 
 def system_state(T1,T2,T3,T4,T5,T6,T7):
-    if T1==True:
-        sys_state="x"
+    if T1.is_lit==True:
+        sys_state="B"
     else:
         sys_state="-"
-    if T2==True:
+    if T2.is_lit==True:
         sys_state=sys_state+"R"
     else:
         sys_state=sys_state+"-"
-    if T3==True:
+    if T3.is_lit==True:
         sys_state=sys_state+"R"
     else:
         sys_state=sys_state+"-"
-    if T4==True:
+    if T4.is_lit==True:
         sys_state=sys_state+"F"
     else:
         sys_state=sys_state+"-"
-    if T5==True:
+    if T5.is_lit==True:
         sys_state=sys_state+"F"
     else:
         sys_state=sys_state+"-"
-    if T6==True:
+    if T6.is_lit==True:
         sys_state=sys_state+"L"
     else:
         sys_state=sys_state+"-"
-    if T7==True:
+    if T7.is_lit==True:
         sys_state=sys_state+"l"
     else:
         sys_state=sys_state+"-"
