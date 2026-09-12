@@ -9,7 +9,7 @@
 # ***********  Initialization  ******************************
 import init_controller
 import time
-section=8
+section=9
 
 init_controller.T1.off()
 init_controller.T2.off()
@@ -272,3 +272,97 @@ if section==8:
             direction="NONE"
             print("Button STOP is pressed, Motor halted", end="                                    \r")
             
+# ***********  Section 9 ************************************
+# ***********  All IO working Together  *********************
+if section==9:
+    print("Starting Section-9 (all IO working together)")
+    switch_time=0.2
+    #Starting condition (from Sec-1), all transistors OFF
+    direction="NONE"
+    init_controller.T2.off()
+    init_controller.T3.off()
+    init_controller.T4.off()
+    init_controller.T5.off()
+    init_controller.T6.off()
+    init_controller.T7.off()
+    init_controller.LED10.blink(0.2, 1.8)
+    print("NO buttons pressed, stopping motor", end="                                    \r")
+    while True:
+        while init_controller.CMD_open.is_pressed:
+            if direction!="OPEN":
+                init_controller.T2.off()
+                init_controller.T3.off()
+                init_controller.T6.off()    # Release Hard-latch
+                init_controller.T7.off()    # Release Soft-latch
+                time.sleep(switch_time)
+                init_controller.T4.on()
+                init_controller.T5.on()
+                init_controller.T1.blink(0.5, 0.5)
+                init_controller.LED10.blink(0.5, 0.5)
+            direction="OPEN"
+            print("Button OPEN is pressed, Motor turning FWD/OPEN", end="                                    \r")
+
+        if direction=="OPEN" and SNS_open.is_pressed:
+            # motor has moved all the way to the open position-sensor
+            # stop motor, reset buzzer and LED-flasher
+            init_controller.T4.off()
+            init_controller.T5.off()
+            init_controller.T1.off()
+            init_controller.LED10.blink(0.2, 1.8)
+            direction="NONE"
+            print("Door had fully opened, Stop Motors",end="                                    \r")
+
+        while init_controller.CMD_close.is_pressed:
+            if direction!="CLOSE":
+                init_controller.T4.off()
+                init_controller.T5.off()
+                time.sleep(switch_time)
+                init_controller.T2.on()
+                init_controller.T3.on()
+                init_controller.T1.blink(0.25, 0.25)
+                init_controller.LED10.blink(0.25, 0.25)
+            direction="CLOSE"
+            print("Button CLOSE is pressed, Motor turning REV/CLOSE", end="                                    \r")
+
+        if direction=="CLOSE" and SNS_close.is_pressed:
+            # motor has moved all the way to the closed position-sensor
+            # stop motor, reset buzzer and LED-flasher
+            #throw Latch
+            init_controller.T2.off()
+            init_controller.T3.off()
+            init_controller.T1.off()
+            init_controller.LED10.blink(0.2, 1.8)
+            init_controller.T6.on()     # Hard-latch on
+            time.pause(5)               # Allow time to push door closed
+            init_controller.T7.on()     # Soft-latch on
+            time.pause(0.25)            # transition delay, ensure soft-latch catches before hard-latch releases
+            init_controller.T6.off()    # Hard-latch off
+            direction="NONE"
+            print("Door had fully closed, Stop Motors, Set Latch",end="                                    \r")            
+        
+        while init_controller.CMD_stop.is_pressed:
+            init_controller.T1.off()
+            init_controller.T2.off()
+            init_controller.T3.off()
+            init_controller.T4.off()
+            init_controller.T5.off()
+            init_controller.T6.off()
+            init_controller.T7.off()
+            init_controller.LED10.blink(0.2, 1.8)
+            direction="NONE"
+            print("Button STOP is pressed, Motor halted", end="                                    \r")
+
+        while init_controller.SNS_torque.is_pressed:
+            init_controller.T1.blink(0.5, 0.5)
+            init_controller.T2.off()
+            init_controller.T3.off()
+            init_controller.T4.off()
+            init_controller.T5.off()
+            init_controller.T6.off()
+            init_controller.T7.off()
+            init_controller.LED10.blink(0.2, 0.2)
+            direction="NONE"
+            print("Over-Torque detected, Stop motors, sound alarm", end="                                    \r")
+
+# ***********  Section 10 ************************************
+# ***********  ???????????????????????? *****************
