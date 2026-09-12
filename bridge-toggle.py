@@ -291,7 +291,7 @@ if section==9:
     sys_state_local=init_controller.system_state(init_controller.T1.is_lit, init_controller.T2.is_lit, init_controller.T3.is_lit, init_controller.T4.is_lit, init_controller.T5.is_lit, init_controller.T6.is_lit, init_controller.T7.is_lit)
     print("NO buttons pressed, stopping motor", sys_state_local, end=print_end)
     message="NO buttons pressed, stopping motor"
-    print(f"{message:<30},{sys_state_local})
+    print(f"{message:<30} {sys_state_local}")
     while True:
         while init_controller.CMD_open.is_pressed:
             if direction!="OPEN":
