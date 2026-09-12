@@ -278,7 +278,7 @@ if section==9:
     print("Starting Section-9 (all IO working together)")
     switch_time=0.2
     print_end="                                    \r"
-    print_end="\r\n"
+    #print_end="\r\n"
     #Starting condition (from Sec-1), all transistors OFF
     direction="NONE"
     init_controller.T2.off()
@@ -288,7 +288,8 @@ if section==9:
     init_controller.T6.off()
     init_controller.T7.off()
     init_controller.LED10.blink(0.2, 1.8)
-    print("NO buttons pressed, stopping motor", end=print_end)
+    sys_state_local=init_controller.system_state(init_controller.T1.is_lit, init_controller.T2.is_lit, init_controller.T3.is_lit, init_controller.T4.is_lit, init_controller.T5.is_lit, init_controller.T6.is_lit, init_controller.T7.is_lit)
+    print("NO buttons pressed, stopping motor", sys_state, end=print_end)
     while True:
         while init_controller.CMD_open.is_pressed:
             if direction!="OPEN":
@@ -366,8 +367,5 @@ if section==9:
             init_controller.LED10.blink(0.2, 0.2)
             direction="NONE"
             print("Over-Torque detected, Stop motors, sound alarm", end=print_end)
-        sys_state_local=init_controller.system_state(init_controller.T1.is_lit, init_controller.T2.is_lit, init_controller.T3.is_lit, init_controller.T4.is_lit, init_controller.T5.is_lit, init_controller.T6.is_lit, init_controller.T7.is_lit)
-        print(sys_state_local, end="\r")
-
-# ***********  Section 10 ************************************
-# ***********  ???????????????????????? *****************
+        #sys_state_local=init_controller.system_state(init_controller.T1.is_lit, init_controller.T2.is_lit, init_controller.T3.is_lit, init_controller.T4.is_lit, init_controller.T5.is_lit, init_controller.T6.is_lit, init_controller.T7.is_lit)
+        #print(sys_state_local, end="\r")
