@@ -289,8 +289,7 @@ if section==9:
     init_controller.T6.off()
     init_controller.T7.off()
     init_controller.LED10.blink(0.2, 1.8)
-    sys_state_local=init_controller.system_state(init_controller.T1.is_lit, init_controller.T2.is_lit, init_controller.T3.is_lit, init_controller.T4.is_lit, init_controller.T5.is_lit, init_controller.T6.is_lit, init_controller.T7.is_lit)
-    #print("NO buttons pressed, stopping motor", sys_state_local, end=print_end)
+    sys_state_local=init_controller.system_state()
     message="NO buttons pressed, stopping motor"
     print(f"{message:<50} {sys_state_local}", end=print_end)
     while True:
@@ -306,7 +305,7 @@ if section==9:
                 init_controller.T1.blink(0.5, 0.5)
                 init_controller.LED10.blink(0.5, 0.5)
             direction="OPEN"
-            sys_state_local=init_controller.system_state(init_controller.T1.is_lit, init_controller.T2.is_lit, init_controller.T3.is_lit, init_controller.T4.is_lit, init_controller.T5.is_lit, init_controller.T6.is_lit, init_controller.T7.is_lit)
+            sys_state_local=init_controller.system_state()
             message="Button OPEN is pressed, Motor turning FWD/OPEN"
             print(f"{message:<50} {sys_state_local}", end=print_end)
             
@@ -318,8 +317,10 @@ if section==9:
             init_controller.T1.off()
             init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
-            print("Door had fully opened, Stop Motors",end=print_end)
-
+            message="Door had fully opened, Stop Motors"
+            #print("Door had fully opened, Stop Motors",end=print_end)
+            print(f"{message:<50} {sys_state_local}", end=print_end)
+        
         while init_controller.CMD_close.is_pressed:
             if direction!="CLOSE":
                 init_controller.T4.off()
@@ -330,7 +331,8 @@ if section==9:
                 init_controller.T1.blink(0.25, 0.25)
                 init_controller.LED10.blink(0.25, 0.25)
             direction="CLOSE"
-            print("Button CLOSE is pressed, Motor turning REV/CLOSE", end=print_end)
+            message="Button CLOSE is pressed, Motor turning REV/CLOSE"
+            print(f"{message:<50} {sys_state_local}", end=print_end)
 
         if direction=="CLOSE" and init_controller.SW_closed.is_pressed:
             # motor has moved all the way to the closed position-sensor
@@ -346,8 +348,9 @@ if section==9:
             time.sleep(0.25)            # transition delay, ensure soft-latch catches before hard-latch releases
             init_controller.T6.off()    # Hard-latch off
             direction="NONE"
-            print("Door had fully closed, Stop Motors, Set Latch",end=print_end)            
-        
+            message="Door had fully closed, Stop Motors, Set Latch"
+            print(f"{message:<50} {sys_state_local}", end=print_end)
+            
         while init_controller.CMD_stop.is_pressed:
             init_controller.T1.off()
             init_controller.T2.off()
@@ -358,8 +361,9 @@ if section==9:
             init_controller.T7.off()            ;     print("T7 off")
             init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
-            print("Button STOP is pressed, Motor halted", end=print_end)
-
+            message="Button STOP is pressed, Motor halted"
+            print(f"{message:<50} {sys_state_local}", end=print_end)
+            
         while init_controller.SW_torque.is_pressed:
             # Note: system will get hung-up here ... no way to jog-out while over-torque is sensed
             init_controller.T1.blink(0.5, 0.5)
@@ -371,6 +375,6 @@ if section==9:
             init_controller.T7.off()
             init_controller.LED10.blink(0.2, 0.2)
             direction="NONE"
-            print("Over-Torque detected, Stop motors, sound alarm", end=print_end)
-        #sys_state_local=init_controller.system_state(init_controller.T1.is_lit, init_controller.T2.is_lit, init_controller.T3.is_lit, init_controller.T4.is_lit, init_controller.T5.is_lit, init_controller.T6.is_lit, init_controller.T7.is_lit)
-        #print(sys_state_local, end="\r")
+            message="Over-Torque detected, Stop motors, sound alarm"
+            print(f"{message:<50} {sys_state_local}", end=print_end)
+
