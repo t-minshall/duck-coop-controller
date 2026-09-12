@@ -324,7 +324,7 @@ if section==9:
             direction="CLOSE"
             print("Button CLOSE is pressed, Motor turning REV/CLOSE", end="                                    \r")
 
-        if direction=="CLOSE" and init_controller.SW_close.is_pressed:
+        if direction=="CLOSE" and init_controller.SW_closed.is_pressed:
             # motor has moved all the way to the closed position-sensor
             # stop motor, reset buzzer and LED-flasher
             #throw Latch
