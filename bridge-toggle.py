@@ -277,6 +277,8 @@ if section==8:
 if section==9:
     print("Starting Section-9 (all IO working together)")
     switch_time=0.2
+    print_end="                                    \r"
+    print_end=""
     #Starting condition (from Sec-1), all transistors OFF
     direction="NONE"
     init_controller.T2.off()
@@ -286,7 +288,7 @@ if section==9:
     init_controller.T6.off()
     init_controller.T7.off()
     init_controller.LED10.blink(0.2, 1.8)
-    print("NO buttons pressed, stopping motor", end="                                    \r")
+    print("NO buttons pressed, stopping motor", end=print_end)
     while True:
         while init_controller.CMD_open.is_pressed:
             if direction!="OPEN":
@@ -300,7 +302,7 @@ if section==9:
                 init_controller.T1.blink(0.5, 0.5)
                 init_controller.LED10.blink(0.5, 0.5)
             direction="OPEN"
-            print("Button OPEN is pressed, Motor turning FWD/OPEN", end="                                    \r")
+            print("Button OPEN is pressed, Motor turning FWD/OPEN", end=print_end)
 
         if direction=="OPEN" and init_controller.SW_open.is_pressed:
             # motor has moved all the way to the open position-sensor
@@ -310,7 +312,7 @@ if section==9:
             init_controller.T1.off()
             init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
-            print("Door had fully opened, Stop Motors",end="                                    \r")
+            print("Door had fully opened, Stop Motors",end=print_end)
 
         while init_controller.CMD_close.is_pressed:
             if direction!="CLOSE":
@@ -322,7 +324,7 @@ if section==9:
                 init_controller.T1.blink(0.25, 0.25)
                 init_controller.LED10.blink(0.25, 0.25)
             direction="CLOSE"
-            print("Button CLOSE is pressed, Motor turning REV/CLOSE", end="                                    \r")
+            print("Button CLOSE is pressed, Motor turning REV/CLOSE", end=print_end)
 
         if direction=="CLOSE" and init_controller.SW_closed.is_pressed:
             # motor has moved all the way to the closed position-sensor
@@ -338,7 +340,7 @@ if section==9:
             time.sleep(0.25)            # transition delay, ensure soft-latch catches before hard-latch releases
             init_controller.T6.off()    # Hard-latch off
             direction="NONE"
-            print("Door had fully closed, Stop Motors, Set Latch",end="                                    \r")            
+            print("Door had fully closed, Stop Motors, Set Latch",end=print_end)            
         
         while init_controller.CMD_stop.is_pressed:
             init_controller.T1.off()
@@ -350,7 +352,7 @@ if section==9:
             init_controller.T7.off()            ;     print("T7 off")
             init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
-            print("Button STOP is pressed, Motor halted", end="                                    \r")
+            print("Button STOP is pressed, Motor halted", end=print_end)
 
         while init_controller.SW_torque.is_pressed:
             # Note: system will get hung-up here ... no way to jog-out while over-torque is sensed
@@ -363,7 +365,7 @@ if section==9:
             init_controller.T7.off()
             init_controller.LED10.blink(0.2, 0.2)
             direction="NONE"
-            print("Over-Torque detected, Stop motors, sound alarm", end="                                    \r")
+            print("Over-Torque detected, Stop motors, sound alarm", end=print_end)
 
 # ***********  Section 10 ************************************
 # ***********  ???????????????????????? *****************
