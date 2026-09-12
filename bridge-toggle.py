@@ -317,6 +317,7 @@ if section==9:
             init_controller.T1.off()
             init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
+            sys_state_local=init_controller.system_state()
             message="Door had fully opened, Stop Motors"
             #print("Door had fully opened, Stop Motors",end=print_end)
             print(f"{message:<50} {sys_state_local}", end=print_end)
@@ -331,6 +332,7 @@ if section==9:
                 init_controller.T1.blink(0.25, 0.25)
                 init_controller.LED10.blink(0.25, 0.25)
             direction="CLOSE"
+            sys_state_local=init_controller.system_state()
             message="Button CLOSE is pressed, Motor turning REV/CLOSE"
             print(f"{message:<50} {sys_state_local}", end=print_end)
 
@@ -348,6 +350,7 @@ if section==9:
             time.sleep(0.25)            # transition delay, ensure soft-latch catches before hard-latch releases
             init_controller.T6.off()    # Hard-latch off
             direction="NONE"
+            sys_state_local=init_controller.system_state()
             message="Door had fully closed, Stop Motors, Set Latch"
             print(f"{message:<50} {sys_state_local}", end=print_end)
             
@@ -361,6 +364,7 @@ if section==9:
             init_controller.T7.off()            ;     print("T7 off")
             init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
+            sys_state_local=init_controller.system_state()
             message="Button STOP is pressed, Motor halted"
             print(f"{message:<50} {sys_state_local}", end=print_end)
             
@@ -375,6 +379,7 @@ if section==9:
             init_controller.T7.off()
             init_controller.LED10.blink(0.2, 0.2)
             direction="NONE"
+            sys_state_local=init_controller.system_state()
             message="Over-Torque detected, Stop motors, sound alarm"
             print(f"{message:<50} {sys_state_local}", end=print_end)
 
