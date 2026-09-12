@@ -293,6 +293,7 @@ if section==9:
     message="NO buttons pressed, stopping motor"
     print(f"{message:<50} {sys_state_local}", end=print_end)
     while True:
+        sys_state_local=init_controller.system_state()
         while init_controller.CMD_open.is_pressed:
             if direction!="OPEN":
                 init_controller.T2.off()
@@ -317,7 +318,7 @@ if section==9:
             init_controller.T1.off()
             init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
-            sys_state_local=init_controller.system_state()
+            #sys_state_local=init_controller.system_state()
             message="Door had fully opened, Stop Motors"
             #print("Door had fully opened, Stop Motors",end=print_end)
             print(f"{message:<50} {sys_state_local}", end=print_end)
@@ -350,7 +351,7 @@ if section==9:
             time.sleep(0.25)            # transition delay, ensure soft-latch catches before hard-latch releases
             init_controller.T6.off()    # Hard-latch off
             direction="NONE"
-            sys_state_local=init_controller.system_state()
+            #sys_state_local=init_controller.system_state()
             message="Door had fully closed, Stop Motors, Set Latch"
             print(f"{message:<50} {sys_state_local}", end=print_end)
             
