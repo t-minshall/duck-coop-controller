@@ -61,7 +61,7 @@ def motor_loop():
     return
 
 def system_state(T1,T2,T3,T4,T5,T6,T7):
-    if T1.is_lit()==True:
+    if T1.is_lit:
         sys_state="B"
     else:
         sys_state="-"
