@@ -9,7 +9,7 @@
 # ***********  Initialization  ******************************
 import init_controller
 import time
-section=7
+section=8
 
 init_controller.T1.off()
 init_controller.T2.off()
@@ -166,7 +166,6 @@ if section==6:
             init_controller.T5.off()
             init_controller.LED10.off()
             print("Button STOP is pressed, Motor halted", end="\r")
-            
 
 # ***********  Section 7 ************************************
 # ***********  Control Motor with More Inputs (w/o button-hold) **************
@@ -212,6 +211,63 @@ if section==7:
             init_controller.T3.off()
             init_controller.T4.off()
             init_controller.T5.off()
+            init_controller.LED10.blink(0.2, 1.8)
+            direction="NONE"
+            print("Button STOP is pressed, Motor halted", end="                                    \r")
+            
+
+# ***********  Section 8 ************************************
+# ***********  Control Motor with Mag Latch *****************
+if section==8:
+    print("Starting Section-8 (motor responds & Latch works)")
+    switch_time=0.2
+    #Starting condition (from Sec-1), all transistors OFF
+    direction="NONE"
+    init_controller.T2.off()
+    init_controller.T3.off()
+    init_controller.T4.off()
+    init_controller.T5.off()
+    init_controller.T6.off()
+    init_controller.T7.off()
+    init_controller.LED10.blink(0.2, 1.8)
+    print("NO buttons pressed, stopping motor", end="                                    \r")
+    while True:
+        while init_controller.CMD_open.is_pressed:
+            if direction!="FWD":
+                init_controller.T2.off()
+                init_controller.T3.off()
+                init_controller.T7.off()
+                time.sleep(switch_time)
+                init_controller.T4.on()
+                init_controller.T5.on()
+                init_controller.T6.on()
+                init_controller.T1.blink(0.5, 0.5)
+                init_controller.LED10.blink(0.5, 0.5)
+            direction="FWD"
+            print("Button OPEN is pressed, Motor turning FWD", end="                                    \r")
+
+        while init_controller.CMD_close.is_pressed:
+            if direction!="REV":
+                init_controller.T4.off()
+                init_controller.T5.off()
+                init_controller.T6.off()
+                time.sleep(switch_time)
+                init_controller.T2.on()
+                init_controller.T3.on()
+                init_controller.T7.on()
+                init_controller.T1.blink(0.25, 0.25)
+                init_controller.LED10.blink(0.25, 0.25)
+            direction="REV"
+            print("Button CLOSE is pressed, Motor turning REV", end="                                    \r")
+
+        while init_controller.CMD_stop.is_pressed:
+            init_controller.T1.off()
+            init_controller.T2.off()
+            init_controller.T3.off()
+            init_controller.T4.off()
+            init_controller.T5.off()
+            init_controller.T6.off()
+            init_controller.T7.off()
             init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
             print("Button STOP is pressed, Motor halted", end="                                    \r")
