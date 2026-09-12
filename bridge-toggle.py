@@ -333,9 +333,9 @@ if section==9:
             init_controller.T1.off()
             init_controller.LED10.blink(0.2, 1.8)
             init_controller.T6.on()     # Hard-latch on
-            time.pause(5)               # Allow time to push door closed
+            time.sleep(5)               # Allow time to push door closed
             init_controller.T7.on()     # Soft-latch on
-            time.pause(0.25)            # transition delay, ensure soft-latch catches before hard-latch releases
+            time.sleep(0.25)            # transition delay, ensure soft-latch catches before hard-latch releases
             init_controller.T6.off()    # Hard-latch off
             direction="NONE"
             print("Door had fully closed, Stop Motors, Set Latch",end="                                    \r")            
