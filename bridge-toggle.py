@@ -1,3 +1,22 @@
+def system_state(T1,T2,T3,T4)
+    if T1==True:
+        sys_state="X"
+    else:
+        sys_state="-"
+    if T2==True:
+        sys_state=sys_state+"X"
+    else:
+        sys_state=sys_state+"-"
+    if T3==True:
+        sys_state=sys_state+"X"
+    else:
+        sys_state=sys_state+"-"
+    if T4==True:
+        sys_state=sys_state+"X"
+    else:
+        sys_state=sys_state+"-"
+
+
 # *************  Start Controlling the H-Bridge  *************
 # 1) Identify which transistor controls which relay, and which relay controls which armature-flow
 #    MAKE SURE NOT TO SHORT THE RELAYS !!!!!!!!!!!
@@ -274,24 +293,6 @@ if section==8:
             
 # ***********  Section 9 ************************************
 # ***********  All IO working Together  *********************
-def system_state(T1,T2,T3,T4)
-    if T1==True:
-        sys_state="X"
-    else:
-        sys_state="-"
-    if T2==True:
-        sys_state=sys_state+"X"
-    else:
-        sys_state=sys_state+"-"
-    if T3==True:
-        sys_state=sys_state+"X"
-    else:
-        sys_state=sys_state+"-"
-    if T4==True:
-        sys_state=sys_state+"X"
-    else:
-        sys_state=sys_state+"-"
-
 if section==9:
     print("Starting Section-9 (all IO working together)")
     switch_time=0.2
@@ -385,24 +386,7 @@ if section==9:
             direction="NONE"
             print("Over-Torque detected, Stop motors, sound alarm", end=print_end)
 
-        print(sys_state)
+        print(sys_state(True, False, True, False)
 
 # ***********  Section 10 ************************************
 # ***********  ???????????????????????? *****************
-def system_state(T1,T2,T3,T4)
-    if T1==True:
-        sys_state="X"
-    else:
-        sys_state="-"
-    if T2==True:
-        sys_state=sys_state+"X"
-    else:
-        sys_state=sys_state+"-"
-    if T3==True:
-        sys_state=sys_state+"X"
-    else:
-        sys_state=sys_state+"-"
-    if T4==True:
-        sys_state=sys_state+"X"
-    else:
-        sys_state=sys_state+"-"
