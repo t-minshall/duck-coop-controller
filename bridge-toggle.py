@@ -1,22 +1,3 @@
-def system_state(T1,T2,T3,T4)
-    if T1==True:
-        sys_state="X"
-    else:
-        sys_state="-"
-    if T2==True:
-        sys_state=sys_state+"X"
-    else:
-        sys_state=sys_state+"-"
-    if T3==True:
-        sys_state=sys_state+"X"
-    else:
-        sys_state=sys_state+"-"
-    if T4==True:
-        sys_state=sys_state+"X"
-    else:
-        sys_state=sys_state+"-"
-
-
 # *************  Start Controlling the H-Bridge  *************
 # 1) Identify which transistor controls which relay, and which relay controls which armature-flow
 #    MAKE SURE NOT TO SHORT THE RELAYS !!!!!!!!!!!
@@ -386,7 +367,7 @@ if section==9:
             direction="NONE"
             print("Over-Torque detected, Stop motors, sound alarm", end=print_end)
 
-        print(sys_state(True, False, True, False)
+        #print(sys_state(True, False, True, False)
 
 # ***********  Section 10 ************************************
 # ***********  ???????????????????????? *****************
