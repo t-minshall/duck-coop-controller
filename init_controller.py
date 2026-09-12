@@ -60,4 +60,22 @@ def motor_loop():
         time.sleep(1)
     return
 
+def system_state(T1,T2,T3,T4)
+    if T1==True:
+        sys_state="X"
+    else:
+        sys_state="-"
+    if T2==True:
+        sys_state=sys_state+"X"
+    else:
+        sys_state=sys_state+"-"
+    if T3==True:
+        sys_state=sys_state+"X"
+    else:
+        sys_state=sys_state+"-"
+    if T4==True:
+        sys_state=sys_state+"X"
+    else:
+        sys_state=sys_state+"-"
+    return
 
