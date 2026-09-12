@@ -278,7 +278,7 @@ if section==9:
     print("Starting Section-9 (all IO working together)")
     switch_time=0.2
     print_end="                                    \r"
-    print_end="/r/n"
+    print_end="\r\n"
     #Starting condition (from Sec-1), all transistors OFF
     direction="NONE"
     init_controller.T2.off()
