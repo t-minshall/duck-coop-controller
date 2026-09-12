@@ -77,5 +77,5 @@ def system_state(T1,T2,T3,T4):
         sys_state=sys_state+"X"
     else:
         sys_state=sys_state+"-"
-    return
+    return(sys_state)
 
