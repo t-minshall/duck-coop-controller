@@ -2,7 +2,17 @@ import init_controller
 import time
 import logging
 from datetime import datetime
+import threading
+
 section=9
+
+def background_task(name, delay):
+    print(f"Background task {name} started...")
+    time.sleep(delay)
+    print(f"Background task {name} finished!")
+
+# Start the background task
+thread.start()
 
 init_controller.T1.off()
 init_controller.T2.off()
