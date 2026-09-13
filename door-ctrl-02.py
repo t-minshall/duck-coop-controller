@@ -9,7 +9,7 @@ LED16=init_controller.LED(16)
 
 def LED_flash(numbr):
     #print(f"Background task to flash {numbr} started...")
-    LED16.blink(1/numbr)
+    LED10.blink(1/numbr)
     time.sleep(1)
     #print(f"Background task (flash-{numbr}) finished!")
 
