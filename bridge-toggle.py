@@ -297,6 +297,7 @@ if section==9:
         message="looping"
         sys_state_local=init_controller.system_state()
         print(f"{message:<50} {sys_state_local} {direction} 1", end=print_end)
+        
         while init_controller.CMD_open.is_pressed:
             if direction!="OPEN":
                 init_controller.T2.off()
@@ -306,7 +307,7 @@ if section==9:
                 time.sleep(switch_time)
                 init_controller.T4.on()
                 init_controller.T5.on()
-                init_controller.T1.blink(0.5, 0.5)
+                init_controller.T1.blink(0.1, 0.9)
                 init_controller.LED10.blink(0.5, 0.5)
             direction="OPEN"
             sys_state_local=init_controller.system_state()
@@ -333,7 +334,7 @@ if section==9:
                 time.sleep(switch_time)
                 init_controller.T2.on()
                 init_controller.T3.on()
-                init_controller.T1.blink(0.25, 0.25)
+                init_controller.T1.blink(0.1, 0.9)
                 init_controller.LED10.blink(0.25, 0.25)
             direction="CLOSE"
             sys_state_local=init_controller.system_state()
@@ -372,7 +373,7 @@ if section==9:
             message="Button STOP is pressed, Motor halted"
             print(f"{message:<50} {sys_state_local} {direction} 6", end=print_end)
             
-        while init_controller.SW_torque.is_pressed:
+        if init_controller.SW_torque.is_pressed:
             # Note: system will get hung-up here ... no way to jog-out while over-torque is sensed
             init_controller.T1.blink(0.5, 0.5)
             init_controller.T2.off()
