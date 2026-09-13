@@ -23,7 +23,7 @@ def LED_flash(numbr):
 
 # Create the thread
 # Use daemon=True so the background task stops automatically if the main program exits
-thread = threading.Thread(target=LED_flash, args=(4,), daemon=True)
+#thread = threading.Thread(target=LED_flash, args=(4,), daemon=True)
 thread = threading.Thread(target=LED_flash, args=(1,), daemon=True)
 
 # Start the background task
@@ -45,7 +45,8 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S'
 )
 print("Section-1 (Initialization) complete")
-logging.info("\c\c Starting Program")
+logging.info(" ");logging.info(" ")
+logging.info("Starting Program")
 logging.info("Section-1 (Initialization) complete")
 
 
@@ -69,11 +70,15 @@ if section==9:
     init_controller.LED10.blink(0.2, 1.8)
     sys_state_local=init_controller.system_state()
     sys_state_old=sys_state_local
+    LED_code=1
+    LED_code_old=LED_code
     message="NO buttons pressed, stopping motor"
     print(f"{message:<50} {sys_state_local} {direction} 0", end=print_end)
     #print(f"{message:<50} {sys_state_local}", end=print_end)
     logging.info(sys_state_local+" | "+message+" 0")
     while True:
+        if not LED_code==LED_code_old:
+            thread = threading.Thread(target=LED_flash, args=(LED_code,), daemon=True)
         message="looping"
         sys_state_local=init_controller.system_state()
         print(f"{message:<50} {sys_state_local[-18:]} {direction} 1", end=print_end)
@@ -92,7 +97,8 @@ if section==9:
                 init_controller.T4.on()
                 init_controller.T5.on()
                 init_controller.T1.blink(0.1, 0.9)
-                init_controller.LED10.blink(0.5, 0.5)
+                LED_code_old=LED_code; LED_code=2
+                #init_controller.LED10.blink(0.5, 0.5)
             direction="OPEN"
             sys_state_local=init_controller.system_state()
             message="Button OPEN is pressed, Motor turning FWD/OPEN"
@@ -107,7 +113,8 @@ if section==9:
             init_controller.T4.off()
             init_controller.T5.off()
             init_controller.T1.off()
-            init_controller.LED10.blink(0.2, 1.8)
+            LED_code_old=LED_code; LED_code=1
+            #init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
             #sys_state_local=init_controller.system_state()
             message="Door fully opened, Stop Motors"
@@ -125,7 +132,8 @@ if section==9:
                 init_controller.T2.on()
                 init_controller.T3.on()
                 init_controller.T1.blink(0.1, 0.9)
-                init_controller.LED10.blink(0.25, 0.25)
+                LED_code_old=LED_code; LED_code=3
+                #init_controller.LED10.blink(0.25, 0.25)
             direction="CLOSE"
             sys_state_local=init_controller.system_state()
             message="Button CLOSE is pressed, Motor turning REV/CLOSE"
@@ -141,7 +149,8 @@ if section==9:
             init_controller.T2.off()
             init_controller.T3.off()
             init_controller.T1.off()
-            init_controller.LED10.blink(0.2, 1.8)
+            LED_code_old=LED_code; LED_code=1
+            #init_controller.LED10.blink(0.2, 1.8)
             init_controller.T6.on()     # Hard-latch on
             time.sleep(5)               # Allow time to push door closed
             init_controller.T7.on()     # Soft-latch on
@@ -164,7 +173,8 @@ if section==9:
             init_controller.T5.off()
             init_controller.T6.off()
             init_controller.T7.off()
-            init_controller.LED10.blink(0.2, 0.2)
+            LED_code_old=LED_code; LED_code=5
+            #init_controller.LED10.blink(0.2, 0.2)
             direction="NONE"
             sys_state_local=init_controller.system_state()
             message="Over-Torque detected, Stop motors, sound alarm"
@@ -181,7 +191,8 @@ if section==9:
             init_controller.T5.off()
             init_controller.T6.off()
             init_controller.T7.off()
-            init_controller.LED10.blink(0.2, 1.8)
+            LED_code_old=LED_code; LED_code=4
+            #init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
             sys_state_local=init_controller.system_state()
             message="Button STOP is pressed"
