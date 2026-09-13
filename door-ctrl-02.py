@@ -51,7 +51,7 @@ if section==9:
         message="looping"
         sys_state_local=init_controller.system_state()
         print(f"{message:<50} {sys_state_local} {direction} 1", end=print_end)
-        if not sys_state_local==sys_state_old
+        if not sys_state_local==sys_state_old:
             logging.info(message,sys_state_local)
             sys_state_old=sys_state_local
         
@@ -70,7 +70,7 @@ if section==9:
             sys_state_local=init_controller.system_state()
             message="Button OPEN is pressed, Motor turning FWD/OPEN"
             print(f"{message:<50} {sys_state_local} {direction} 2", end=print_end)
-            if not sys_state_local==sys_state_old
+            if not sys_state_local==sys_state_old:
                 logging.info(message,sys_state_local)
                 sys_state_old=sys_state_local
             
@@ -86,7 +86,7 @@ if section==9:
             message="Door had fully opened, Stop Motors"
             #print("Door had fully opened, Stop Motors",end=print_end)
             print(f"{message:<50} {sys_state_local} {direction} 3", end=print_end)
-            if not sys_state_local==sys_state_old
+            if not sys_state_local==sys_state_old:
                 logging.info(message,sys_state_local)
                 sys_state_old=sys_state_local
         
@@ -103,7 +103,7 @@ if section==9:
             sys_state_local=init_controller.system_state()
             message="Button CLOSE is pressed, Motor turning REV/CLOSE"
             print(f"{message:<50} {sys_state_local} {direction} 4", end=print_end)
-            if not sys_state_local==sys_state_old
+            if not sys_state_local==sys_state_old:
                 logging.info(message,sys_state_local)
                 sys_state_old=sys_state_local
 
@@ -124,7 +124,7 @@ if section==9:
             #sys_state_local=init_controller.system_state()
             message="Door had fully closed, Stop Motors, Set Latch"
             print(f"{message:<50} {sys_state_local} {direction} 5", end=print_end)
-            if not sys_state_local==sys_state_old
+            if not sys_state_local==sys_state_old:
                 logging.info(message,sys_state_local)
                 sys_state_old=sys_state_locallogging.info(sys_state_local+" | "+message)
             
@@ -141,7 +141,7 @@ if section==9:
             sys_state_local=init_controller.system_state()
             message="Button STOP is pressed, Motor halted"
             print(f"{message:<50} {sys_state_local} {direction} 6", end=print_end)
-            if not sys_state_local==sys_state_old
+            if not sys_state_local==sys_state_old:
                 logging.info(message,sys_state_local)
                 sys_state_old=sys_state_locallogging.info(sys_state_local+" | "+message)
             
@@ -159,7 +159,7 @@ if section==9:
             sys_state_local=init_controller.system_state()
             message="Over-Torque detected, Stop motors, sound alarm"
             print(f"{message:<50} {sys_state_local} {direction} 7", end=print_end)
-            if not sys_state_local==sys_state_old
+            if not sys_state_local==sys_state_old:
                 logging.info(message,sys_state_local)
                 sys_state_old=sys_state_locallogging.info(sys_state_local+" | "+message)
           
