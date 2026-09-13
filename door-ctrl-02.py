@@ -24,6 +24,7 @@ def LED_flash(numbr):
 # Create the thread
 # Use daemon=True so the background task stops automatically if the main program exits
 thread = threading.Thread(target=LED_flash, args=(4,), daemon=True)
+thread = threading.Thread(target=LED_flash, args=(1,), daemon=True)
 
 # Start the background task
 thread.start()
