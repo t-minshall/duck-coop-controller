@@ -6,11 +6,11 @@ import threading
 import sys
 
 section=9
-LED16=init_controller.LED(16)
+LED_code=1
 
 def LED_flash(numbr):
     while True:
-        for _ in range(numbr):
+        for _ in range(LED_code):
             init_controller.LED10.on()
             time.sleep(0.1)
             init_controller.LED10.off()
@@ -19,11 +19,10 @@ def LED_flash(numbr):
 
 # Create the thread
 # Use daemon=True so the background task stops automatically if the main program exits
-#thread = threading.Thread(target=LED_flash, args=(4,), daemon=True)
-#thread = threading.Thread(target=LED_flash, args=(1,), daemon=True)
+thread = threading.Thread(target=LED_flash, args=(1,), daemon=True)
 
 # Start the background task
-#thread.start()
+thread.start()
 
 
 init_controller.T1.off()
@@ -73,12 +72,12 @@ if section==9:
     #print(f"{message:<50} {sys_state_local}", end=print_end)
     logging.info(sys_state_local+" | "+message+" 0")
     while True:
-        if not LED_code==LED_code_old:
-            thread = threading.Thread(target=LED_flash, args=(LED_code,), daemon=True)
-            thread.start()
-            print("")
-            print(f"LED_code changed from {LED_code_old} to {LED_code}")
-            LED_code_old=LED_code
+        #if not LED_code==LED_code_old:
+        #    thread = threading.Thread(target=LED_flash, args=(LED_code,), daemon=True)
+        #    thread.start()
+        #    print("")
+        #    print(f"LED_code changed from {LED_code_old} to {LED_code}")
+        #    LED_code_old=LED_code
         message="looping"
         sys_state_local=init_controller.system_state()
         print(f"{message:<50} {sys_state_local[-18:]} {direction} 1", end=print_end)
