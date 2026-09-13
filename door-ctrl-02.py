@@ -44,7 +44,7 @@ if section==9:
     message="NO buttons pressed, stopping motor"
     print(f"{message:<50} {sys_state_local} {direction} 0", end=print_end)
     #print(f"{message:<50} {sys_state_local}", end=print_end)
-    logging.info(message,sys_state_local)
+    logging.info(message+sys_state_local)
     while True:
         message="looping"
         sys_state_local=init_controller.system_state()
