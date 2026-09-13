@@ -12,6 +12,12 @@ init_controller.T5.off()
 init_controller.T6.off()
 init_controller.T7.off()
 init_controller.LED10.off()
+logging.basicConfig(
+    filename='/home/duckie/duck-coop-controller/door-ctrl-02.log',  # Path to your log file
+    level=logging.INFO,                # Track INFO level messages and above
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
 print("Section-1 (Initialization) complete")
 logging.info("Section-1 (Initialization) complete")
 
