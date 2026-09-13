@@ -14,8 +14,8 @@ def LED_flash(numbr):
             init_controller.LED10.on()
             time.sleep(0.1)
             init_controller.LED10.off()
-            time.sleep(0.5)
-        time.sleep(2)
+            time.sleep(0.4)
+        time.sleep(1.5)
 
 # Create the thread
 # Use daemon=True so the background task stops automatically if the main program exits
@@ -62,22 +62,15 @@ if section==9:
     init_controller.T5.off()
     init_controller.T6.off()
     init_controller.T7.off()
-    init_controller.LED10.blink(0.2, 1.8)
+    #init_controller.LED10.blink(0.2, 1.8)
     sys_state_local=init_controller.system_state()
     sys_state_old=sys_state_local
     LED_code=1
-    LED_code_old=LED_code
     message="NO buttons pressed, stopping motor"
     print(f"{message:<50} {sys_state_local} {direction} 0", end=print_end)
     #print(f"{message:<50} {sys_state_local}", end=print_end)
     logging.info(sys_state_local+" | "+message+" 0")
     while True:
-        #if not LED_code==LED_code_old:
-        #    thread = threading.Thread(target=LED_flash, args=(LED_code,), daemon=True)
-        #    thread.start()
-        #    print("")
-        #    print(f"LED_code changed from {LED_code_old} to {LED_code}")
-        #    LED_code_old=LED_code
         message="looping"
         sys_state_local=init_controller.system_state()
         print(f"{message:<50} {sys_state_local[-18:]} {direction} 1", end=print_end)
@@ -96,7 +89,7 @@ if section==9:
                 init_controller.T4.on()
                 init_controller.T5.on()
                 init_controller.T1.blink(0.1, 0.9)
-                LED_code_old=LED_code; LED_code=2
+                LED_code=2
                 #init_controller.LED10.blink(0.5, 0.5)
             direction="OPEN"
             sys_state_local=init_controller.system_state()
@@ -112,7 +105,7 @@ if section==9:
             init_controller.T4.off()
             init_controller.T5.off()
             init_controller.T1.off()
-            LED_code_old=LED_code; LED_code=1
+            LED_code=1
             #init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
             #sys_state_local=init_controller.system_state()
@@ -131,7 +124,7 @@ if section==9:
                 init_controller.T2.on()
                 init_controller.T3.on()
                 init_controller.T1.blink(0.1, 0.9)
-                LED_code_old=LED_code; LED_code=3
+                LED_code=3
                 #init_controller.LED10.blink(0.25, 0.25)
             direction="CLOSE"
             sys_state_local=init_controller.system_state()
@@ -148,7 +141,7 @@ if section==9:
             init_controller.T2.off()
             init_controller.T3.off()
             init_controller.T1.off()
-            LED_code_old=LED_code; LED_code=1
+            LED_code=1
             #init_controller.LED10.blink(0.2, 1.8)
             init_controller.T6.on()     # Hard-latch on
             time.sleep(5)               # Allow time to push door closed
@@ -172,7 +165,7 @@ if section==9:
             init_controller.T5.off()
             init_controller.T6.off()
             init_controller.T7.off()
-            LED_code_old=LED_code; LED_code=5
+            LED_code=5
             #init_controller.LED10.blink(0.2, 0.2)
             direction="NONE"
             sys_state_local=init_controller.system_state()
@@ -190,7 +183,7 @@ if section==9:
             init_controller.T5.off()
             init_controller.T6.off()
             init_controller.T7.off()
-            LED_code_old=LED_code; LED_code=4
+            LED_code=4
             #init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
             sys_state_local=init_controller.system_state()
