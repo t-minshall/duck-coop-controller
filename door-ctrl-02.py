@@ -5,7 +5,7 @@ from datetime import datetime
 import threading
 
 section=9
-LED16=LED(16)
+LED16=init_controller.LED(16)
 
 def LED_flash(numbr):
     #print(f"Background task to flash {numbr} started...")
