@@ -5,15 +5,17 @@ from datetime import datetime
 import threading
 
 section=9
+LED16=LED(16)
 
 def LED_flash(numbr):
-    print(f"Background task to flash {numbr} started...")
+    #print(f"Background task to flash {numbr} started...")
+    LED16.blink(1/numbr)
     time.sleep(1)
-    print(f"Background task (flash-{numbr}) finished!")
+    #print(f"Background task (flash-{numbr}) finished!")
 
 # Create the thread
 # Use daemon=True so the background task stops automatically if the main program exits
-thread = threading.Thread(target=LED_flash, args=("1"), daemon=True)
+thread = threading.Thread(target=LED_flash, args=(), daemon=True)
 
 # Start the background task
 thread.start()
