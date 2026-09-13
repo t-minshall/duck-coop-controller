@@ -291,10 +291,12 @@ if section==9:
     init_controller.LED10.blink(0.2, 1.8)
     sys_state_local=init_controller.system_state()
     message="NO buttons pressed, stopping motor"
-    print(f"{message:<50} {sys_state_local} {direction} 1", end=print_end)
+    print(f"{message:<50} {sys_state_local} {direction} 0", end=print_end)
     #print(f"{message:<50} {sys_state_local}", end=print_end)
     while True:
+        message="looping"
         sys_state_local=init_controller.system_state()
+        print(f"{message:<50} {sys_state_local} {direction} 1", end=print_end)
         while init_controller.CMD_open.is_pressed:
             if direction!="OPEN":
                 init_controller.T2.off()
