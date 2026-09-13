@@ -50,8 +50,7 @@ if section==9:
     while True:
         message="looping"
         sys_state_local=init_controller.system_state()
-        #print(f"{message:<50} {sys_state_local[-18:]} {direction} 1", end=print_end)
-        print(sys_state_local, sys_state_local[-18:])
+        print(f"{message:<50} {sys_state_local[-18:]} {direction} 1", end=print_end)
         #if not sys_state_local==sys_state_old:
         if not sys_state_local[-18:]==sys_state_old[-18:]:
             logging.info(sys_state_local+" | "+message)
