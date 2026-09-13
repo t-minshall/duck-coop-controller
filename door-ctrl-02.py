@@ -83,7 +83,7 @@ if section==9:
             init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
             #sys_state_local=init_controller.system_state()
-            message="Door had fully opened, Stop Motors"
+            message="Door fully opened, Stop Motors"
             #print("Door had fully opened, Stop Motors",end=print_end)
             print(f"{message:<50} {sys_state_local} {direction} 3", end=print_end)
             if not sys_state_local==sys_state_old:
@@ -139,7 +139,7 @@ if section==9:
             init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
             sys_state_local=init_controller.system_state()
-            message="Button STOP is pressed, Motor halted"
+            message="Button STOP is pressed"
             print(f"{message:<50} {sys_state_local} {direction} 6", end=print_end)
             if not sys_state_local==sys_state_old:
                 logging.info(sys_state_local+" | "+message)
