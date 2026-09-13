@@ -71,6 +71,7 @@ if section==9:
     #print(f"{message:<50} {sys_state_local}", end=print_end)
     logging.info(sys_state_local+" | "+message+" 0")
     while True:
+        time.sleep(0.03)
         message="looping"
         sys_state_local=init_controller.system_state()
         print(f"{message:<50} {sys_state_local[-18:]} {direction} 1", end=print_end)
