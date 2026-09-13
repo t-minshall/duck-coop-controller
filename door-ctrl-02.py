@@ -76,7 +76,8 @@ if section==9:
         if not LED_code==LED_code_old:
             thread = threading.Thread(target=LED_flash, args=(LED_code,), daemon=True)
             thread.start()
-            print(f"LED_code changed from {LED_code_old} to {LED_code}", end="\r\n")
+            print("")
+            print(f"LED_code changed from {LED_code_old} to {LED_code}")
             LED_code_old=LED_code
         message="looping"
         sys_state_local=init_controller.system_state()
