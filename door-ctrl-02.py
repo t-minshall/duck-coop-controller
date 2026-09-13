@@ -163,5 +163,5 @@ if section==9:
             if not sys_state_local==sys_state_old:
                 logging.info(sys_state_local+" | "+message)
                 sys_state_old=sys_state_local
-            break
+            sys.exit() #force program to exit when stop is pressed - easier to read log-file
             
