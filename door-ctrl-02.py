@@ -11,8 +11,13 @@ def background_task(name, delay):
     time.sleep(delay)
     print(f"Background task {name} finished!")
 
+# Create the thread
+# Use daemon=True so the background task stops automatically if the main program exits
+thread = threading.Thread(target=background_task, args=("Worker-1", 4), daemon=True)
+
 # Start the background task
 thread.start()
+
 
 init_controller.T1.off()
 init_controller.T2.off()
