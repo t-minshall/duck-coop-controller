@@ -129,23 +129,6 @@ if section==9:
                 logging.info(sys_state_local+" | "+message)
                 sys_state_old=sys_state_local
             
-        while init_controller.CMD_stop.is_pressed:
-            init_controller.T1.off()
-            init_controller.T2.off()
-            init_controller.T3.off()
-            init_controller.T4.off()
-            init_controller.T5.off()
-            init_controller.T6.off()
-            init_controller.T7.off()
-            init_controller.LED10.blink(0.2, 1.8)
-            direction="NONE"
-            sys_state_local=init_controller.system_state()
-            message="Button STOP is pressed"
-            print(f"{message:<50} {sys_state_local} {direction} 6", end=print_end)
-            if not sys_state_local==sys_state_old:
-                logging.info(sys_state_local+" | "+message)
-                sys_state_old=sys_state_local
-            
         if init_controller.SW_torque.is_pressed:
             # Note: system will get hung-up here ... no way to jog-out while over-torque is sensed
             init_controller.T1.blink(0.5, 0.5)
@@ -164,3 +147,21 @@ if section==9:
                 logging.error(sys_state_local+" | "+message)
                 sys_state_old=sys_state_local
           
+        while init_controller.CMD_stop.is_pressed:
+            init_controller.T1.off()
+            init_controller.T2.off()
+            init_controller.T3.off()
+            init_controller.T4.off()
+            init_controller.T5.off()
+            init_controller.T6.off()
+            init_controller.T7.off()
+            init_controller.LED10.blink(0.2, 1.8)
+            direction="NONE"
+            sys_state_local=init_controller.system_state()
+            message="Button STOP is pressed"
+            print(f"{message:<50} {sys_state_local} {direction} 6", end=print_end)
+            if not sys_state_local==sys_state_old:
+                logging.info(sys_state_local+" | "+message)
+                sys_state_old=sys_state_local
+            return
+            
