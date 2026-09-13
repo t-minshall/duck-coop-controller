@@ -16,18 +16,14 @@ def LED_flash(numbr):
             init_controller.LED10.off()
             time.sleep(0.5)
         time.sleep(2)
-        #print(f"Background task to flash {numbr} started...")
-        #init_controller.LED10.blink(1/numbr)
-        #time.sleep(1)
-        #print(f"Background task (flash-{numbr}) finished!")
 
 # Create the thread
 # Use daemon=True so the background task stops automatically if the main program exits
 #thread = threading.Thread(target=LED_flash, args=(4,), daemon=True)
-thread = threading.Thread(target=LED_flash, args=(1,), daemon=True)
+#thread = threading.Thread(target=LED_flash, args=(1,), daemon=True)
 
 # Start the background task
-thread.start()
+#thread.start()
 
 
 init_controller.T1.off()
@@ -79,6 +75,7 @@ if section==9:
     while True:
         if not LED_code==LED_code_old:
             thread = threading.Thread(target=LED_flash, args=(LED_code,), daemon=True)
+            thread.start()
             print(f"LED_code changed from {LED_code_old} to {LED_code}", end="\c\c")
             LED_code_old=LED_code
         message="looping"
