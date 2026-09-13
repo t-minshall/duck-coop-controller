@@ -3,15 +3,23 @@ import time
 import logging
 from datetime import datetime
 import threading
+import sys
 
 section=9
 LED16=init_controller.LED(16)
 
 def LED_flash(numbr):
-    #print(f"Background task to flash {numbr} started...")
-    init_controller.LED10.blink(1/numbr)
-    time.sleep(1)
-    #print(f"Background task (flash-{numbr}) finished!")
+    while True:
+        for _ in range(numbr):
+            init_controller.LED10.on()
+            time.sleep(0.1)
+            init_controller.LED10.off()
+            time.sleep(0.5)
+        time.sleep(2)
+        #print(f"Background task to flash {numbr} started...")
+        #init_controller.LED10.blink(1/numbr)
+        #time.sleep(1)
+        #print(f"Background task (flash-{numbr}) finished!")
 
 # Create the thread
 # Use daemon=True so the background task stops automatically if the main program exits
