@@ -126,7 +126,7 @@ if section==9:
             print(f"{message:<50} {sys_state_local} {direction} 5", end=print_end)
             if not sys_state_local==sys_state_old:
                 logging.info(sys_state_local+" | "+message)
-                sys_state_old=sys_state_locallogging.info(sys_state_local+" | "+message)
+                sys_state_old=sys_state_local
             
         while init_controller.CMD_stop.is_pressed:
             init_controller.T1.off()
@@ -143,7 +143,7 @@ if section==9:
             print(f"{message:<50} {sys_state_local} {direction} 6", end=print_end)
             if not sys_state_local==sys_state_old:
                 logging.info(sys_state_local+" | "+message)
-                sys_state_old=sys_state_locallogging.info(sys_state_local+" | "+message)
+                sys_state_old=sys_state_local
             
         if init_controller.SW_torque.is_pressed:
             # Note: system will get hung-up here ... no way to jog-out while over-torque is sensed
@@ -161,5 +161,5 @@ if section==9:
             print(f"{message:<50} {sys_state_local} {direction} 7", end=print_end)
             if not sys_state_local==sys_state_old:
                 logging.error(sys_state_local+" | "+message)
-                sys_state_old=sys_state_locallogging.info(sys_state_local+" | "+message)
+                sys_state_old=sys_state_local
           
