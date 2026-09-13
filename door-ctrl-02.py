@@ -6,14 +6,14 @@ import threading
 
 section=9
 
-def background_task(name, delay):
-    print(f"Background task {name} started...")
-    time.sleep(delay)
-    print(f"Background task {name} finished!")
+def LED_flash(numbr):
+    print(f"Background task to flash {numbr} started...")
+    time.sleep(1)
+    print(f"Background task {numbr} finished!")
 
 # Create the thread
 # Use daemon=True so the background task stops automatically if the main program exits
-thread = threading.Thread(target=background_task, args=("Worker-1", 4), daemon=True)
+thread = threading.Thread(target=LED_flash, args=("Worker-1", 4), daemon=True)
 
 # Start the background task
 thread.start()
