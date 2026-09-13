@@ -19,6 +19,7 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S'
 )
 print("Section-1 (Initialization) complete")
+logging.info("\c\c Starting Program")
 logging.info("Section-1 (Initialization) complete")
 
 
