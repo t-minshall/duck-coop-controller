@@ -17,6 +17,7 @@ CMD_stop=Button(13, bounce_time=0.05)
 SW_open=Button(19, bounce_time=0.05)
 SW_closed=Button(26, bounce_time=0.05)
 SW_torque=Button(20, bounce_time=0.05)
+CMD_term=Button(14, bounce_time=0.05)
 
 def motor_stop():
   T2.off()
