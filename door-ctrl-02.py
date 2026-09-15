@@ -143,16 +143,17 @@ if section==9:
             init_controller.T2.off()
             init_controller.T3.off()
             init_controller.T1.off()
-            direction="NONE"
             LED_code=1
             #init_controller.LED10.blink(0.2, 1.8)
             init_controller.T6.on()     # Hard-latch on
+            sys_state_local=init_controller.system_state()
             message="Hard-latch on"
             print(f"{message:<55} {sys_state_local} {direction} 5", end=print_end)
             if not sys_state_local[-18:]==sys_state_old[-18:]:
                 logging.info(sys_state_local+" | "+message+" 5")
                 sys_state_old=sys_state_local
             time.sleep(5)               # Allow time to push door closed
+            sys_state_local=init_controller.system_state()
             message="Soft-latch on"
             print(f"{message:<55} {sys_state_local} {direction} 5", end=print_end)
             if not sys_state_local[-18:]==sys_state_old[-18:]:
@@ -161,17 +162,19 @@ if section==9:
             init_controller.T7.on()     # Soft-latch on
             time.sleep(0.25)            # transition delay, ensure soft-latch catches before hard-latch releases
             init_controller.T6.off()    # Hard-latch off
+            sys_state_local=init_controller.system_state()
             message="Hard-latch off"
             print(f"{message:<55} {sys_state_local} {direction} 5", end=print_end)
             if not sys_state_local[-18:]==sys_state_old[-18:]:
                 logging.info(sys_state_local+" | "+message+" 5")
                 sys_state_old=sys_state_local
-            #sys_state_local=init_controller.system_state()
+            sys_state_local=init_controller.system_state()
             message="Door had fully closed, Stop Motors, Set Latch"
             print(f"{message:<55} {sys_state_local} {direction} 5", end=print_end)
             if not sys_state_local[-18:]==sys_state_old[-18:]:
                 logging.info(sys_state_local+" | "+message+" 5")
                 sys_state_old=sys_state_local
+            direction="NONE"
             
         if init_controller.SW_torque.is_pressed:
             # Note: system will get hung-up here ... no way to jog-out while over-torque is sensed
