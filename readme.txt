@@ -285,3 +285,15 @@ Host duckie-*
 	StrictHostKeyChecking no
 	UserKnownHostsFile NUL
 (these lines will prevent fingerprint-checking on all hosts named duckie-*)
+
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 15:  Installing additional packages  -----------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+Enable pi to ping outside network:
+	sudo apt install iputils-ping
+
+Enable pi to reach network shares:
+	????????
+
+Enable pi to send me messages if it errors (or when operated)
+	????????
