@@ -268,6 +268,10 @@ data-port with correct USB-cable.
 10) open shell, install GIT per section-8, starting with the install git step
 	10.1) sudo apt install git -y
 	10.2) git clone https://github.com/t-minshall/duck-coop-controller
+11) make sure OS is update and clean
+	sudo apt update		# creates upgrade-list
+	sudo apt upgrade	# installs upgrade packages
+	sudo apt autoremove # removes obsolete packages
 
 --------------------------------------------------------------------------------------------------------------------------
 --------------- Sec 14:  Connecting to R-pi via Power-Shell (not Rasberry Connect)  --------------------------------------
