@@ -297,7 +297,14 @@ Enable pi to ping outside network:
 	sudo apt install iputils-ping
 
 Enable pi to reach network shares:
-	????????
+	sudo apt install sshfs -y
+	cd /mnt && mkdir share1		#	create a mount-point within the /mnt directory
+	sudo nano /etc/fuse.conf
+		un-comment out the line that allows others
+	sudo chown duckie /mnt/share1		#	make duckie the mount-point owner (not root)
+	sudo chmod 750 /mnt/share1			#	set appropriate user-permissions
+	sshfs ted@192.168.1.210:/mnt/drive3 /mnt/share1 -o allow_other
+	ls -l /mnt/share1					#	verify that remote-drive contents are listed
 
 Enable pi to send me messages if it errors (or when operated)
 	????????
@@ -309,3 +316,20 @@ For a non-boot and non-root partition, this is supposed to be easy ... haven't t
 Pi Imager creates 2 partitions:  a boot and a root ... neither can be re-sized while operating
 Instead:
 	??????????????????? Paragon didn't work for me
+
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 17:  Saving and restoring an image-file for the Pi-OS  -----------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+To create an image-file:
+	open Win32 Disk Imager. Note: this program is super finicky - may need to re-boot just prior to launch.
+	insert SD card, verify it comes up as drive in "device"
+	define file-name for new image (using downloads as temporary location). Make sure extension is ".img". Using convention "dcc_2026-09-16_03.img"	
+	make sure "read only allocated partitions" box is checked
+	Press "Read" to read from SD-card and create image
+	Move image-file to suitable location/name (K:backups\duck-coop-controller)
+
+To write an image-file to an SD-card:
+	open Balena Etcher
+	select flash from file, then nav-to/select appropriate image file
+	insert SD card, select target, & pick SD-card (D-drive). Select.
+	Flash (note: might need to use local-copy of img-file ... seems to hang if flashing from NAS)
