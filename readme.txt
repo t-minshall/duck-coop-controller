@@ -301,10 +301,11 @@ Enable pi to reach network shares:
 	cd /mnt && mkdir share1		#	create a mount-point within the /mnt directory
 	sudo nano /etc/fuse.conf
 		un-comment out the line that allows others
-	sudo chown duckie /mnt/share1		#	make duckie the mount-point owner (not root)
-	sudo chmod 750 /mnt/share1			#	set appropriate user-permissions
-	sshfs ted@192.168.1.210:/mnt/drive3 /mnt/share1 -o allow_other
-	ls -l /mnt/share1					#	verify that remote-drive contents are listed
+	sudo chown duckie /mnt/share1																		# make duckie the mount-point owner (not root)
+	sudo chmod 750 /mnt/share1																			# set appropriate user-permissions
+   #sshfs ted@192.168.1.210:/mnt/drive3 /mnt/share1 -o allow_other										# connect to external share-drive
+	echo Silvia_1989 | sshfs ted@192.168.1.210:/mnt/drive3 /mnt/share1 -o allow_other,password_stdin	# connect to external share-drive
+	ls -l /mnt/share1																					# verify that remote-drive contents are listed
 
 Enable pi to send me messages if it errors (or when operated)
 	????????
@@ -315,14 +316,18 @@ Enable pi to send me messages if it errors (or when operated)
 For a non-boot and non-root partition, this is supposed to be easy ... haven't tried.
 Pi Imager creates 2 partitions:  a boot and a root ... neither can be re-sized while operating
 Instead:
-	??????????????????? Paragon didn't work for me
-
-	Using Linux emulator within Windows
-	Source:  https://www.google.com/search?q=raspberry+pi+resize+img+on+windows&rlz=1C1HKFL_enUS1206US1206&oq=raspberry+pi+resize+img+on+windows&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yDQgCEAAYhgMYgAQYigUyCggDEAAYogQYiQUyBwgEEAAY7wUyBwgFEAAY7wUyBwgGEAAY7wXSAQkxMDI0MGowajeoAgCwAgA&sourceid=chrome&source=chrome.ob&ie=UTF-8
-	ensure wsl is installed as package within Linux emulator within powershell
-		open powershell
-		type wsl --install
-
+	map the pi-zero to a network share where a Pi image is stored, then "cd" to that directory
+	make a copy of the image
+		cp pi_image_original.img pi_image_shrink.img
+	download appropriate packages
+		sudo apt update && sudo apt install -y wget parted gzip pigz xz-utils udev e2fsprogs
+	download the pishrink script
+		wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
+	prepare the script for execution
+		chmod +x pishrink.sh
+		sudo mv pishrink.sh /usr/local/bin
+	run the script on the appropriate image (note: image will be altered - make a copy next time)
+		sudo pishrink.sh pi_image_shrink.img
 
 --------------------------------------------------------------------------------------------------------------------------
 --------------- Sec 17:  Saving and restoring an image-file for the Pi-OS  -----------------------------------------------
