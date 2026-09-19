@@ -317,6 +317,13 @@ Pi Imager creates 2 partitions:  a boot and a root ... neither can be re-sized w
 Instead:
 	??????????????????? Paragon didn't work for me
 
+	Using Linux emulator within Windows
+	Source:  https://www.google.com/search?q=raspberry+pi+resize+img+on+windows&rlz=1C1HKFL_enUS1206US1206&oq=raspberry+pi+resize+img+on+windows&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yDQgCEAAYhgMYgAQYigUyCggDEAAYogQYiQUyBwgEEAAY7wUyBwgFEAAY7wUyBwgGEAAY7wXSAQkxMDI0MGowajeoAgCwAgA&sourceid=chrome&source=chrome.ob&ie=UTF-8
+	ensure wsl is installed as package within Linux emulator within powershell
+		open powershell
+		type wsl --install
+
+
 --------------------------------------------------------------------------------------------------------------------------
 --------------- Sec 17:  Saving and restoring an image-file for the Pi-OS  -----------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------
