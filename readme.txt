@@ -307,6 +307,14 @@ Enable pi to reach network shares:
 	echo Silvia_1989 | sshfs ted@192.168.1.210:/mnt/drive3 /mnt/share1 -o allow_other,password_stdin	# connect to external share-drive
 	ls -l /mnt/share1																					# verify that remote-drive contents are listed
 
+Once all this is done once, most is unnecessary (only need the sshfs line), so I wrote a script
+	cd ~																									# change to home directory
+	nano net-share.sh																						# create a script
+		echo Silvia_1989 | sshfs ted@192.168.1.210:/mnt/drive3 /mnt/share1 -o allow_other,password_stdin	# same line as above
+		ctrl-s ctrl-x																						# save and exit
+	. net-share.sh																							# executes the script, works from 
+																											#   command shell post-power-up
+
 Enable pi to send me messages if it errors (or when operated)
 	????????
 
