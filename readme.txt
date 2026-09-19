@@ -301,3 +301,11 @@ Enable pi to reach network shares:
 
 Enable pi to send me messages if it errors (or when operated)
 	????????
+
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 16:  Re-sizing a Pi Partition  -----------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+For a non-boot and non-root partition, this is supposed to be easy ... haven't tried.
+Pi Imager creates 2 partitions:  a boot and a root ... neither can be re-sized while operating
+Instead:
+	??????????????????? Paragon didn't work for me
