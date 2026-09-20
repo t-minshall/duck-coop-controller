@@ -57,6 +57,7 @@ if section==9:
     close_departure_limit=1
     open_arrival_limit=10
     close_arrival_limit=10
+    motion_start=0    # give it a dummy-value so if/then tests won't crash later on
     
     # Define LED Blink codes
     sys_idle=1
