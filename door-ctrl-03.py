@@ -131,6 +131,7 @@ if section==9:
               if not sys_state_local[-18:]==sys_state_old[-18:]:
                   logging.error(sys_state_local+" | "+message+" 3.1")
                   sys_state_old=sys_state_local
+            else print(dt.datetime.now(),motion_start+dt.timedelta(seconds=open_departure_limit),direction,init_controller.SW_closed.is_pressed)
 
             if (dt.datetime.now()>motion_start+dt.timedelta(seconds=open_arrival_limit)) and (direction=="OPEN") and not(init_controller.SW_open.is_pressed):
               init_controller.T4.off()
