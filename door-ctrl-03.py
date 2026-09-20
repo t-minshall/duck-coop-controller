@@ -55,8 +55,8 @@ if section==9:
     switch_time=0.2
     open_departure_limit=10
     close_departure_limit=10
-    open_arrival_limit=100
-    close_arrival_limit=100
+    open_arrival_limit=30
+    close_arrival_limit=30
     motion_start=dt.datetime.now()    # give it a dummy-value so if/then tests won't crash later on
     
     # Define LED Blink codes
@@ -128,13 +128,12 @@ if section==9:
               message="Departure-error on Door-Open"
               print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
               LED_code=departure_error
-              print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
               sys_state_local=init_controller.system_state()
               if not sys_state_local[-18:]==sys_state_old[-18:]:
                   logging.error(sys_state_local+" | "+message+" 3.1")
                   sys_state_old=sys_state_local
-        else:
-              print(dt.datetime.now(),motion_start+dt.timedelta(seconds=open_departure_limit),direction,init_controller.SW_closed.is_pressed)
+#        else:
+#              print(dt.datetime.now(),motion_start+dt.timedelta(seconds=open_departure_limit),direction,init_controller.SW_closed.is_pressed)
 
         if (dt.datetime.now()>motion_start+dt.timedelta(seconds=open_arrival_limit)) and (direction=="OPEN") and not(init_controller.SW_open.is_pressed):
               init_controller.T4.off()
@@ -144,7 +143,7 @@ if section==9:
               message="Arrival-error on Door-Open"
               print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
               LED_code=departure_error
-              print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
+              sys_state_local=init_controller.system_state()
               if not sys_state_local[-18:]==sys_state_old[-18:]:
                   logging.error(sys_state_local+" | "+message+" 3.2")
                   sys_state_old=sys_state_local
