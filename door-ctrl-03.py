@@ -1,7 +1,7 @@
 import init_controller
 import time
 import logging
-from datetime import datetime
+import datetime as dt
 import threading
 import sys
 
@@ -109,7 +109,7 @@ if section==9:
                 init_controller.T1.blink(0.1, 0.9)
                 LED_code=moving_normal
                 if init_controller.SW_closed.is_pressed:
-                    motion_start=datetime.now()
+                    motion_start=dt.datetime.now()
                 #init_controller.LED10.blink(0.5, 0.5)
             direction="OPEN"
             sys_state_local=init_controller.system_state()
@@ -119,7 +119,7 @@ if section==9:
                 logging.info(sys_state_local+" | "+message+" 2")
                 sys_state_old=sys_state_local
 
-            if (datetime.now()>motion_start+open_departure_limit) and (direction=="OPEN") and (init_controller.SW_closed.is_pressed):
+            if (dt.datetime.now()>motion_start+dt.timedelta(seconds=open_departure_limit)) and (direction=="OPEN") and (init_controller.SW_closed.is_pressed):
               init_controller.T4.off()
               init_controller.T5.off()
               init_controller.T1.blink(0.5)
@@ -132,7 +132,7 @@ if section==9:
                   logging.error(sys_state_local+" | "+message+" 3.1")
                   sys_state_old=sys_state_local
 
-            if (datetime.now()>motion_start+open_arrival_limit) and (direction=="OPEN") and not(init_controller.SW_open.is_pressed):
+            if (dt.datetime.now()>motion_start+dt.timedelta(seconds=open_arrival_limit)) and (direction=="OPEN") and not(init_controller.SW_open.is_pressed):
               init_controller.T4.off()
               init_controller.T5.off()
               init_controller.T1.blink(0.5)
