@@ -119,7 +119,7 @@ if section==9:
                 logging.info(sys_state_local+" | "+message+" 2")
                 sys_state_old=sys_state_local
 
-            if (dt.datetime.now()>motion_start+dt.timedelta(seconds=open_departure_limit)) and (direction=="OPEN") and (init_controller.SW_closed.is_pressed):
+        if (dt.datetime.now()>motion_start+dt.timedelta(seconds=open_departure_limit)) and (direction=="OPEN") and (init_controller.SW_closed.is_pressed):
               init_controller.T4.off()
               init_controller.T5.off()
               init_controller.T1.blink(0.5)
@@ -131,10 +131,10 @@ if section==9:
               if not sys_state_local[-18:]==sys_state_old[-18:]:
                   logging.error(sys_state_local+" | "+message+" 3.1")
                   sys_state_old=sys_state_local
-            else:
+        else:
               print(dt.datetime.now(),motion_start+dt.timedelta(seconds=open_departure_limit),direction,init_controller.SW_closed.is_pressed)
 
-            if (dt.datetime.now()>motion_start+dt.timedelta(seconds=open_arrival_limit)) and (direction=="OPEN") and not(init_controller.SW_open.is_pressed):
+        if (dt.datetime.now()>motion_start+dt.timedelta(seconds=open_arrival_limit)) and (direction=="OPEN") and not(init_controller.SW_open.is_pressed):
               init_controller.T4.off()
               init_controller.T5.off()
               init_controller.T1.blink(0.5)
