@@ -129,6 +129,7 @@ if section==9:
               print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
               LED_code=departure_error
               print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
+              sys_state_local=init_controller.system_state()
               if not sys_state_local[-18:]==sys_state_old[-18:]:
                   logging.error(sys_state_local+" | "+message+" 3.1")
                   sys_state_old=sys_state_local
