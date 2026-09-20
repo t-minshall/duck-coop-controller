@@ -129,7 +129,20 @@ if section==9:
               LED_code=departure_error
               print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
               if not sys_state_local[-18:]==sys_state_old[-18:]:
-                  logging.info(sys_state_local+" | "+message+" 3")
+                  logging.error(sys_state_local+" | "+message+" 3.1")
+                  sys_state_old=sys_state_local
+
+            if (datetime.now()>motion_start+open_arrival_limit) and (direction=="OPEN") and not(init_controller.SW_open.is_pressed):
+              init_controller.T4.off()
+              init_controller.T5.off()
+              init_controller.T1.blink(0.5)
+              direction="NONE"
+              message="Arrival-error on Door-Open"
+              print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
+              LED_code=departure_error
+              print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
+              if not sys_state_local[-18:]==sys_state_old[-18:]:
+                  logging.error(sys_state_local+" | "+message+" 3.2")
                   sys_state_old=sys_state_local
 
         if direction=="OPEN" and init_controller.SW_open.is_pressed:
