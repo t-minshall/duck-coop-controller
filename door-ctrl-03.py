@@ -53,10 +53,10 @@ if section==9:
     
     #Define Time-Variables
     switch_time=0.2
-    open_departure_limit=1
-    close_departure_limit=1
-    open_arrival_limit=10
-    close_arrival_limit=10
+    open_departure_limit=10
+    close_departure_limit=10
+    open_arrival_limit=100
+    close_arrival_limit=100
     motion_start=dt.datetime.now()    # give it a dummy-value so if/then tests won't crash later on
     
     # Define LED Blink codes
