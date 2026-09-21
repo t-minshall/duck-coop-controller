@@ -35,7 +35,7 @@ thread2 = threading.Thread(target=chirp, args=(1,), daemon=True)
 
 # Start the background task
 thread.start()
-#thread2.start()
+thread2.start()
 
 init_controller.T1.off()
 init_controller.T2.off()
