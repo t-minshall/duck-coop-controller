@@ -125,7 +125,7 @@ if section==9:
                 init_controller.T5.on()
                 #init_controller.T1.blink(0.1, 0.9)
                 LED_code=moving_normal
-                chirp_count=1; chirp_duration=0.1; chirp_silent=0.5
+                chirp_count=1; chirp_duration=0.05; chirp_silent=0.5
                 if init_controller.SW_closed.is_pressed:
                     motion_start=dt.datetime.now()
                 #init_controller.LED10.blink(0.5, 0.5)
@@ -193,7 +193,7 @@ if section==9:
                 init_controller.T3.on()
                 #init_controller.T1.blink(0.1, 0.9)
                 LED_code=moving_normal
-                chirp_count=2; chirp_duration=0.1; chirp_silent=0.5
+                chirp_count=2; chirp_duration=0.1; chirp_silent=0.3
                 #init_controller.LED10.blink(0.25, 0.25)
             direction="CLOSE"
             sys_state_local=init_controller.system_state()
