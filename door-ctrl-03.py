@@ -46,7 +46,7 @@ thread2 = threading.Thread(target=chirp, args=(1,), daemon=True)
 thread.start()
 thread2.start()
 
-init_controller.T1.off()
+#init_controller.T1.off()
 init_controller.T2.off()
 init_controller.T3.off()
 init_controller.T4.off()
@@ -129,7 +129,7 @@ if section==9:
                 time.sleep(switch_time)
                 init_controller.T4.on()
                 init_controller.T5.on()
-                init_controller.T1.blink(0.1, 0.9)
+                #init_controller.T1.blink(0.1, 0.9)
                 LED_code=moving_normal
                 chirp_count=4
                 if init_controller.SW_closed.is_pressed:
@@ -146,7 +146,7 @@ if section==9:
         if (dt.datetime.now()>motion_start+dt.timedelta(seconds=open_departure_limit)) and (direction=="OPEN") and (init_controller.SW_closed.is_pressed):
               init_controller.T4.off()
               init_controller.T5.off()
-              init_controller.T1.blink(0.5)
+              #init_controller.T1.blink(0.5)
               direction="NONE"
               message="Departure-error on Door-Open"
               print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
@@ -161,7 +161,7 @@ if section==9:
         if (dt.datetime.now()>motion_start+dt.timedelta(seconds=open_arrival_limit)) and (direction=="OPEN") and not(init_controller.SW_open.is_pressed):
               init_controller.T4.off()
               init_controller.T5.off()
-              init_controller.T1.blink(0.5)
+              #init_controller.T1.blink(0.5)
               direction="NONE"
               message="Arrival-error on Door-Open"
               print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
@@ -176,7 +176,7 @@ if section==9:
             # stop motor, reset buzzer and LED-flasher
             init_controller.T4.off()
             init_controller.T5.off()
-            init_controller.T1.off()
+            #init_controller.T1.off()
             LED_code=sys_idle
             #init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
@@ -195,7 +195,7 @@ if section==9:
                 time.sleep(switch_time)
                 init_controller.T2.on()
                 init_controller.T3.on()
-                init_controller.T1.blink(0.1, 0.9)
+                #init_controller.T1.blink(0.1, 0.9)
                 LED_code=moving_normal
                 #init_controller.LED10.blink(0.25, 0.25)
             direction="CLOSE"
@@ -212,7 +212,7 @@ if section==9:
             #throw Latch
             init_controller.T2.off()
             init_controller.T3.off()
-            init_controller.T1.off()
+            #init_controller.T1.off()
             LED_code=sys_idle
             #init_controller.LED10.blink(0.2, 1.8)
             init_controller.T6.on()     # Hard-latch on
@@ -248,7 +248,7 @@ if section==9:
             
         if init_controller.SW_torque.is_pressed:
             # Note: system will get hung-up here ... no way to jog-out while over-torque is sensed
-            init_controller.T1.blink(0.5, 0.5)
+            #init_controller.T1.blink(0.5, 0.5)
             init_controller.T2.off()
             init_controller.T3.off()
             init_controller.T4.off()
@@ -266,7 +266,7 @@ if section==9:
                 sys_state_old=sys_state_local
           
         while init_controller.CMD_stop.is_pressed:
-            init_controller.T1.off()
+            #init_controller.T1.off()
             init_controller.T2.off()
             init_controller.T3.off()
             init_controller.T4.off()
@@ -284,7 +284,7 @@ if section==9:
                 sys_state_old=sys_state_local
 
         while init_controller.CMD_term.is_pressed:
-            init_controller.T1.off()
+            #init_controller.T1.off()
             init_controller.T2.off()
             init_controller.T3.off()
             init_controller.T4.off()
