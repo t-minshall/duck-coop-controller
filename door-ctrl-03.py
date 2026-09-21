@@ -9,15 +9,15 @@ section=9
 LED_code=1
 chirp_count=0
 
-#def chirp(numbr):
-#    while True:
-#        if not(chirp_count==0):
-#            for _ in range(chirp_count):
-#                init_controller.T1.on()
-#                time.sleep(0.2)
-#                init_controller.T1.off()
-#                time.sleep(0.5)
-#            chirp_count=0
+def chirp(numbr):
+    while True:
+        if not(chirp_count==0):
+            for _ in range(chirp_count):
+                init_controller.T1.on()
+                time.sleep(0.2)
+                init_controller.T1.off()
+                time.sleep(0.5)
+            chirp_count=0
 
 def LED_flash(numbr):
     while True:
