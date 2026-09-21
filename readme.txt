@@ -364,4 +364,5 @@ To change host-name:
 	4) sudo reboot
 
 To change from static IP to DHCP
-	1) verify current IP address, type "ip a"
+	1) verify current IP address, type "ip a" (or "ip addr"). Note the identifying name for the network adapter (eg wlan0).
+	2) edit the netplan config file, type "sudo nano /etc/netplan/00-installer-config.yaml"
