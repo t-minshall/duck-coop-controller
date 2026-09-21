@@ -27,13 +27,13 @@ def LED_flash(numbr):
             init_controller.LED10.off()
             time.sleep(0.4)
         time.sleep(1.5)
-        if not(chirp_count==0):
-            for _ in range(chirp_count):
-                init_controller.T1.on()
-                time.sleep(0.2)
-                init_controller.T1.off()
-                time.sleep(0.5)
-            chirp_count=0
+        #if not(chirp_count==0):
+        for _ in range(chirp_count):
+            init_controller.T1.on()
+            time.sleep(0.2)
+            init_controller.T1.off()
+            time.sleep(0.5)
+        chirp_count=0
 
 # Create the thread
 # Use daemon=True so the background task stops automatically if the main program exits
