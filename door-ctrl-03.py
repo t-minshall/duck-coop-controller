@@ -9,15 +9,15 @@ section=9
 LED_code=1
 chirp_count=0
 
-def chirp(numbr):
-    while True:
-        if not(chirp_count==0):
-            for _ in range(chirp_count):
-                init_controller.T1.on()
-                time.sleep(0.2)
-                init_controller.T1.off()
-                time.sleep(0.5)
-            chirp_count=0
+#def chirp(numbr):
+#    while True:
+#        if not(chirp_count==0):
+#            for _ in range(chirp_count):
+#                init_controller.T1.on()
+#                time.sleep(0.2)
+#                init_controller.T1.off()
+#                time.sleep(0.5)
+#            chirp_count=0
 
 def LED_flash(numbr):
     while True:
@@ -31,11 +31,11 @@ def LED_flash(numbr):
 # Create the thread
 # Use daemon=True so the background task stops automatically if the main program exits
 thread = threading.Thread(target=LED_flash, args=(1,), daemon=True)
-thread2 = threading.Thread(target=chirp, args=(1,), daemon=True)
+#thread2 = threading.Thread(target=chirp, args=(1,), daemon=True)
 
 # Start the background task
 thread.start()
-thread2.start()
+#thread2.start()
 
 init_controller.T1.off()
 init_controller.T2.off()
