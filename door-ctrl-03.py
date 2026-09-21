@@ -123,7 +123,8 @@ if section==9:
         if not sys_state_local[-18:]==sys_state_old[-18:]:
             logging.info(sys_state_local+" | "+message+" 1")
             sys_state_old=sys_state_local
-        
+
+############################################################################################### OPEN #####################
         while init_controller.CMD_open.is_pressed:
             if direction!="OPEN":
                 #initial button press
@@ -195,6 +196,7 @@ if section==9:
                 logging.info(sys_state_local+" | "+message+" 3")
                 sys_state_old=sys_state_local
         
+############################################################################################### CLOSE ####################
         while init_controller.CMD_close.is_pressed:
             if direction!="CLOSE":
                 init_controller.T4.off()
@@ -284,6 +286,7 @@ if section==9:
                 sys_state_old=sys_state_local
             direction="NONE"
             
+############################################################################################### TORQUE / STOP ############
         if init_controller.SW_torque.is_pressed:
             # Note: system will get hung-up here ... no way to jog-out while over-torque is sensed
             #init_controller.T1.blink(0.5, 0.5)
