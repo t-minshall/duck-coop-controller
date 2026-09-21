@@ -8,6 +8,8 @@ import sys
 section=9
 LED_code=1
 chirp_count=0
+chirp_duration=0.2
+chirp_silent=0.5
 
 def chirp(numbr):
     global chirp_count
@@ -15,13 +17,12 @@ def chirp(numbr):
         if not(chirp_count==0):
             for _ in range(chirp_count):
                 init_controller.T1.on()
-                time.sleep(0.2)
+                time.sleep(chirp_duration)
                 init_controller.T1.off()
-                time.sleep(0.5)
+                time.sleep(chirp_silent)
             chirp_count=0
 
 def LED_flash(numbr):
-    global chirp_count
     while True:
         for _ in range(LED_code):
             init_controller.LED10.on()
@@ -29,13 +30,6 @@ def LED_flash(numbr):
             init_controller.LED10.off()
             time.sleep(0.4)
         time.sleep(1.5)
-#        if not(chirp_count==0):
-#            for _ in range(chirp_count):
-#                init_controller.T1.on()
-#                time.sleep(0.2)
-#                init_controller.T1.off()
-#                time.sleep(0.5)
-#            chirp_count=0
 
 # Create the thread
 # Use daemon=True so the background task stops automatically if the main program exits
@@ -103,7 +97,7 @@ if section==9:
     sys_state_local=init_controller.system_state()
     sys_state_old=sys_state_local
     LED_code=1
-    chirp_count=1
+    chirp_count=1; chirp_duration=0.1; chirp_silent=0.5
     message="NO buttons pressed, stopping motor"
     print(f"{message:<55} {sys_state_local} {direction} 0", end=print_end)
     #print(f"{message:<55} {sys_state_local}", end=print_end)
@@ -131,7 +125,7 @@ if section==9:
                 init_controller.T5.on()
                 #init_controller.T1.blink(0.1, 0.9)
                 LED_code=moving_normal
-                chirp_count=4
+                chirp_count=1; chirp_duration=0.1; chirp_silent=0.5
                 if init_controller.SW_closed.is_pressed:
                     motion_start=dt.datetime.now()
                 #init_controller.LED10.blink(0.5, 0.5)
@@ -151,6 +145,7 @@ if section==9:
               message="Departure-error on Door-Open"
               print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
               LED_code=departure_error
+              chirp_count=1; chirp_duration=0.2; chirp_silent=0.5
               sys_state_local=init_controller.system_state()
               if not sys_state_local[-18:]==sys_state_old[-18:]:
                   logging.error(sys_state_local+" | "+message+" 3.1")
@@ -166,6 +161,7 @@ if section==9:
               message="Arrival-error on Door-Open"
               print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
               LED_code=departure_error
+              chirp_count=1; chirp_duration=0.2; chirp_silent=0.5
               sys_state_local=init_controller.system_state()
               if not sys_state_local[-18:]==sys_state_old[-18:]:
                   logging.error(sys_state_local+" | "+message+" 3.2")
@@ -197,6 +193,7 @@ if section==9:
                 init_controller.T3.on()
                 #init_controller.T1.blink(0.1, 0.9)
                 LED_code=moving_normal
+                chirp_count=2; chirp_duration=0.1; chirp_silent=0.5
                 #init_controller.LED10.blink(0.25, 0.25)
             direction="CLOSE"
             sys_state_local=init_controller.system_state()
@@ -256,6 +253,7 @@ if section==9:
             init_controller.T6.off()
             init_controller.T7.off()
             LED_code=torque_error
+            chirp_count=4; chirp_duration=0.2; chirp_silent=0.5
             #init_controller.LED10.blink(0.2, 0.2)
             direction="NONE"
             sys_state_local=init_controller.system_state()
@@ -274,6 +272,7 @@ if section==9:
             init_controller.T6.off()
             init_controller.T7.off()
             LED_code=sys_idle
+            chirp_count=3; chirp_duration=0.1; chirp_silent=0.3
             #init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
             sys_state_local=init_controller.system_state()
