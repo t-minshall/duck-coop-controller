@@ -79,10 +79,10 @@ if section==9:
     
     #Define Time-Variables
     switch_time=0.2
-    open_departure_limit=10
-    close_departure_limit=10
-    open_arrival_limit=30
-    close_arrival_limit=30
+    open_departure_limit=3
+    close_departure_limit=3
+    open_arrival_limit=10
+    close_arrival_limit=10
     motion_start=dt.datetime.now()    # give it a dummy-value so if/then tests won't crash later on
     
     # Define LED Blink codes
@@ -208,6 +208,8 @@ if section==9:
                 LED_code=moving_normal
                 chirp_count=3; chirp_duration=0.05; chirp_silent=0.1        # Chirp signature - CLOSE command
                 #init_controller.LED10.blink(0.25, 0.25)
+                if init_controller.SW_open.is_pressed:
+                    motion_start=dt.datetime.now()
             direction="CLOSE"
             sys_state_local=init_controller.system_state()
             message="Button CLOSE is pressed, Motor turning REV/CLOSE"
@@ -231,7 +233,7 @@ if section==9:
                   logging.error(sys_state_local+" | "+message+" 3.1")
                   sys_state_old=sys_state_local
 
-        if (dt.datetime.now()>motion_start+dt.timedelta(seconds=open_arrival_limit)) and (direction=="OPEN") and not(init_controller.SW_open.is_pressed):
+        if (dt.datetime.now()>motion_start+dt.timedelta(seconds=close_arrival_limit)) and (direction=="CLOSE") and not(init_controller.SW_closed.is_pressed):
               #    Timeout: CLOSE Arrival
               init_controller.T2.off()
               init_controller.T3.off()
