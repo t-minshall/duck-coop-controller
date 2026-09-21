@@ -353,3 +353,15 @@ To write an image-file to an SD-card:
 	select flash from file, then nav-to/select appropriate image file
 	insert SD card, select target, & pick SD-card (D-drive). Select.
 	Flash (note: might need to use local-copy of img-file ... seems to hang if flashing from NAS)
+
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 18:  Managing Network ID & IP  -----------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+To change host-name:
+	1) verify hostname is what you think it is:  type "hostname"
+	2) change name: type "sudo hostnamectl set-hostname duckie-00"
+	3) change file: type "sudo nano /etc/hosts" and change name at the 127.0.1.1 line
+	4) sudo reboot
+
+To change from static IP to DHCP
+	1) verify current IP address, type "ip a"
