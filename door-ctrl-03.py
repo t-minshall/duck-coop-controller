@@ -9,7 +9,7 @@ section=9
 LED_code=1
 chirp_count=0
 
-def chirp(numbr)
+def chirp(numbr):
     while True:
         if not(chirp_count==0):
             for _ in range(chirp_count):
