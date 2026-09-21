@@ -101,6 +101,7 @@ if section==9:
     sys_state_local=init_controller.system_state()
     sys_state_old=sys_state_local
     LED_code=1
+    chirp_count=1
     message="NO buttons pressed, stopping motor"
     print(f"{message:<55} {sys_state_local} {direction} 0", end=print_end)
     #print(f"{message:<55} {sys_state_local}", end=print_end)
