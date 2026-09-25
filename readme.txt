@@ -272,6 +272,8 @@ data-port with correct USB-cable.
 	sudo apt update		# creates upgrade-list
 	sudo apt upgrade	# installs upgrade packages
 	sudo apt autoremove # removes obsolete packages
+12) untested ... ensure rpi-connect doesn't timeout - enable linger
+ 	loginctl enable-linger
 
 --------------------------------------------------------------------------------------------------------------------------
 --------------- Sec 14:  Connecting to R-pi via Power-Shell (not Rasberry Connect)  --------------------------------------
