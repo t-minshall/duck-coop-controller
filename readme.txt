@@ -263,7 +263,7 @@ data-port with correct USB-cable.
 	9.2) move selection-line with arrows, select with CR.  Select Edit a Connection.
 	9.3) Select the appropriate line under WiFi
 	9.4) down-arrow to IPv4 configuration, change from Auto to Manual.
-	9.5) Right arrow to "show".  Add address as 192.168.1.205, set gateway as 192.168.1.1 and DNS as 192.168.1.1
+	9.5) Right arrow to "show".  Add address as 192.168.1.205/24, set gateway as 192.168.1.1 and DNS as 192.168.1.1
 	9.6) arrow-down to select OK
 10) open shell, install GIT per section-8, starting with the install git step
 	10.1) sudo apt install git -y
