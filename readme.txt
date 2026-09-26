@@ -219,18 +219,16 @@ From root-shell type:
 --------------- Sec 12:  Make the R-Pi work/talk with the PC over USB (for when headless fails)  -------------------------
 --------------------------------------------------------------------------------------------------------------------------
 ************ did not work for me ... crap!
-Source video:  https://www.youtube.com/watch?v=xj3MPmJhAPU
+Source video:  https://www.youtube.com/watch?v=DtscCh6bv3Q
 Install Notepad-plus-plus from https://notepad-plus-plus.org/
-Install PuTTY from https://putty.org/index.html
+Burn Pi image, but don't remove SD card yet
 Launch Notepad++
-    on the SD-card, edit file "config.txt", and add the following line to the very end/bottom (also add a <CR>)
-        <CR> (carriage return, not these specific characters)
-        dtoverlay=dwc2
-    edit file "cmdline.txt", insert the following right after "rootwait"
+    edit file "cmdline.txt", insert the following at the very end (space after last existing character)
         modules-load=dwc2,g_ether (no extra CR's, just 1 long line, with space on either side of inserted code)
-    create null-file "ssh" (no extension, no contents)
+    edit file "config.txt", and add the following line to the bottom (under the [all] section)
+        dtoverlay=dwc2
 Remove SD card, insert into R-pi.  Power R-pi through the power-connector, give it ~5 min to fully boot for 1st time.
-Test that SSH works correctly via wi-fi (using connect.raspberrypi.com)
+Test that SSH works correctly via wi-fi (or using connect.raspberrypi.com)
 remove power, connect R-pi with data-cable to data-port (make sure power-port was unplugged)
 
 data-port with correct USB-cable.
