@@ -338,10 +338,10 @@ if section==9:
             init_controller.T7.off()
             LED_code=9
             sys_state_local=init_controller.system_state()
-            message="Button STOP is pressed"
+            message="Terminate pin was activated"
             print(f"{message:<55} {sys_state_local} {direction} 9", end=print_end)
             if not sys_state_local[-18:]==sys_state_old[-18:]:
                 logging.info(sys_state_local+" | "+message+" 9")
                 sys_state_old=sys_state_local
-            sys.exit() #force program to exit when stop is pressed - easier to read log-file
+            sys.exit() #force program to exit when spare-pin GPIO14 (pin 8) stop is grounded ... shouldn't normally happen
             
