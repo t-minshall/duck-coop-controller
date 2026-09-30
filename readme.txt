@@ -298,7 +298,7 @@ Enable pi to ping outside network:
 
 Enable pi to reach network shares:
 	sudo apt install sshfs -y
-	cd /mnt && mkdir share1		#	create a mount-point within the /mnt directory
+	cd /mnt && sudo mkdir share1		#	create a mount-point within the /mnt directory
 	sudo nano /etc/fuse.conf
 		un-comment out the line that allows others
 	sudo chown duckie /mnt/share1																		# make duckie the mount-point owner (not root)
@@ -372,7 +372,7 @@ To change from static IP to DHCP
 --------------------------------------------------------------------------------------------------------------------------
 Image				SSID				IP				Hostname	User	Password	AutoStart			Notes
 -----------------	---------------		-------------	---------	------	--------	---------			---------------------------------------------
-dcc_2026-09-??_01	Minshall-outside	192.168.1.206	duckie-03	duckie	quack		door-ctrl-03.py		.
+dcc_2026-09-??_01	Minshall-outside	192.168.1.206	duckie-03	duckie	quack		door-ctrl-03.py		Includes pishrink script, ping, file-share w/ "lynx"
 																						blink-always.py
 ---------------
 dcc_2026-09-22_01	minshall			192.168.1.206	duckie-02	duckie	quack		door-ctrl-03.py		.
