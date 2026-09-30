@@ -381,3 +381,5 @@ dcc_2026-09-22_01	minshall			192.168.1.206	duckie-02	duckie	quack		door-ctrl-03.
 dcc_2026-09-20_01	Minshall			DHCP			duckie-01	duckie	quack		door-ctrl-03.py		.
 																						blink-always.py
 ---------------
+photos_2026-09-30	Minshall			192.168.1.207	photo-1		ted		kodak		?					pulls photos from //tiger:jaguar in slideshow sub-dir
+---------------
