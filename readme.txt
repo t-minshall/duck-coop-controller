@@ -366,3 +366,18 @@ To change host-name:
 To change from static IP to DHCP
 	1) verify current IP address, type "ip a" (or "ip addr"). Note the identifying name for the network adapter (eg wlan0).
 	2) edit the netplan config file, type "sudo nano /etc/netplan/00-installer-config.yaml"
+
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 19:  Managing Versions  ------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+Image				SSID				IP				Hostname	User	Password	AutoStart			Notes
+-----------------	---------------		-------------	---------	------	--------	---------			---------------------------------------------
+dcc_2026-09-??_01	Minshall-outside	192.168.1.206	duckie-03	duckie	quack		door-ctrl-03.py		.
+																						blink-always.py
+---------------
+dcc_2026-09-22_01	minshall			192.168.1.206	duckie-02	duckie	quack		door-ctrl-03.py		.
+																						blink-always.py
+---------------
+dcc_2026-09-20_01	Minshall			DHCP			duckie-01	duckie	quack		door-ctrl-03.py		.
+																						blink-always.py
+---------------
