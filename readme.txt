@@ -383,3 +383,16 @@ dcc_2026-09-20_01	Minshall			DHCP			duckie-01	duckie	quack		door-ctrl-03.py		.
 ---------------
 photos_2026-09-30	Minshall			192.168.1.207	photo-1		ted		kodak		?					pulls photos from //tiger:jaguar in slideshow sub-dir
 ---------------
+
+--------------------------------------------------------------------------------------------------------------------------
+--------------- Sec 20:  Making a photo-Viewer  --------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+Source info from:
+1-primary) https://github.com/tdamdouni/Raspberry-Pi-DIY-Projects/blob/master/_WebArticles/how-to-display-images-on-raspbian-command-line-with-fbi.md
+2-alt) https://raspberrypihobbyist.blogspot.com/2013/02/jumbo-digital-picture-frame.html
+
+1) create clean disk (pi imager, 32-bit OS lite)
+2) make headless with static IP (...207) on Minshall network
+3) add access to file-shares (specifically jaguar on tiger-server)
+4) sudo apt -y install fbi
+build off:           fbi -a -u -t 4 *.jpg
