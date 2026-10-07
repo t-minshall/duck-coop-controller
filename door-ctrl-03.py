@@ -185,11 +185,12 @@ if section==9:
             init_controller.T4.off()
             init_controller.T5.off()
             #init_controller.T1.off()
+            elapsed_time=dt.datetime.now()-motion_start
             LED_code=sys_idle
             #init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
             sys_state_local=init_controller.system_state()
-            message="Door fully opened, Stop Motors"
+            message="Door fully opened in "+elapsed_time+" seconds, Stop Motors"
             #print("Door had fully opened, Stop Motors",end=print_end)
             print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
             if not sys_state_local[-18:]==sys_state_old[-18:]:
@@ -259,14 +260,14 @@ if section==9:
             #init_controller.LED10.blink(0.2, 1.8)
             init_controller.T6.on()     # Hard-latch on
             sys_state_local=init_controller.system_state()
-            message="Hard-latch on"
+            message="Door closed, Hard-latch on"
             print(f"{message:<55} {sys_state_local} {direction} 5", end=print_end)
             if not sys_state_local[-18:]==sys_state_old[-18:]:
                 logging.info(sys_state_local+" | "+message+" 5")
                 sys_state_old=sys_state_local
             time.sleep(5)               # Allow time to push door closed
             sys_state_local=init_controller.system_state()
-            message="Soft-latch on"
+            message="Door closed, Soft-latch on"
             print(f"{message:<55} {sys_state_local} {direction} 5", end=print_end)
             if not sys_state_local[-18:]==sys_state_old[-18:]:
                 logging.info(sys_state_local+" | "+message+" 5")
