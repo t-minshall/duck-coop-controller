@@ -185,7 +185,7 @@ if section==9:
             init_controller.T4.off()
             init_controller.T5.off()
             #init_controller.T1.off()
-            elapsed_time=dt.datetime.now()-motion_start
+            elapsed_time=str(dt.datetime.now()-motion_start)
             LED_code=sys_idle
             #init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
