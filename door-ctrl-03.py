@@ -82,7 +82,7 @@ if section==9:
     open_departure_limit=3
     close_departure_limit=3
     open_arrival_limit=30
-    close_arrival_limit=20
+    close_arrival_limit=30
     motion_start=dt.datetime.now()    # give it a dummy-value so if/then tests won't crash later on
     
     # Define LED Blink codes
@@ -188,7 +188,7 @@ if section==9:
             LED_code=sys_idle
             #init_controller.LED10.blink(0.2, 1.8)
             direction="NONE"
-            #sys_state_local=init_controller.system_state()
+            sys_state_local=init_controller.system_state()
             message="Door fully opened, Stop Motors"
             #print("Door had fully opened, Stop Motors",end=print_end)
             print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
