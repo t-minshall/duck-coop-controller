@@ -81,8 +81,8 @@ if section==9:
     switch_time=0.2
     open_departure_limit=3
     close_departure_limit=3
-    open_arrival_limit=20
-    close_arrival_limit=10
+    open_arrival_limit=30
+    close_arrival_limit=20
     motion_start=dt.datetime.now()    # give it a dummy-value so if/then tests won't crash later on
     
     # Define LED Blink codes
