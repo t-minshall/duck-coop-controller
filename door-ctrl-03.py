@@ -261,7 +261,7 @@ if section==9:
             #init_controller.LED10.blink(0.2, 1.8)
             init_controller.T6.on()     # Hard-latch on
             sys_state_local=init_controller.system_state()
-            message="Door fully closed in "+elapsed_time+", Hard-latch on"
+            message="Door fully closed in "+elapsed_time+" seconds, Hard-latch on"
             print(f"{message:<55} {sys_state_local} {direction} 5", end=print_end)
             if not sys_state_local[-18:]==sys_state_old[-18:]:
                 logging.info(sys_state_local+" | "+message+" 5")
