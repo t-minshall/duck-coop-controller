@@ -60,7 +60,7 @@ init_controller.T6.off()
 init_controller.T7.off()
 init_controller.LED10.off()
 logging.basicConfig(
-    filename='/home/duckie/duck-coop-controller/door-ctrl-03.log',  # Path to your log file
+    filename='/home/duckie/duck-coop-controller/door-ctrl-04.log',  # Path to your log file
     level=logging.INFO,                # Track INFO level messages and above
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
@@ -84,6 +84,8 @@ if section==9:
     open_arrival_limit=30
     close_arrival_limit=30
     motion_start=dt.datetime.now()    # give it a dummy-value so if/then tests won't crash later on
+    logging_period=15
+    next_snapshot=dt.datetime.now()+dt.timedelta(seconds=10)    # not a dummy value ... start logging after system wakes up
     
     # Define LED Blink codes
     sys_idle=1
@@ -290,7 +292,7 @@ if section==9:
                 sys_state_old=sys_state_local
             direction="NONE"
             
-############################################################################################### TORQUE / STOP ############
+############################################################################################### TORQUE / STOP / TIME / TERMINATE ############
         if init_controller.SW_torque.is_pressed:
             # Note: system will get hung-up here ... no way to jog-out while over-torque is sensed
             #init_controller.T1.blink(0.5, 0.5)
@@ -346,4 +348,11 @@ if section==9:
                 logging.info(sys_state_local+" | "+message+" 9")
                 sys_state_old=sys_state_local
             sys.exit() #force program to exit when spare-pin GPIO14 (pin 8) stop is grounded ... shouldn't normally happen
-            
+
+        if (dt.datetime.now()>next_snapshot):
+            message="Periodic logging
+            sys_state_local=init_controller.system_state()
+            logging.info(sys_state_local+" | "+message
+            next_snapshot=dt.datetime.now()+dt.timedelta(minutes=logging_period)
+            next_snapshot=dt.datetime.now()+dt.timedelta(seconds=10)        # for debugging only ... delete this line once logging working correctly
+
