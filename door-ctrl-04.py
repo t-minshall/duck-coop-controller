@@ -1,0 +1,356 @@
+import init_controller
+import time
+import logging
+import datetime as dt
+import threading
+import sys
+
+section=9
+LED_code=1
+chirp_count=0
+chirp_duration=0.2
+chirp_silent=0.5
+
+def chirp(numbr):
+    global chirp_count
+    while True:
+        if not(chirp_count==0):
+            for _ in range(chirp_count):
+                init_controller.T1.on()
+                time.sleep(chirp_duration)
+                init_controller.T1.off()
+                time.sleep(chirp_silent)
+            chirp_count=0
+#    ***********      Chirp-Code Plans     ***********************
+#    Condition                        number    Duration    Silent
+#    wake-up                            1        .05        .1
+#    OPEN command                       2        .05        .1
+#    CLOSE command                      3        .05        .1
+#    STOP command                       4        .05        .1
+#    TORQUE error                       5        .25        .25
+#    Timeout: OPEN - departure          2        .1         .1
+#    Timeout: OPEN - arrival            2        .1         .1
+#    Timeout: CLOSE - departure         3        .1         .1
+#    Timeout: CLOSE - arrival           3        .1         .1
+
+def LED_flash(numbr):
+    while True:
+        for _ in range(LED_code):
+            init_controller.LED10.on()
+            time.sleep(0.1)
+            init_controller.LED10.off()
+            time.sleep(0.4)
+        time.sleep(1.5)
+
+# Create the thread
+# Use daemon=True so the background task stops automatically if the main program exits
+thread = threading.Thread(target=LED_flash, args=(1,), daemon=True)
+thread2 = threading.Thread(target=chirp, args=(1,), daemon=True)
+
+# Start the background task
+thread.start()
+thread2.start()
+
+#init_controller.T1.off()
+init_controller.T2.off()
+init_controller.T3.off()
+init_controller.T4.off()
+init_controller.T5.off()
+init_controller.T6.off()
+init_controller.T7.off()
+init_controller.LED10.off()
+logging.basicConfig(
+    filename='/home/duckie/duck-coop-controller/door-ctrl-03.log',  # Path to your log file
+    level=logging.INFO,                # Track INFO level messages and above
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+print("Section-1 (Initialization) complete")
+logging.info(" ");logging.info("***********************************************************************************");logging.info(" ")
+logging.info("Starting Program")
+logging.info("Section-1 (Initialization) complete")
+
+
+# ***********  Section 9 ************************************
+# ***********  All IO working Together  *********************
+if section==9:
+    print("Starting Section-9 (all IO working together)")
+    logging.info("Starting Section-9 (all IO working together)")
+    
+    #Define Time-Variables
+    switch_time=0.2
+    open_departure_limit=3
+    close_departure_limit=3
+    open_arrival_limit=30
+    close_arrival_limit=30
+    motion_start=dt.datetime.now()    # give it a dummy-value so if/then tests won't crash later on
+    logging_period=15
+    next_snapshot=dt.datetime.now()+dt.timedelta(seconds=10)    # not a dummy value ... start logging after system wakes up
+    
+    # Define LED Blink codes
+    sys_idle=1
+    moving_normal=2
+    moving_manual=3
+    departure_error=5
+    arrival_error=6
+    torque_error=7
+    
+    print_end="                                    \r"
+    #print_end="\r"
+    #print_end="\r\n"
+    #Starting condition (from Sec-1), all transistors OFF
+    direction="NONE"
+    init_controller.T2.off()
+    init_controller.T3.off()
+    init_controller.T4.off()
+    init_controller.T5.off()
+    init_controller.T6.off()
+    init_controller.T7.off()
+    #init_controller.LED10.blink(0.2, 1.8)
+    sys_state_local=init_controller.system_state()
+    sys_state_old=sys_state_local
+    LED_code=1
+    chirp_count=1; chirp_duration=0.05; chirp_silent=0.1        # Chirp signature - wake up
+    message="NO buttons pressed, stopping motor"
+    print(f"{message:<55} {sys_state_local} {direction} 0", end=print_end)
+    #print(f"{message:<55} {sys_state_local}", end=print_end)
+    logging.info(sys_state_local+" | "+message+" 0")
+    while True:
+        time.sleep(0.03)
+        message="looping"
+        sys_state_local=init_controller.system_state()
+        #print(f"{message:<55} {sys_state_local[-18:]} {direction} 1", end=print_end)
+        print(f"{message:<55} {sys_state_local} {direction} 1", end=print_end)
+        #if not sys_state_local==sys_state_old:
+        if not sys_state_local[-18:]==sys_state_old[-18:]:
+            logging.info(sys_state_local+" | "+message+" 1")
+            sys_state_old=sys_state_local
+
+############################################################################################### OPEN #####################
+        while init_controller.CMD_open.is_pressed:
+            if direction!="OPEN":
+                #initial button press
+                init_controller.T2.off()
+                init_controller.T3.off()
+                init_controller.T6.off()    # Release Hard-latch
+                init_controller.T7.off()    # Release Soft-latch
+                time.sleep(switch_time)
+                init_controller.T4.on()
+                init_controller.T5.on()
+                #init_controller.T1.blink(0.1, 0.9)
+                LED_code=moving_normal
+                chirp_count=2; chirp_duration=0.05; chirp_silent=0.1        # Chirp signature - OPEN command
+                if init_controller.SW_closed.is_pressed:
+                    motion_start=dt.datetime.now()
+                #init_controller.LED10.blink(0.5, 0.5)
+            direction="OPEN"
+            sys_state_local=init_controller.system_state()
+            message="Button OPEN is pressed, Motor turning FWD/OPEN"
+            print(f"{message:<55} {sys_state_local} {direction} 2", end=print_end)
+            if not sys_state_local[-18:]==sys_state_old[-18:]:
+                logging.info(sys_state_local+" | "+message+" 2")
+                sys_state_old=sys_state_local
+
+        if (dt.datetime.now()>motion_start+dt.timedelta(seconds=open_departure_limit)) and (direction=="OPEN") and (init_controller.SW_closed.is_pressed):
+              #    Timeout:  OPEN Departure
+              init_controller.T4.off()
+              init_controller.T5.off()
+              #init_controller.T1.blink(0.5)
+              direction="NONE"
+              message="Departure-error on Door-Open"
+              print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
+              LED_code=departure_error
+              chirp_count=2; chirp_duration=0.1; chirp_silent=0.1        # Chirp signature - departure timeout on open
+              sys_state_local=init_controller.system_state()
+              if not sys_state_local[-18:]==sys_state_old[-18:]:
+                  logging.error(sys_state_local+" | "+message+" 3.1")
+                  sys_state_old=sys_state_local
+
+        if (dt.datetime.now()>motion_start+dt.timedelta(seconds=open_arrival_limit)) and (direction=="OPEN") and not(init_controller.SW_open.is_pressed):
+              #    Timeout: OPEN Arrival
+              init_controller.T4.off()
+              init_controller.T5.off()
+              #init_controller.T1.blink(0.5)
+              direction="NONE"
+              message="Arrival-error on Door-Open"
+              print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
+              LED_code=arrival_error
+              chirp_count=2; chirp_duration=0.1; chirp_silent=0.1        # Chirp signature - arrival timeout on open
+              sys_state_local=init_controller.system_state()
+              if not sys_state_local[-18:]==sys_state_old[-18:]:
+                  logging.error(sys_state_local+" | "+message+" 3.2")
+                  sys_state_old=sys_state_local
+
+        if direction=="OPEN" and init_controller.SW_open.is_pressed:
+            # motor has moved all the way to the open position-sensor
+            # stop motor, reset buzzer and LED-flasher
+            init_controller.T4.off()
+            init_controller.T5.off()
+            #init_controller.T1.off()
+            elapsed_time=str(dt.datetime.now()-motion_start)
+            LED_code=sys_idle
+            #init_controller.LED10.blink(0.2, 1.8)
+            direction="NONE"
+            sys_state_local=init_controller.system_state()
+            message="Door fully opened in "+elapsed_time+" seconds, Stop Motors"
+            #print("Door had fully opened, Stop Motors",end=print_end)
+            print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
+            if not sys_state_local[-18:]==sys_state_old[-18:]:
+                logging.info(sys_state_local+" | "+message+" 3")
+                sys_state_old=sys_state_local
+        
+############################################################################################### CLOSE ####################
+        while init_controller.CMD_close.is_pressed:
+            if direction!="CLOSE":
+                init_controller.T4.off()
+                init_controller.T5.off()
+                time.sleep(switch_time)
+                init_controller.T2.on()
+                init_controller.T3.on()
+                #init_controller.T1.blink(0.1, 0.9)
+                LED_code=moving_normal
+                chirp_count=3; chirp_duration=0.05; chirp_silent=0.1        # Chirp signature - CLOSE command
+                #init_controller.LED10.blink(0.25, 0.25)
+                if init_controller.SW_open.is_pressed:
+                    motion_start=dt.datetime.now()
+            direction="CLOSE"
+            sys_state_local=init_controller.system_state()
+            message="Button CLOSE is pressed, Motor turning REV/CLOSE"
+            print(f"{message:<55} {sys_state_local} {direction} 4", end=print_end)
+            if not sys_state_local[-18:]==sys_state_old[-18:]:
+                logging.info(sys_state_local+" | "+message+" 4")
+                sys_state_old=sys_state_local
+
+        if (dt.datetime.now()>motion_start+dt.timedelta(seconds=close_departure_limit)) and (direction=="CLOSE") and (init_controller.SW_open.is_pressed):
+              #    Timeout:  CLOSE Departure
+              init_controller.T2.off()
+              init_controller.T3.off()
+              #init_controller.T1.blink(0.5)
+              direction="NONE"
+              message="Departure-error on Door-Close"
+              print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
+              LED_code=departure_error
+              chirp_count=3; chirp_duration=0.1; chirp_silent=0.1        # Chirp signature - departure timeout on open
+              sys_state_local=init_controller.system_state()
+              if not sys_state_local[-18:]==sys_state_old[-18:]:
+                  logging.error(sys_state_local+" | "+message+" 3.1")
+                  sys_state_old=sys_state_local
+
+        if (dt.datetime.now()>motion_start+dt.timedelta(seconds=close_arrival_limit)) and (direction=="CLOSE") and not(init_controller.SW_closed.is_pressed):
+              #    Timeout: CLOSE Arrival
+              init_controller.T2.off()
+              init_controller.T3.off()
+              #init_controller.T1.blink(0.5)
+              direction="NONE"
+              message="Arrival-error on Door-Close"
+              print(f"{message:<55} {sys_state_local} {direction} 3", end=print_end)
+              LED_code=arrival_error
+              chirp_count=3; chirp_duration=0.1; chirp_silent=0.1        # Chirp signature - arrival timeout on Close
+              sys_state_local=init_controller.system_state()
+              if not sys_state_local[-18:]==sys_state_old[-18:]:
+                  logging.error(sys_state_local+" | "+message+" 3.2")
+                  sys_state_old=sys_state_local
+        
+        if direction=="CLOSE" and init_controller.SW_closed.is_pressed:
+            # motor has moved all the way to the closed position-sensor
+            # stop motor, reset buzzer and LED-flasher
+            #throw Latch
+            init_controller.T2.off()
+            init_controller.T3.off()
+            #init_controller.T1.off()
+            LED_code=sys_idle
+            elapsed_time=str(dt.datetime.now()-motion_start)
+            #init_controller.LED10.blink(0.2, 1.8)
+            init_controller.T6.on()     # Hard-latch on
+            sys_state_local=init_controller.system_state()
+            message="Door fully closed in "+elapsed_time+" seconds, Hard-latch on"
+            print(f"{message:<55} {sys_state_local} {direction} 5", end=print_end)
+            if not sys_state_local[-18:]==sys_state_old[-18:]:
+                logging.info(sys_state_local+" | "+message+" 5")
+                sys_state_old=sys_state_local
+            time.sleep(5)               # Allow time to push door closed
+            sys_state_local=init_controller.system_state()
+            message="Door closed, Soft-latch on"
+            print(f"{message:<55} {sys_state_local} {direction} 5", end=print_end)
+            if not sys_state_local[-18:]==sys_state_old[-18:]:
+                logging.info(sys_state_local+" | "+message+" 5")
+                sys_state_old=sys_state_local
+            init_controller.T7.on()     # Soft-latch on
+            time.sleep(0.25)            # transition delay, ensure soft-latch catches before hard-latch releases
+            init_controller.T6.off()    # Hard-latch off
+            sys_state_local=init_controller.system_state()
+            message="Hard-latch off"
+            print(f"{message:<55} {sys_state_local} {direction} 5", end=print_end)
+            if not sys_state_local[-18:]==sys_state_old[-18:]:
+                logging.info(sys_state_local+" | "+message+" 5")
+                sys_state_old=sys_state_local
+            sys_state_local=init_controller.system_state()
+            message="Door had fully closed, Stop Motors, Set Latch"
+            print(f"{message:<55} {sys_state_local} {direction} 5", end=print_end)
+            if not sys_state_local[-18:]==sys_state_old[-18:]:
+                logging.info(sys_state_local+" | "+message+" 5")
+                sys_state_old=sys_state_local
+            direction="NONE"
+            
+############################################################################################### TORQUE / STOP / TIME / TERMINATE ############
+        if init_controller.SW_torque.is_pressed:
+            # Note: system will get hung-up here ... no way to jog-out while over-torque is sensed
+            #init_controller.T1.blink(0.5, 0.5)
+            init_controller.T2.off()
+            init_controller.T3.off()
+            init_controller.T4.off()
+            init_controller.T5.off()
+            init_controller.T6.off()
+            init_controller.T7.off()
+            LED_code=torque_error
+            chirp_count=5; chirp_duration=0.25; chirp_silent=0.25        # Chirp signature - torque error
+            #init_controller.LED10.blink(0.2, 0.2)
+            direction="NONE"
+            sys_state_local=init_controller.system_state()
+            message="Over-Torque detected, Stop motors, sound alarm"
+            print(f"{message:<55} {sys_state_local} {direction} 7", end=print_end)
+            if not sys_state_local[-18:]==sys_state_old[-18:]:
+                logging.error(sys_state_local+" | "+message+" 7")
+                sys_state_old=sys_state_local
+          
+        while init_controller.CMD_stop.is_pressed:
+            #init_controller.T1.off()
+            init_controller.T2.off()
+            init_controller.T3.off()
+            init_controller.T4.off()
+            init_controller.T5.off()
+            init_controller.T6.off()
+            init_controller.T7.off()
+            LED_code=sys_idle
+            chirp_count=4; chirp_duration=0.05; chirp_silent=0.1        # Chirp signature - STOP command
+            #init_controller.LED10.blink(0.2, 1.8)
+            direction="NONE"
+            sys_state_local=init_controller.system_state()
+            message="Button STOP is pressed"
+            print(f"{message:<55} {sys_state_local} {direction} 6", end=print_end)
+            if not sys_state_local[-18:]==sys_state_old[-18:]:
+                logging.info(sys_state_local+" | "+message+" 6")
+                sys_state_old=sys_state_local
+
+        while init_controller.CMD_term.is_pressed:
+            #init_controller.T1.off()
+            init_controller.T2.off()
+            init_controller.T3.off()
+            init_controller.T4.off()
+            init_controller.T5.off()
+            init_controller.T6.off()
+            init_controller.T7.off()
+            LED_code=9
+            sys_state_local=init_controller.system_state()
+            message="Terminate pin was activated"
+            print(f"{message:<55} {sys_state_local} {direction} 9", end=print_end)
+            if not sys_state_local[-18:]==sys_state_old[-18:]:
+                logging.info(sys_state_local+" | "+message+" 9")
+                sys_state_old=sys_state_local
+            sys.exit() #force program to exit when spare-pin GPIO14 (pin 8) stop is grounded ... shouldn't normally happen
+
+        if (dt.datetime.now()>next_snapshot):
+            message="Periodic logging"
+            sys_state_local=init_controller.system_state()
+            logging.info(sys_state_local+" | "+message)
+            next_snapshot=dt.datetime.now()+dt.timedelta(minutes=logging_period)
