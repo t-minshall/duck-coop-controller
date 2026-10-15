@@ -352,7 +352,7 @@ if section==9:
         if (dt.datetime.now()>next_snapshot):
             message="Periodic logging"
             sys_state_local=init_controller.system_state()
-            logging.info(sys_state_local+" | "+message
+            logging.info(sys_state_local+" | "+message)
             next_snapshot=dt.datetime.now()+dt.timedelta(minutes=logging_period)
             next_snapshot=dt.datetime.now()+dt.timedelta(seconds=10)        # for debugging only ... delete this line once logging working correctly
 
