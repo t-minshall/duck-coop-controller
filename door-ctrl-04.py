@@ -350,7 +350,7 @@ if section==9:
             sys.exit() #force program to exit when spare-pin GPIO14 (pin 8) stop is grounded ... shouldn't normally happen
 
         if (dt.datetime.now()>next_snapshot):
-            message="Periodic logging
+            message="Periodic logging"
             sys_state_local=init_controller.system_state()
             logging.info(sys_state_local+" | "+message
             next_snapshot=dt.datetime.now()+dt.timedelta(minutes=logging_period)
