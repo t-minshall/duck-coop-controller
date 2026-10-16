@@ -347,7 +347,8 @@ if section==9:
             if not sys_state_local[-18:]==sys_state_old[-18:]:
                 logging.info(sys_state_local+" | "+message+" 9")
                 sys_state_old=sys_state_local
-            sys.exit() #force program to exit when spare-pin GPIO14 (pin 8) stop is grounded ... shouldn't normally happen
+            time.sleep(10)        # wait 10 seconds to ensure logging is completed, then end the program
+            sys.exit()            # force program to exit when spare-pin GPIO14 (pin 8) stop is grounded ... shouldn't normally happen
 
         if (dt.datetime.now()>next_snapshot):
             message="Periodic logging"
