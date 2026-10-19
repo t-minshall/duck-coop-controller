@@ -115,6 +115,34 @@ if section==9:
     print(f"{message:<55} {sys_state_local} {direction} 0", end=print_end)
     #print(f"{message:<55} {sys_state_local}", end=print_end)
     logging.info(sys_state_local+" | "+message+" 0")
+
+    if init_controller.SW_closed.is_pressed:
+        #door is closed, but nothing can be moving yes ... still in initial start-up, so latch door
+        init_controller.T6.on()     # Hard-latch on
+        sys_state_local=init_controller.system_state()
+        message="Door fully closed in "+elapsed_time+" seconds, Hard-latch on"
+        print(f"{message:<55} {sys_state_local} {direction} 5", end=print_end)
+        if not sys_state_local[-18:]==sys_state_old[-18:]:
+            logging.info(sys_state_local+" | "+message+" 5")
+            sys_state_old=sys_state_local
+        time.sleep(5)               # Allow time to push door closed
+        sys_state_local=init_controller.system_state()
+        message="Door closed, Soft-latch on"
+        print(f"{message:<55} {sys_state_local} {direction} 5", end=print_end)
+        if not sys_state_local[-18:]==sys_state_old[-18:]:
+            logging.info(sys_state_local+" | "+message+" 5")
+            sys_state_old=sys_state_local
+        init_controller.T7.on()     # Soft-latch on
+        time.sleep(0.25)            # transition delay, ensure soft-latch catches before hard-latch releases
+        init_controller.T6.off()    # Hard-latch off
+        sys_state_local=init_controller.system_state()
+        message="Hard-latch off"
+        print(f"{message:<55} {sys_state_local} {direction} 5", end=print_end)
+        if not sys_state_local[-18:]==sys_state_old[-18:]:
+            logging.info(sys_state_local+" | "+message+" 5")
+            sys_state_old=sys_state_local
+        sys_state_local=init_controller.system_state()
+    
     while True:
         time.sleep(0.03)
         message="looping"
@@ -198,7 +226,7 @@ if section==9:
             if not sys_state_local[-18:]==sys_state_old[-18:]:
                 logging.info(sys_state_local+" | "+message+" 3")
                 sys_state_old=sys_state_local
-        
+
 ############################################################################################### CLOSE ####################
         while init_controller.CMD_close.is_pressed:
             if direction!="CLOSE":
