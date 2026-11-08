@@ -1,4 +1,34 @@
 --------------------------------------------------------------------------------------------------------------------------
+--------------- Index  ---------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+Sec.	Line	Title																		Notes
+0		 32		Starting a Do-Over
+1		 46		Get Python running on laptop, run emulation program
+2		 55		Board Build / Debug Plan
+3		 76		Create the R-Pi Disk
+4		 95		Opening a Shell, interacting w/ the R-Pi
+5		104		Build/Run a simple program
+6		123		Make a program that runs forever
+7		149		Make a program that starts on boot-up
+8		159		Instal Git-Hub on Pi, Clone a Repository
+9		184		Flash LED's based on GPIO inputs
+10		227		Write a batch-type script
+11		242		Write a batch-type script
+12		249		Make the R-Pi work/talk with the PC over USB (for when headless fails)
+13		267		Creating a stable OS
+14		307		Connecting to R-pi via Power-Shell (not Rasberry Connect)
+15		324		Installing additional packages												ping, network share
+16		352		Re-sizing a Pi Partition
+17		371		Saving and restoring an image-file for the Pi-OS
+18		388		Managing Network ID & IP
+19		401		Managing Versions
+20		418		Making a photo-Viewer
+21				
+22				
+23				
+24				
+25				
+--------------------------------------------------------------------------------------------------------------------------
 --------------- Sec 0:  Starting a Do-over  ------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------
 1) open Pi Imager, make new SD card per section-3 below (Creating the R-Pi Disk)
