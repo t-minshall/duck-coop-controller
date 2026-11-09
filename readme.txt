@@ -15,7 +15,7 @@ Sec.	Line	Title																		Notes
 10		227		Write a batch-type script
 11		242		Write a batch-type script
 12		249		Make the R-Pi work/talk with the PC over USB (for when headless fails)
-13		267		Creating a stable OS
+13 **	267		Creating a stable OS
 14		307		Connecting to R-pi via Power-Shell (not Rasberry Connect)
 15		324		Installing additional packages												ping, network share
 16		352		Re-sizing a Pi Partition
